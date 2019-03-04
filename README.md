@@ -8,7 +8,3 @@ the MainDevelopment.
 
 Note: Please write meaningful commit messages and branch names so they are easily identifiable. 
 
-
-
-
-
