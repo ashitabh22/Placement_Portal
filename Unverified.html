@@ -279,15 +279,16 @@
       </tr>
     </thead>
     <tbody id="myTable">
+        
       <tr>
         <td>John</td>
         <td>John@iitbhilai.ac.in</td>
         <td>
         
-        <button type="button"  data-toggle="modal" data-target="#myModal">View</button>
+        <button type="button"  data-toggle="modal" data-target="#john">View</button>
 
   <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
+  <div class="modal fade" id="john" role="dialog">
     <div class="modal-dialog">
 
       <!-- Modal content-->
@@ -376,10 +377,55 @@
         </table>        
           </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-success" data-dismiss="modal">Verify</button>
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Decline</button>
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#verify">Verify</button>
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#decline">Decline</button>
             <button type="button" class="btn btn-info" data-dismiss="modal">Go to Page</button>
-        </div>
+            
+            <div id="verify" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title text-center">Verified</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p class="text-justify">The Student has been verified. A verification E-mail will be delivered to the student.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="decline" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title text-center">Decline</h4>
+                        </div>
+                        <div class="modal-body">
+                            <input type="text" placeholder="Please write down the reason for being declined" id="decline-box">
+                            <style>
+                                #decline-box {
+                                    width: 100%;
+                                    height: 100px;
+                                }
+                            </style>
+                            
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Decline</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>                        
       </div>
       </div></div>
             
@@ -391,10 +437,10 @@
         <td>mary@iitbhilai.ac.in</td>
         <td>
         
-        <button type="button"  data-toggle="modal" data-target="#myModal">View</button>
+        <button type="button"  data-toggle="modal" data-target="#mary">View</button>
 
   <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
+  <div class="modal fade" id="mary" role="dialog">
     <div class="modal-dialog">
 
       <!-- Modal content-->
@@ -482,11 +528,56 @@
           </tr>
         </table>        
           </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-success" data-dismiss="modal">Verify</button>
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Decline</button>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#verify">Verify</button>
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#decline">Decline</button>
             <button type="button" class="btn btn-info" data-dismiss="modal">Go to Page</button>
-        </div>
+            
+            <div id="verify" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title text-center">Verified</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p class="text-justify">The Student has been verified. A verification E-mail will be delivered to the student.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="decline" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title text-center">Decline</h4>
+                        </div>
+                        <div class="modal-body">
+                            <input type="text" placeholder="Please write down the reason for being declined" id="decline-box">
+                            <style>
+                                #decline-box {
+                                    width: 100%;
+                                    height: 100px;
+                                }
+                            </style>
+                            
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Decline</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>                        
       </div>
       </div></div>
             
@@ -498,10 +589,10 @@
         <td>alice@iitbhilai.ac.in</td>
         <td>
         
-        <button type="button"  data-toggle="modal" data-target="#myModal">View</button>
+        <button type="button"  data-toggle="modal" data-target="#alice">View</button>
 
   <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
+  <div class="modal fade" id="alice" role="dialog">
     <div class="modal-dialog">
 
       <!-- Modal content-->
@@ -590,10 +681,55 @@
         </table>        
           </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-success" data-dismiss="modal">Verify</button>
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Decline</button>
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#verify">Verify</button>
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#decline">Decline</button>
             <button type="button" class="btn btn-info" data-dismiss="modal">Go to Page</button>
-        </div>
+            
+            <div id="verify" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title text-center">Verified</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p class="text-justify">The Student has been verified. A verification E-mail will be delivered to the student.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="decline" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title text-center">Decline</h4>
+                        </div>
+                        <div class="modal-body">
+                            <input type="text" placeholder="Please write down the reason for being declined" id="decline-box">
+                            <style>
+                                #decline-box {
+                                    width: 100%;
+                                    height: 100px;
+                                }
+                            </style>
+                            
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Decline</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>                        
       </div>
       </div></div>
             
@@ -605,10 +741,10 @@
         <td>bob@iitbhilai.ac.in</td>
         <td>
         
-        <button type="button"  data-toggle="modal" data-target="#myModal">View</button>
+        <button type="button"  data-toggle="modal" data-target="#bob">View</button>
 
   <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
+  <div class="modal fade" id="bob" role="dialog">
     <div class="modal-dialog">
 
       <!-- Modal content-->
@@ -697,10 +833,55 @@
         </table>        
           </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-success" data-dismiss="modal">Verify</button>
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Decline</button>
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#verify">Verify</button>
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#decline">Decline</button>
             <button type="button" class="btn btn-info" data-dismiss="modal">Go to Page</button>
-        </div>
+            
+            <div id="verify" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title text-center">Verified</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p class="text-justify">The Student has been verified. A verification E-mail will be delivered to the student.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="decline" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title text-center">Decline</h4>
+                        </div>
+                        <div class="modal-body">
+                            <input type="text" placeholder="Please write down the reason for being declined" id="decline-box">
+                            <style>
+                                #decline-box {
+                                    width: 100%;
+                                    height: 100px;
+                                }
+                            </style>
+                            
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Decline</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>                        
       </div>
       </div></div>
             
@@ -712,10 +893,10 @@
         <td>alexa@iitbhilai.ac.in</td>
         <td>
         
-        <button type="button"  data-toggle="modal" data-target="#myModal">View</button>
+        <button type="button"  data-toggle="modal" data-target="#alexa">View</button>
 
   <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
+  <div class="modal fade" id="alexa" role="dialog">
     <div class="modal-dialog">
 
       <!-- Modal content-->
@@ -804,117 +985,55 @@
         </table>        
           </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-success" data-dismiss="modal">Verify</button>
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Decline</button>
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#verify">Verify</button>
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#decline">Decline</button>
             <button type="button" class="btn btn-info" data-dismiss="modal">Go to Page</button>
-        </div>
-      </div>
-      </div></div>
             
-        </td>
-      </tr>
+            <div id="verify" class="modal fade" role="dialog">
+                <div class="modal-dialog">
 
-      <tr>
-        <td>Smriti</td>
-        <td>smriti@iitbhilai.ac.in</td>
-        <td>
-        
-        <button type="button"  data-toggle="modal" data-target="#myModal">View</button>
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title text-center">Verified</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p class="text-justify">The Student has been verified. A verification E-mail will be delivered to the student.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="decline" class="modal fade" role="dialog">
+                <div class="modal-dialog">
 
-  <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title text-center">Student_ID</h4>
-        </div>
-        <div class="modal-body">
-         <table class="table table-hover table-striped table-bordered table-condensed">
-          <tr>
-            <th> Sr.</th>
-            <th>Field</th>
-            <th>Description</th>
-          </tr>
-          <tr>
-            <td>1.</td>
-            <td>Name</td>
-            <td>John Fernandis</td>
-          </tr>
-          <tr>
-            <td>2.</td>
-            <td>Semester</td>
-            <td>2018-19 W</td>
-          </tr>
-            <tr>
-            <td>3.</td>
-            <td>Student ID</td>
-            <td>11640390</td>
-          </tr>
-          <tr>
-            <td>4.</td>
-            <td>Discipline</td>
-            <td>Computer Science and Engineering</td>
-          </tr>
-          <tr>
-            <td>5.</td>
-            <td>Email-Id</td>
-            <td>johnf@iitbhilai.ac.in</td>
-          </tr>
-          <tr>
-            <td>6.</td>
-            <td>Age</td>
-            <td>20</td>
-          </tr>
-          <tr>
-            <td>7.</td>
-            <td>Contact-1</td>
-            <td>9977887799</td>
-          </tr>
-          <tr>
-            <td>8.</td>
-            <td>Contact-2</td>
-            <td>7544119988</td>
-          </tr>
-          <tr>
-            <td>9.</td>
-            <td>Program</td>
-            <td>Bachelor of Technology</td>
-          </tr>
-          <tr>
-            <td>10.</td>
-            <td>CGPA</td>
-            <td>7.2</td>
-          </tr>
-          <tr>
-            <td>11.</td>
-            <td>Class XII School</td>
-            <td>St. Mary School</td>
-          </tr>
-          <tr>
-            <td>12.</td>
-            <td>Class XII percentage</td>
-            <td>92.0</td>
-          </tr>
-          <tr>
-            <td>13.</td>
-            <td>Class X School</td>
-            <td>St. Mary School</td>
-          </tr>
-          <tr>
-            <td>14.</td>
-            <td>Class X percentage</td>
-            <td>9.8</td>
-          </tr>
-        </table>        
-          </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-success" data-dismiss="modal">Verify</button>
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Decline</button>
-            <button type="button" class="btn btn-info" data-dismiss="modal">Go to Page</button>
-        </div>
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title text-center">Decline</h4>
+                        </div>
+                        <div class="modal-body">
+                            <input type="text" placeholder="Please write down the reason for being declined" id="decline-box">
+                            <style>
+                                #decline-box {
+                                    width: 100%;
+                                    height: 100px;
+                                }
+                            </style>
+                            
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Decline</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>                        
       </div>
       </div></div>
             
@@ -926,10 +1045,10 @@
         <td>priya@iitbhilai.ac.in</td>
         <td>
         
-        <button type="button"  data-toggle="modal" data-target="#myModal">View</button>
+        <button type="button"  data-toggle="modal" data-target="#priya">View</button>
 
   <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
+  <div class="modal fade" id="priya" role="dialog">
     <div class="modal-dialog">
 
       <!-- Modal content-->
@@ -1018,10 +1137,55 @@
         </table>        
           </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-success" data-dismiss="modal">Verify</button>
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Decline</button>
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#verify">Verify</button>
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#decline">Decline</button>
             <button type="button" class="btn btn-info" data-dismiss="modal">Go to Page</button>
-        </div>
+            
+            <div id="verify" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title text-center">Verified</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p class="text-justify">The Student has been verified. A verification E-mail will be delivered to the student.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="decline" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title text-center">Decline</h4>
+                        </div>
+                        <div class="modal-body">
+                            <input type="text" placeholder="Please write down the reason for being declined" id="decline-box">
+                            <style>
+                                #decline-box {
+                                    width: 100%;
+                                    height: 100px;
+                                }
+                            </style>
+                            
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Decline</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>                        
       </div>
       </div></div>
             
@@ -1029,14 +1193,14 @@
       </tr>
 
       <tr>
-        <td>John</td>
-        <td>John@iitbhilai.ac.in</td>
+        <td>Goofy</td>
+        <td>goofy@iitbhilai.ac.in</td>
         <td>
         
-        <button type="button"  data-toggle="modal" data-target="#myModal">View</button>
+        <button type="button"  data-toggle="modal" data-target="#goofy">View</button>
 
   <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
+  <div class="modal fade" id="goofy" role="dialog">
     <div class="modal-dialog">
 
       <!-- Modal content-->
@@ -1125,10 +1289,55 @@
         </table>        
           </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-success" data-dismiss="modal">Verify</button>
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Decline</button>
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#verify">Verify</button>
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#decline">Decline</button>
             <button type="button" class="btn btn-info" data-dismiss="modal">Go to Page</button>
-        </div>
+            
+            <div id="verify" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title text-center">Verified</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p class="text-justify">The Student has been verified. A verification E-mail will be delivered to the student.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="decline" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title text-center">Decline</h4>
+                        </div>
+                        <div class="modal-body">
+                            <input type="text" placeholder="Please write down the reason for being declined" id="decline-box">
+                            <style>
+                                #decline-box {
+                                    width: 100%;
+                                    height: 100px;
+                                }
+                            </style>
+                            
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Decline</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>                        
       </div>
       </div></div>
             
@@ -1136,14 +1345,14 @@
       </tr>
 
       <tr>
-        <td>John</td>
-        <td>John@iitbhilai.ac.in</td>
+        <td>Scrooge</td>
+        <td>scrooge@iitbhilai.ac.in</td>
         <td>
         
-        <button type="button"  data-toggle="modal" data-target="#myModal">View</button>
+        <button type="button"  data-toggle="modal" data-target="#scrooge">View</button>
 
   <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
+  <div class="modal fade" id="scrooge" role="dialog">
     <div class="modal-dialog">
 
       <!-- Modal content-->
@@ -1232,10 +1441,55 @@
         </table>        
           </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-success" data-dismiss="modal">Verify</button>
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Decline</button>
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#verify">Verify</button>
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#decline">Decline</button>
             <button type="button" class="btn btn-info" data-dismiss="modal">Go to Page</button>
-        </div>
+            
+            <div id="verify" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title text-center">Verified</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p class="text-justify">The Student has been verified. A verification E-mail will be delivered to the student.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="decline" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title text-center">Decline</h4>
+                        </div>
+                        <div class="modal-body">
+                            <input type="text" placeholder="Please write down the reason for being declined" id="decline-box">
+                            <style>
+                                #decline-box {
+                                    width: 100%;
+                                    height: 100px;
+                                }
+                            </style>
+                            
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Decline</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>                        
       </div>
       </div></div>
             
@@ -1243,14 +1497,14 @@
       </tr>
 
       <tr>
-        <td>John</td>
-        <td>John@iitbhilai.ac.in</td>
+        <td>Sameer</td>
+        <td>sameer@iitbhilai.ac.in</td>
         <td>
         
-        <button type="button"  data-toggle="modal" data-target="#myModal">View</button>
+        <button type="button"  data-toggle="modal" data-target="#sameer">View</button>
 
-  <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
+        <!-- Modal -->
+        <div class="modal fade" id="sameer" role="dialog">
     <div class="modal-dialog">
 
       <!-- Modal content-->
@@ -1339,1088 +1593,64 @@
         </table>        
           </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-success" data-dismiss="modal">Verify</button>
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Decline</button>
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#verify">Verify</button>
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#decline">Decline</button>
             <button type="button" class="btn btn-info" data-dismiss="modal">Go to Page</button>
-        </div>
-      </div>
-      </div></div>
             
-        </td>
-      </tr>
+            <div id="verify" class="modal fade" role="dialog">
+                <div class="modal-dialog">
 
-      <tr>
-        <td>John</td>
-        <td>John@iitbhilai.ac.in</td>
-        <td>
-        
-        <button type="button"  data-toggle="modal" data-target="#myModal">View</button>
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title text-center">Verified</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p class="text-justify">The Student has been verified. A verification E-mail will be delivered to the student.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="decline" class="modal fade" role="dialog">
+                <div class="modal-dialog">
 
-  <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title text-center">Student_ID</h4>
-        </div>
-        <div class="modal-body">
-         <table class="table table-hover table-striped table-bordered table-condensed">
-          <tr>
-            <th> Sr.</th>
-            <th>Field</th>
-            <th>Description</th>
-          </tr>
-          <tr>
-            <td>1.</td>
-            <td>Name</td>
-            <td>John Fernandis</td>
-          </tr>
-          <tr>
-            <td>2.</td>
-            <td>Semester</td>
-            <td>2018-19 W</td>
-          </tr>
-            <tr>
-            <td>3.</td>
-            <td>Student ID</td>
-            <td>11640390</td>
-          </tr>
-          <tr>
-            <td>4.</td>
-            <td>Discipline</td>
-            <td>Computer Science and Engineering</td>
-          </tr>
-          <tr>
-            <td>5.</td>
-            <td>Email-Id</td>
-            <td>johnf@iitbhilai.ac.in</td>
-          </tr>
-          <tr>
-            <td>6.</td>
-            <td>Age</td>
-            <td>20</td>
-          </tr>
-          <tr>
-            <td>7.</td>
-            <td>Contact-1</td>
-            <td>9977887799</td>
-          </tr>
-          <tr>
-            <td>8.</td>
-            <td>Contact-2</td>
-            <td>7544119988</td>
-          </tr>
-          <tr>
-            <td>9.</td>
-            <td>Program</td>
-            <td>Bachelor of Technology</td>
-          </tr>
-          <tr>
-            <td>10.</td>
-            <td>CGPA</td>
-            <td>7.2</td>
-          </tr>
-          <tr>
-            <td>11.</td>
-            <td>Class XII School</td>
-            <td>St. Mary School</td>
-          </tr>
-          <tr>
-            <td>12.</td>
-            <td>Class XII percentage</td>
-            <td>92.0</td>
-          </tr>
-          <tr>
-            <td>13.</td>
-            <td>Class X School</td>
-            <td>St. Mary School</td>
-          </tr>
-          <tr>
-            <td>14.</td>
-            <td>Class X percentage</td>
-            <td>9.8</td>
-          </tr>
-        </table>        
-          </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-success" data-dismiss="modal">Verify</button>
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Decline</button>
-            <button type="button" class="btn btn-info" data-dismiss="modal">Go to Page</button>
-        </div>
-      </div>
-      </div></div>
-            
-        </td>
-      </tr>
-
-      <tr>
-        <td>John</td>
-        <td>John@iitbhilai.ac.in</td>
-        <td>
-        
-        <button type="button"  data-toggle="modal" data-target="#myModal">View</button>
-
-  <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title text-center">Student_ID</h4>
-        </div>
-        <div class="modal-body">
-         <table class="table table-hover table-striped table-bordered table-condensed">
-          <tr>
-            <th> Sr.</th>
-            <th>Field</th>
-            <th>Description</th>
-          </tr>
-          <tr>
-            <td>1.</td>
-            <td>Name</td>
-            <td>John Fernandis</td>
-          </tr>
-          <tr>
-            <td>2.</td>
-            <td>Semester</td>
-            <td>2018-19 W</td>
-          </tr>
-            <tr>
-            <td>3.</td>
-            <td>Student ID</td>
-            <td>11640390</td>
-          </tr>
-          <tr>
-            <td>4.</td>
-            <td>Discipline</td>
-            <td>Computer Science and Engineering</td>
-          </tr>
-          <tr>
-            <td>5.</td>
-            <td>Email-Id</td>
-            <td>johnf@iitbhilai.ac.in</td>
-          </tr>
-          <tr>
-            <td>6.</td>
-            <td>Age</td>
-            <td>20</td>
-          </tr>
-          <tr>
-            <td>7.</td>
-            <td>Contact-1</td>
-            <td>9977887799</td>
-          </tr>
-          <tr>
-            <td>8.</td>
-            <td>Contact-2</td>
-            <td>7544119988</td>
-          </tr>
-          <tr>
-            <td>9.</td>
-            <td>Program</td>
-            <td>Bachelor of Technology</td>
-          </tr>
-          <tr>
-            <td>10.</td>
-            <td>CGPA</td>
-            <td>7.2</td>
-          </tr>
-          <tr>
-            <td>11.</td>
-            <td>Class XII School</td>
-            <td>St. Mary School</td>
-          </tr>
-          <tr>
-            <td>12.</td>
-            <td>Class XII percentage</td>
-            <td>92.0</td>
-          </tr>
-          <tr>
-            <td>13.</td>
-            <td>Class X School</td>
-            <td>St. Mary School</td>
-          </tr>
-          <tr>
-            <td>14.</td>
-            <td>Class X percentage</td>
-            <td>9.8</td>
-          </tr>
-        </table>        
-          </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-success" data-dismiss="modal">Verify</button>
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Decline</button>
-            <button type="button" class="btn btn-info" data-dismiss="modal">Go to Page</button>
-        </div>
-      </div>
-      </div></div>
-            
-        </td>
-      </tr>
-
-      <tr>
-        <td>John</td>
-        <td>John@iitbhilai.ac.in</td>
-        <td>
-        
-        <button type="button"  data-toggle="modal" data-target="#myModal">View</button>
-
-  <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title text-center">Student_ID</h4>
-        </div>
-        <div class="modal-body">
-         <table class="table table-hover table-striped table-bordered table-condensed">
-          <tr>
-            <th> Sr.</th>
-            <th>Field</th>
-            <th>Description</th>
-          </tr>
-          <tr>
-            <td>1.</td>
-            <td>Name</td>
-            <td>John Fernandis</td>
-          </tr>
-          <tr>
-            <td>2.</td>
-            <td>Semester</td>
-            <td>2018-19 W</td>
-          </tr>
-            <tr>
-            <td>3.</td>
-            <td>Student ID</td>
-            <td>11640390</td>
-          </tr>
-          <tr>
-            <td>4.</td>
-            <td>Discipline</td>
-            <td>Computer Science and Engineering</td>
-          </tr>
-          <tr>
-            <td>5.</td>
-            <td>Email-Id</td>
-            <td>johnf@iitbhilai.ac.in</td>
-          </tr>
-          <tr>
-            <td>6.</td>
-            <td>Age</td>
-            <td>20</td>
-          </tr>
-          <tr>
-            <td>7.</td>
-            <td>Contact-1</td>
-            <td>9977887799</td>
-          </tr>
-          <tr>
-            <td>8.</td>
-            <td>Contact-2</td>
-            <td>7544119988</td>
-          </tr>
-          <tr>
-            <td>9.</td>
-            <td>Program</td>
-            <td>Bachelor of Technology</td>
-          </tr>
-          <tr>
-            <td>10.</td>
-            <td>CGPA</td>
-            <td>7.2</td>
-          </tr>
-          <tr>
-            <td>11.</td>
-            <td>Class XII School</td>
-            <td>St. Mary School</td>
-          </tr>
-          <tr>
-            <td>12.</td>
-            <td>Class XII percentage</td>
-            <td>92.0</td>
-          </tr>
-          <tr>
-            <td>13.</td>
-            <td>Class X School</td>
-            <td>St. Mary School</td>
-          </tr>
-          <tr>
-            <td>14.</td>
-            <td>Class X percentage</td>
-            <td>9.8</td>
-          </tr>
-        </table>        
-          </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-success" data-dismiss="modal">Verify</button>
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Decline</button>
-            <button type="button" class="btn btn-info" data-dismiss="modal">Go to Page</button>
-        </div>
-      </div>
-      </div></div>
-            
-        </td>
-      </tr>
-
-      <tr>
-        <td>John</td>
-        <td>John@iitbhilai.ac.in</td>
-        <td>
-        
-        <button type="button"  data-toggle="modal" data-target="#myModal">View</button>
-
-  <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title text-center">Student_ID</h4>
-        </div>
-        <div class="modal-body">
-         <table class="table table-hover table-striped table-bordered table-condensed">
-          <tr>
-            <th> Sr.</th>
-            <th>Field</th>
-            <th>Description</th>
-          </tr>
-          <tr>
-            <td>1.</td>
-            <td>Name</td>
-            <td>John Fernandis</td>
-          </tr>
-          <tr>
-            <td>2.</td>
-            <td>Semester</td>
-            <td>2018-19 W</td>
-          </tr>
-            <tr>
-            <td>3.</td>
-            <td>Student ID</td>
-            <td>11640390</td>
-          </tr>
-          <tr>
-            <td>4.</td>
-            <td>Discipline</td>
-            <td>Computer Science and Engineering</td>
-          </tr>
-          <tr>
-            <td>5.</td>
-            <td>Email-Id</td>
-            <td>johnf@iitbhilai.ac.in</td>
-          </tr>
-          <tr>
-            <td>6.</td>
-            <td>Age</td>
-            <td>20</td>
-          </tr>
-          <tr>
-            <td>7.</td>
-            <td>Contact-1</td>
-            <td>9977887799</td>
-          </tr>
-          <tr>
-            <td>8.</td>
-            <td>Contact-2</td>
-            <td>7544119988</td>
-          </tr>
-          <tr>
-            <td>9.</td>
-            <td>Program</td>
-            <td>Bachelor of Technology</td>
-          </tr>
-          <tr>
-            <td>10.</td>
-            <td>CGPA</td>
-            <td>7.2</td>
-          </tr>
-          <tr>
-            <td>11.</td>
-            <td>Class XII School</td>
-            <td>St. Mary School</td>
-          </tr>
-          <tr>
-            <td>12.</td>
-            <td>Class XII percentage</td>
-            <td>92.0</td>
-          </tr>
-          <tr>
-            <td>13.</td>
-            <td>Class X School</td>
-            <td>St. Mary School</td>
-          </tr>
-          <tr>
-            <td>14.</td>
-            <td>Class X percentage</td>
-            <td>9.8</td>
-          </tr>
-        </table>        
-          </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-success" data-dismiss="modal">Verify</button>
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Decline</button>
-            <button type="button" class="btn btn-info" data-dismiss="modal">Go to Page</button>
-        </div>
-      </div>
-      </div></div>
-            
-        </td>
-      </tr>
-
-      <tr>
-        <td>John</td>
-        <td>John@iitbhilai.ac.in</td>
-        <td>
-        
-        <button type="button"  data-toggle="modal" data-target="#myModal">View</button>
-
-  <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title text-center">Student_ID</h4>
-        </div>
-        <div class="modal-body">
-         <table class="table table-hover table-striped table-bordered table-condensed">
-          <tr>
-            <th> Sr.</th>
-            <th>Field</th>
-            <th>Description</th>
-          </tr>
-          <tr>
-            <td>1.</td>
-            <td>Name</td>
-            <td>John Fernandis</td>
-          </tr>
-          <tr>
-            <td>2.</td>
-            <td>Semester</td>
-            <td>2018-19 W</td>
-          </tr>
-            <tr>
-            <td>3.</td>
-            <td>Student ID</td>
-            <td>11640390</td>
-          </tr>
-          <tr>
-            <td>4.</td>
-            <td>Discipline</td>
-            <td>Computer Science and Engineering</td>
-          </tr>
-          <tr>
-            <td>5.</td>
-            <td>Email-Id</td>
-            <td>johnf@iitbhilai.ac.in</td>
-          </tr>
-          <tr>
-            <td>6.</td>
-            <td>Age</td>
-            <td>20</td>
-          </tr>
-          <tr>
-            <td>7.</td>
-            <td>Contact-1</td>
-            <td>9977887799</td>
-          </tr>
-          <tr>
-            <td>8.</td>
-            <td>Contact-2</td>
-            <td>7544119988</td>
-          </tr>
-          <tr>
-            <td>9.</td>
-            <td>Program</td>
-            <td>Bachelor of Technology</td>
-          </tr>
-          <tr>
-            <td>10.</td>
-            <td>CGPA</td>
-            <td>7.2</td>
-          </tr>
-          <tr>
-            <td>11.</td>
-            <td>Class XII School</td>
-            <td>St. Mary School</td>
-          </tr>
-          <tr>
-            <td>12.</td>
-            <td>Class XII percentage</td>
-            <td>92.0</td>
-          </tr>
-          <tr>
-            <td>13.</td>
-            <td>Class X School</td>
-            <td>St. Mary School</td>
-          </tr>
-          <tr>
-            <td>14.</td>
-            <td>Class X percentage</td>
-            <td>9.8</td>
-          </tr>
-        </table>        
-          </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-success" data-dismiss="modal">Verify</button>
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Decline</button>
-            <button type="button" class="btn btn-info" data-dismiss="modal">Go to Page</button>
-        </div>
-      </div>
-      </div></div>
-            
-        </td>
-      </tr>
-
-      <tr>
-        <td>John</td>
-        <td>John@iitbhilai.ac.in</td>
-        <td>
-        
-        <button type="button"  data-toggle="modal" data-target="#myModal">View</button>
-
-  <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title text-center">Student_ID</h4>
-        </div>
-        <div class="modal-body">
-         <table class="table table-hover table-striped table-bordered table-condensed">
-          <tr>
-            <th> Sr.</th>
-            <th>Field</th>
-            <th>Description</th>
-          </tr>
-          <tr>
-            <td>1.</td>
-            <td>Name</td>
-            <td>John Fernandis</td>
-          </tr>
-          <tr>
-            <td>2.</td>
-            <td>Semester</td>
-            <td>2018-19 W</td>
-          </tr>
-            <tr>
-            <td>3.</td>
-            <td>Student ID</td>
-            <td>11640390</td>
-          </tr>
-          <tr>
-            <td>4.</td>
-            <td>Discipline</td>
-            <td>Computer Science and Engineering</td>
-          </tr>
-          <tr>
-            <td>5.</td>
-            <td>Email-Id</td>
-            <td>johnf@iitbhilai.ac.in</td>
-          </tr>
-          <tr>
-            <td>6.</td>
-            <td>Age</td>
-            <td>20</td>
-          </tr>
-          <tr>
-            <td>7.</td>
-            <td>Contact-1</td>
-            <td>9977887799</td>
-          </tr>
-          <tr>
-            <td>8.</td>
-            <td>Contact-2</td>
-            <td>7544119988</td>
-          </tr>
-          <tr>
-            <td>9.</td>
-            <td>Program</td>
-            <td>Bachelor of Technology</td>
-          </tr>
-          <tr>
-            <td>10.</td>
-            <td>CGPA</td>
-            <td>7.2</td>
-          </tr>
-          <tr>
-            <td>11.</td>
-            <td>Class XII School</td>
-            <td>St. Mary School</td>
-          </tr>
-          <tr>
-            <td>12.</td>
-            <td>Class XII percentage</td>
-            <td>92.0</td>
-          </tr>
-          <tr>
-            <td>13.</td>
-            <td>Class X School</td>
-            <td>St. Mary School</td>
-          </tr>
-          <tr>
-            <td>14.</td>
-            <td>Class X percentage</td>
-            <td>9.8</td>
-          </tr>
-        </table>        
-          </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-success" data-dismiss="modal">Verify</button>
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Decline</button>
-            <button type="button" class="btn btn-info" data-dismiss="modal">Go to Page</button>
-        </div>
-      </div>
-      </div></div>
-            
-        </td>
-      </tr>
-
-      <tr>
-        <td>John</td>
-        <td>John@iitbhilai.ac.in</td>
-        <td>
-        
-        <button type="button"  data-toggle="modal" data-target="#myModal">View</button>
-
-  <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title text-center">Student_ID</h4>
-        </div>
-        <div class="modal-body">
-         <table class="table table-hover table-striped table-bordered table-condensed">
-          <tr>
-            <th> Sr.</th>
-            <th>Field</th>
-            <th>Description</th>
-          </tr>
-          <tr>
-            <td>1.</td>
-            <td>Name</td>
-            <td>John Fernandis</td>
-          </tr>
-          <tr>
-            <td>2.</td>
-            <td>Semester</td>
-            <td>2018-19 W</td>
-          </tr>
-            <tr>
-            <td>3.</td>
-            <td>Student ID</td>
-            <td>11640390</td>
-          </tr>
-          <tr>
-            <td>4.</td>
-            <td>Discipline</td>
-            <td>Computer Science and Engineering</td>
-          </tr>
-          <tr>
-            <td>5.</td>
-            <td>Email-Id</td>
-            <td>johnf@iitbhilai.ac.in</td>
-          </tr>
-          <tr>
-            <td>6.</td>
-            <td>Age</td>
-            <td>20</td>
-          </tr>
-          <tr>
-            <td>7.</td>
-            <td>Contact-1</td>
-            <td>9977887799</td>
-          </tr>
-          <tr>
-            <td>8.</td>
-            <td>Contact-2</td>
-            <td>7544119988</td>
-          </tr>
-          <tr>
-            <td>9.</td>
-            <td>Program</td>
-            <td>Bachelor of Technology</td>
-          </tr>
-          <tr>
-            <td>10.</td>
-            <td>CGPA</td>
-            <td>7.2</td>
-          </tr>
-          <tr>
-            <td>11.</td>
-            <td>Class XII School</td>
-            <td>St. Mary School</td>
-          </tr>
-          <tr>
-            <td>12.</td>
-            <td>Class XII percentage</td>
-            <td>92.0</td>
-          </tr>
-          <tr>
-            <td>13.</td>
-            <td>Class X School</td>
-            <td>St. Mary School</td>
-          </tr>
-          <tr>
-            <td>14.</td>
-            <td>Class X percentage</td>
-            <td>9.8</td>
-          </tr>
-        </table>        
-          </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-success" data-dismiss="modal">Verify</button>
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Decline</button>
-            <button type="button" class="btn btn-info" data-dismiss="modal">Go to Page</button>
-        </div>
-      </div>
-      </div></div>
-            
-        </td>
-      </tr>
-
-      <tr>
-        <td>John</td>
-        <td>John@iitbhilai.ac.in</td>
-        <td>
-        
-        <button type="button"  data-toggle="modal" data-target="#myModal">View</button>
-
-  <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title text-center">Student_ID</h4>
-        </div>
-        <div class="modal-body">
-         <table class="table table-hover table-striped table-bordered table-condensed">
-          <tr>
-            <th> Sr.</th>
-            <th>Field</th>
-            <th>Description</th>
-          </tr>
-          <tr>
-            <td>1.</td>
-            <td>Name</td>
-            <td>John Fernandis</td>
-          </tr>
-          <tr>
-            <td>2.</td>
-            <td>Semester</td>
-            <td>2018-19 W</td>
-          </tr>
-            <tr>
-            <td>3.</td>
-            <td>Student ID</td>
-            <td>11640390</td>
-          </tr>
-          <tr>
-            <td>4.</td>
-            <td>Discipline</td>
-            <td>Computer Science and Engineering</td>
-          </tr>
-          <tr>
-            <td>5.</td>
-            <td>Email-Id</td>
-            <td>johnf@iitbhilai.ac.in</td>
-          </tr>
-          <tr>
-            <td>6.</td>
-            <td>Age</td>
-            <td>20</td>
-          </tr>
-          <tr>
-            <td>7.</td>
-            <td>Contact-1</td>
-            <td>9977887799</td>
-          </tr>
-          <tr>
-            <td>8.</td>
-            <td>Contact-2</td>
-            <td>7544119988</td>
-          </tr>
-          <tr>
-            <td>9.</td>
-            <td>Program</td>
-            <td>Bachelor of Technology</td>
-          </tr>
-          <tr>
-            <td>10.</td>
-            <td>CGPA</td>
-            <td>7.2</td>
-          </tr>
-          <tr>
-            <td>11.</td>
-            <td>Class XII School</td>
-            <td>St. Mary School</td>
-          </tr>
-          <tr>
-            <td>12.</td>
-            <td>Class XII percentage</td>
-            <td>92.0</td>
-          </tr>
-          <tr>
-            <td>13.</td>
-            <td>Class X School</td>
-            <td>St. Mary School</td>
-          </tr>
-          <tr>
-            <td>14.</td>
-            <td>Class X percentage</td>
-            <td>9.8</td>
-          </tr>
-        </table>        
-          </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-success" data-dismiss="modal">Verify</button>
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Decline</button>
-            <button type="button" class="btn btn-info" data-dismiss="modal">Go to Page</button>
-        </div>
-      </div>
-      </div></div>
-            
-        </td>
-      </tr>
-
-      <tr>
-        <td>John</td>
-        <td>John@iitbhilai.ac.in</td>
-        <td>
-        
-        <button type="button"  data-toggle="modal" data-target="#myModal">View</button>
-
-  <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title text-center">Student_ID</h4>
-        </div>
-        <div class="modal-body">
-         <table class="table table-hover table-striped table-bordered table-condensed">
-          <tr>
-            <th> Sr.</th>
-            <th>Field</th>
-            <th>Description</th>
-          </tr>
-          <tr>
-            <td>1.</td>
-            <td>Name</td>
-            <td>John Fernandis</td>
-          </tr>
-          <tr>
-            <td>2.</td>
-            <td>Semester</td>
-            <td>2018-19 W</td>
-          </tr>
-            <tr>
-            <td>3.</td>
-            <td>Student ID</td>
-            <td>11640390</td>
-          </tr>
-          <tr>
-            <td>4.</td>
-            <td>Discipline</td>
-            <td>Computer Science and Engineering</td>
-          </tr>
-          <tr>
-            <td>5.</td>
-            <td>Email-Id</td>
-            <td>johnf@iitbhilai.ac.in</td>
-          </tr>
-          <tr>
-            <td>6.</td>
-            <td>Age</td>
-            <td>20</td>
-          </tr>
-          <tr>
-            <td>7.</td>
-            <td>Contact-1</td>
-            <td>9977887799</td>
-          </tr>
-          <tr>
-            <td>8.</td>
-            <td>Contact-2</td>
-            <td>7544119988</td>
-          </tr>
-          <tr>
-            <td>9.</td>
-            <td>Program</td>
-            <td>Bachelor of Technology</td>
-          </tr>
-          <tr>
-            <td>10.</td>
-            <td>CGPA</td>
-            <td>7.2</td>
-          </tr>
-          <tr>
-            <td>11.</td>
-            <td>Class XII School</td>
-            <td>St. Mary School</td>
-          </tr>
-          <tr>
-            <td>12.</td>
-            <td>Class XII percentage</td>
-            <td>92.0</td>
-          </tr>
-          <tr>
-            <td>13.</td>
-            <td>Class X School</td>
-            <td>St. Mary School</td>
-          </tr>
-          <tr>
-            <td>14.</td>
-            <td>Class X percentage</td>
-            <td>9.8</td>
-          </tr>
-        </table>        
-          </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-success" data-dismiss="modal">Verify</button>
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Decline</button>
-            <button type="button" class="btn btn-info" data-dismiss="modal">Go to Page</button>
-        </div>
-      </div>
-      </div></div>
-            
-        </td>
-      </tr>
-
-      <tr>
-        <td>John</td>
-        <td>John@iitbhilai.ac.in</td>
-        <td>
-        
-        <button type="button"  data-toggle="modal" data-target="#myModal">View</button>
-
-  <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title text-center">Student_ID</h4>
-        </div>
-        <div class="modal-body">
-         <table class="table table-hover table-striped table-bordered table-condensed">
-          <tr>
-            <th> Sr.</th>
-            <th>Field</th>
-            <th>Description</th>
-          </tr>
-          <tr>
-            <td>1.</td>
-            <td>Name</td>
-            <td>John Fernandis</td>
-          </tr>
-          <tr>
-            <td>2.</td>
-            <td>Semester</td>
-            <td>2018-19 W</td>
-          </tr>
-            <tr>
-            <td>3.</td>
-            <td>Student ID</td>
-            <td>11640390</td>
-          </tr>
-          <tr>
-            <td>4.</td>
-            <td>Discipline</td>
-            <td>Computer Science and Engineering</td>
-          </tr>
-          <tr>
-            <td>5.</td>
-            <td>Email-Id</td>
-            <td>johnf@iitbhilai.ac.in</td>
-          </tr>
-          <tr>
-            <td>6.</td>
-            <td>Age</td>
-            <td>20</td>
-          </tr>
-          <tr>
-            <td>7.</td>
-            <td>Contact-1</td>
-            <td>9977887799</td>
-          </tr>
-          <tr>
-            <td>8.</td>
-            <td>Contact-2</td>
-            <td>7544119988</td>
-          </tr>
-          <tr>
-            <td>9.</td>
-            <td>Program</td>
-            <td>Bachelor of Technology</td>
-          </tr>
-          <tr>
-            <td>10.</td>
-            <td>CGPA</td>
-            <td>7.2</td>
-          </tr>
-          <tr>
-            <td>11.</td>
-            <td>Class XII School</td>
-            <td>St. Mary School</td>
-          </tr>
-          <tr>
-            <td>12.</td>
-            <td>Class XII percentage</td>
-            <td>92.0</td>
-          </tr>
-          <tr>
-            <td>13.</td>
-            <td>Class X School</td>
-            <td>St. Mary School</td>
-          </tr>
-          <tr>
-            <td>14.</td>
-            <td>Class X percentage</td>
-            <td>9.8</td>
-          </tr>
-        </table>        
-          </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-success" data-dismiss="modal">Verify</button>
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Decline</button>
-            <button type="button" class="btn btn-info" data-dismiss="modal">Go to Page</button>
-        </div>
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title text-center">Decline</h4>
+                        </div>
+                        <div class="modal-body">
+                            <input type="text" placeholder="Please write down the reason for being declined" id="decline-box">
+                            <style>
+                                #decline-box {
+                                    width: 100%;
+                                    height: 100px;
+                                }
+                            </style>
+                            
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Decline</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>                        
       </div>
       </div></div>
             
         </td>
       </tr>
         
-    </tbody>                            
+    </tbody> 
   </table>
+                        
                     </div>
                     <script>
                         $(document).ready(function(){
