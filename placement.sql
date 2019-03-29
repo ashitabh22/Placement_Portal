@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 28, 2019 at 03:30 PM
+-- Generation Time: Mar 29, 2019 at 02:45 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 5.6.40
 
@@ -123,26 +123,27 @@ CREATE TABLE `applicable_jobs` (
   `company_name` int(11) NOT NULL,
   `job_title` text NOT NULL,
   `job_description` text NOT NULL,
-  `cgpa_requirement` text NOT NULL,
+  `cgpa_requirement` double(10,0) NOT NULL,
   `program` text NOT NULL,
   `branch` text NOT NULL,
   `application_period` text NOT NULL,
-  `minimum_package_offered` text NOT NULL,
-  `number_of_posts` text NOT NULL,
-  `ppt_data` text NOT NULL,
-  `test_date` text NOT NULL,
-  `interview_date` text NOT NULL,
-  `shortlisting_date` text NOT NULL
+  `minimum_package_offered` bigint(20) NOT NULL,
+  `number_of_posts` decimal(10,0) NOT NULL,
+  `ppt_data` date NOT NULL,
+  `test_date` date NOT NULL,
+  `interview_date` date NOT NULL,
+  `shortlisting_date` date NOT NULL,
+  `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `applicable_jobs`
 --
 
-INSERT INTO `applicable_jobs` (`company_name`, `job_title`, `job_description`, `cgpa_requirement`, `program`, `branch`, `application_period`, `minimum_package_offered`, `number_of_posts`, `ppt_data`, `test_date`, `interview_date`, `shortlisting_date`) VALUES
-(1, 'job title 1', 'job description 1', 'cgpa 1', 'program 1', 'branch 1', 'applicaton perid 1', 'minimum package offered 1', 'number of posts 1', 'ppt date 1', 'test_date 1', 'interview_date 1', 'shortlisting date 1'),
-(2, 'job title 2', 'job description 2', 'cgpa 2', 'program 2', 'branch 2', 'applicaton perid 2', 'minimum package offered 2', 'number of posts 2', 'ppt date 2', 'test_date 2', 'interview_date 2', 'shortlisting date 2'),
-(3, 'job title 3', 'job description 3', 'cgpa 3', 'program 3', 'branch 3', 'applicaton perid 3', 'minimum package offered 3', 'number of posts 3', 'ppt date 3', 'test_date 3', 'interview_date 3', 'shortlisting date 3');
+INSERT INTO `applicable_jobs` (`company_name`, `job_title`, `job_description`, `cgpa_requirement`, `program`, `branch`, `application_period`, `minimum_package_offered`, `number_of_posts`, `ppt_data`, `test_date`, `interview_date`, `shortlisting_date`, `status`) VALUES
+(1, 'job title 1', 'job description 1', 8, 'program 1', 'branch 1', 'applicaton perid 1', 0, '0', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', 1),
+(2, 'job title 2', 'job 2', 7, 'program 2', 'branch 2', 'applicaton perid 2', 1, '5', '2019-03-12', '2019-03-14', '2019-03-16', '2019-03-18', 1),
+(3, 'job title 3', 'job description 3', 0, 'program 3', 'branch 3', 'applicaton perid 3', 0, '0', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', 1);
 
 -- --------------------------------------------------------
 
@@ -161,8 +162,8 @@ CREATE TABLE `AppliedStudents` (
 --
 
 INSERT INTO `AppliedStudents` (`sr`, `ldap`, `status`) VALUES
-(1, 'a1', '2'),
-(2, 'a2', '6');
+(1, 'a1', '7'),
+(2, 'a2', '7');
 
 -- --------------------------------------------------------
 
@@ -377,6 +378,14 @@ CREATE TABLE `posted_jobs` (
   `academic_year` year(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `posted_jobs`
+--
+
+INSERT INTO `posted_jobs` (`company_id`, `job_title`, `job_description`, `cgpa_requirements`, `program`, `branch`, `application_period`, `minimum_package_offered`, `number_of_posts`, `interview_date`, `ppt_date`, `test_date`, `shortlisting_date`, `academic_year`) VALUES
+('abgj233', 'wergfjhty', 'dgjdb\r\ndqwafb', 8.00, 'B.Tech', 'CSE/EE', '2019-04-30', '450000', 9, '2019-03-29', '2019-03-25', '2019-03-26', '2019-03-30', 2019),
+('DEF658', 'DEF', 'JKHSD\r\n', 7.50, 'B.Tech', 'EE/CSE', '2019-03-16', '600000', 15, '2019-03-27', '2019-03-19', '2019-03-22', '2019-03-29', 2019);
+
 -- --------------------------------------------------------
 
 --
@@ -426,7 +435,6 @@ CREATE TABLE `registered_companies` (
 --
 
 INSERT INTO `registered_companies` (`company_id`, `company_name`, `email`, `point_of_contact`, `mobile`, `address`, `website`, `about`, `designation`) VALUES
-('10000', 'ABC', 'abc@gmail.com', 'lajkdfh', 128345432, 'sdfkjlskdfn, zlkdfglf, lkjfzls 23', 'akjfgklzjdfk.com', 'iaoertj sdjfg ckkxf ioroi zdfjgid fdigho kjn.', 'ksjdfk'),
 ('10001', 'DEF', 'def@gmail.com', 'lfkgnlsfkhg', 283746253, '45 lkfdfjps, sdifjgosjig, sjdzfoijgd .', 'erioidrotieurt.com', 'dlkfgjaeijrt, aoiwsrfois, asirjtpairjt.', 'oiesrtowsihgo'),
 ('10002', 'GHI', 'ghi@gmail.com', 'kljszdfkldf', 134235345, 'arjfoairef, hdfogidofg, oiiajroigjap.', 'akljhfolshdfolasdf.com', 'uaierfhoiahfbkbj akjsdfga jaklwlfkj.', 'ioidfjgksdg');
 
