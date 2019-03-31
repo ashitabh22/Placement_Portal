@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 29, 2019 at 02:45 PM
+-- Generation Time: Mar 31, 2019 at 09:43 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 5.6.40
 
@@ -90,6 +90,7 @@ INSERT INTO `achievement_details` (`slno`, `ldapid`, `achievement`, `year`) VALU
 --
 
 CREATE TABLE `all_jobs` (
+  `company_id` varchar(30) NOT NULL,
   `company_name` text NOT NULL,
   `job_title` text NOT NULL,
   `job_description` text NOT NULL,
@@ -102,16 +103,18 @@ CREATE TABLE `all_jobs` (
   `ppt_date` date NOT NULL,
   `test_date` date NOT NULL,
   `interview_date` date NOT NULL,
-  `shortlisting_date` date NOT NULL
+  `shortlisting_date` date NOT NULL,
+  `academic_year` year(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `all_jobs`
 --
 
-INSERT INTO `all_jobs` (`company_name`, `job_title`, `job_description`, `cgpa_requirement`, `program`, `branch`, `application_period`, `min_package_offered`, `number_of_posts`, `ppt_date`, `test_date`, `interview_date`, `shortlisting_date`) VALUES
-('google', 'software developer', 'python, java required', 8, 'B.tech', 'CSE', '2019-03-26', 10000000, 3, '2019-03-12', '2019-03-13', '2019-03-29', '2019-03-14'),
-('Microsoft', 'web developer', 'back end and front end ', 8, 'B.tech', 'Any branch', '2019-03-20', 1000000, 2, '2019-03-06', '2019-03-20', '2019-03-13', '2019-03-22');
+INSERT INTO `all_jobs` (`company_id`, `company_name`, `job_title`, `job_description`, `cgpa_requirement`, `program`, `branch`, `application_period`, `min_package_offered`, `number_of_posts`, `ppt_date`, `test_date`, `interview_date`, `shortlisting_date`, `academic_year`) VALUES
+('2', 'asdf', 'asdf', 'asdf', 0, 'adfs', 'ds', '2019-03-21', 0, 0, '2019-03-15', '2019-03-22', '2019-03-20', '2019-03-19', 0000),
+('ABC123', 'google', 'software developer', 'python, java required', 8, 'B.tech', 'CSE', '2019-03-26', 10000000, 3, '2019-03-12', '2019-03-13', '2019-03-29', '2019-03-14', 2019),
+('DEF345', 'Microsoft', 'web developer', 'back end and front end ', 8, 'B.tech', 'Any branch', '2019-03-20', 1000000, 2, '2019-03-06', '2019-03-20', '2019-03-13', '2019-03-22', 2019);
 
 -- --------------------------------------------------------
 
@@ -162,7 +165,7 @@ CREATE TABLE `AppliedStudents` (
 --
 
 INSERT INTO `AppliedStudents` (`sr`, `ldap`, `status`) VALUES
-(1, 'a1', '7'),
+(1, 'a1', '6'),
 (2, 'a2', '7');
 
 -- --------------------------------------------------------
@@ -435,8 +438,7 @@ CREATE TABLE `registered_companies` (
 --
 
 INSERT INTO `registered_companies` (`company_id`, `company_name`, `email`, `point_of_contact`, `mobile`, `address`, `website`, `about`, `designation`) VALUES
-('10001', 'DEF', 'def@gmail.com', 'lfkgnlsfkhg', 283746253, '45 lkfdfjps, sdifjgosjig, sjdzfoijgd .', 'erioidrotieurt.com', 'dlkfgjaeijrt, aoiwsrfois, asirjtpairjt.', 'oiesrtowsihgo'),
-('10002', 'GHI', 'ghi@gmail.com', 'kljszdfkldf', 134235345, 'arjfoairef, hdfogidofg, oiiajroigjap.', 'akljhfolshdfolasdf.com', 'uaierfhoiahfbkbj akjsdfga jaklwlfkj.', 'ioidfjgksdg');
+('1', 'DEF', 'def@gmail.com', 'lfkgnlsfkhg', 283746253, '45 lkfdfjps, sdifjgosjig, sjdzfoijgd .', 'erioidrotieurt.com', 'dlkfgjaeijrt, aoiwsrfois, asirjtpairjt.', 'oiesrtowsihgo');
 
 -- --------------------------------------------------------
 
@@ -485,7 +487,15 @@ INSERT INTO `status` (`code`, `status_name`, `color_label`) VALUES
 (0, 'Resume Being Built', 'default'),
 (1, 'Unverified Resume', 'warning'),
 (2, 'Verified Resume', 'success'),
-(3, 'Out of Placement', 'default');
+(3, 'Out of Placement', 'default'),
+(4, 'Applied', 'default'),
+(5, 'Shortlisted', 'default'),
+(6, 'Not Shortlisted', 'default'),
+(7, 'Test cleared', 'default'),
+(8, 'Test failed', 'default'),
+(9, 'Selected for Interview', 'default'),
+(10, 'Job cleared', 'default'),
+(11, 'Rejected from Job', 'default');
 
 -- --------------------------------------------------------
 
@@ -626,6 +636,12 @@ ALTER TABLE `academic_details`
 ALTER TABLE `achievement_details`
   ADD PRIMARY KEY (`slno`),
   ADD KEY `ldapid` (`ldapid`);
+
+--
+-- Indexes for table `all_jobs`
+--
+ALTER TABLE `all_jobs`
+  ADD PRIMARY KEY (`company_id`);
 
 --
 -- Indexes for table `applicable_jobs`

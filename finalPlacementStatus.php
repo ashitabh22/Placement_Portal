@@ -1,3 +1,93 @@
+<?php
+require_once("includes/settings.php");
+require_once("includes/database.php");
+require_once("includes/functions/common.php");
+require_once("includes/classes/db.cls.php");
+require_once("includes/classes/sitedata.cls.php");
+
+$db = new SiteData();
+$sql = "SELECT * FROM " . PLACEMENT_STATUS;
+$res = $db->getData($sql);
+
+if (isset($_POST['OK']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
+	$name = $_POST['OK'];
+
+
+	$var = $_POST['place'];
+	if (isset($var)) {
+		$place = 1;
+		$target_dir = "uploads/";
+		#
+		$target_file = $target_dir . basename($_FILES['filename']['name']);
+
+		if ($_FILES["filename"]["name"] != '') {
+			if ($_FILES["filename"]["size"] > 10000000000) {
+				$msg = "File size should not exceed 10MB";
+				setMessage('danger', $msg);
+				echo "danger";
+				redirect($url);
+			} else {
+				$FileType = strtolower(pathinfo(basename($_FILES["filename"]["name"]), PATHINFO_EXTENSION));
+				//$destination = FILE_PATH . $uid . '.' . $FileType;
+				if ($FileType == 'pdf' || $FileType == 'PDF') {
+					echo "ok";
+					if (move_uploaded_file($_FILES["filename"]["tmp_name"], $target_file)) {
+						echo "uploaded";
+					} else {
+						echo "uplaod error";
+						die();
+					}
+					$query = "UPDATE placement_status SET upload = '" . $filename . "', place = '" . $place . "'  WHERE name = '" . $name . "'";
+					if (mysql_query($query)) {
+						redirect('finalPlacementStatus.php');
+					} else {
+						die(mysql_error());
+					}
+				} else {
+					$msg = "Only .pdf and .PDF documents are allowed";
+					setMessage('danger', $msg);
+					redirect($url);
+				}
+			}
+		}
+	} else {
+		$place = 0;
+		$target_dir = "uploads/";
+		$target_file = $target_dir . basename($_FILES['filename']['name']);
+
+		$filename = $_POST['filename'];
+		echo $filename;
+		echo $target_file;
+
+		if ($_FILES['filename']['name'] != '') {
+			if ($_FILES['filename']['size'] > 10000000000) {
+				$msg = "File size should not exceed 10MB";
+				setMessage('danger', $msg);
+				redirect($url);
+			} else {
+				$FileType = strtolower(pathinfo(basename($_FILES['filename']['name']), PATHINFO_EXTENSION));
+				$destination = $target_file . "" . $filename . '.' . $FileType;
+				if ($FileType == 'pdf' || $FileType == 'PDF') {
+					move_uploaded_file($filename, $destination);
+					$query1 = "UPDATE placement_status SET upload = '" . $filename . "', place = '" . $place . "'  WHERE name = '" . $name . "'";
+					if (mysql_query($query)) {
+						redirect('finalPlacementStatus.php');
+					} else {
+						die(mysql_error());
+					}
+				} else {
+					$msg = "Only .pdf and .PDF documents are allowed";
+					setMessage('danger', $msg);
+					redirect($url);
+				}
+			}
+		}
+	}
+}
+
+?>
+
+
 <?php include('includes/templates/header2.php'); ?>
 <?php include('includes/templates/top_bar.php'); ?>
 
@@ -43,126 +133,31 @@
                                                         <th>Upload</th>
                                                         <th></th>
                                                     </tr>
-                                                    <tr>
-                                                        <td>abc</td>
-                                                        <td><input type="checkbox" name="place"></td>
-                                                        <td>
-                                                            <label class="btn btn-file">
-                                                                <input type="file">
-                                                            </label>
-                                                        </td>
-                                                        <td><input type="submit" class="btn btn-info" value="OK"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>def</td>
-                                                        <td><input type="checkbox" name="place"></td>
-                                                        <td>
-                                                            <label class="btn btn-file">
-                                                                <input type="file">
-                                                            </label>
-                                                        </td>
-                                                        <td><input type="submit" class="btn btn-info" value="OK"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>raj</td>
-                                                        <td><input type="checkbox" name="place"></td>
-                                                        <td>
-                                                            <label class="btn btn-file">
-                                                                <input type="file">
-                                                            </label>
-                                                        </td>
-                                                        <td><input type="submit" class="btn btn-info" value="OK"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>dev</td>
-                                                        <td><input type="checkbox" name="place"></td>
-                                                        <td>
-                                                            <label class="btn btn-file">
-                                                                <input type="file">
-                                                            </label>
-                                                        </td>
-                                                        <td><input type="submit" class="btn btn-info" value="OK"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>nik</td>
-                                                        <td><input type="checkbox" name="place"></td>
-                                                        <td>
-                                                            <label class="btn btn-file">
-                                                                <input type="file">
-                                                            </label>
-                                                        </td>
-                                                        <td><input type="submit" class="btn btn-info" value="OK"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>jon</td>
-                                                        <td><input type="checkbox" name="place"></td>
-                                                        <td>
-                                                            <label class="btn btn-file">
-                                                                <input type="file">
-                                                            </label>
-                                                        </td>
-                                                        <td><input type="submit" class="btn btn-info" value="OK"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>mik</td>
-                                                        <td><input type="checkbox" name="place"></td>
-                                                        <td>
-                                                            <label class="btn btn-file">
-                                                                <input type="file">
-                                                            </label>
-                                                        </td>
-                                                        <td><input type="submit" class="btn btn-info" value="OK"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>sam</td>
-                                                        <td><input type="checkbox" name="place"></td>
-                                                        <td>
-                                                            <label class="btn btn-file">
-                                                                <input type="file">
-                                                            </label>
-                                                        </td>
-                                                        <td><input type="submit" class="btn btn-info" value="OK"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>asd</td>
-                                                        <td><input type="checkbox" name="place"></td>
-                                                        <td>
-                                                            <label class="btn btn-file">
-                                                                <input type="file">
-                                                            </label>
-                                                        </td>
-                                                        <td><input type="submit" class="btn btn-info" value="OK"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>psd</td>
-                                                        <td><input type="checkbox" name="place"></td>
-                                                        <td>
-                                                            <label class="btn btn-file">
-                                                                <input type="file">
-                                                            </label>
-                                                        </td>
-                                                        <td><input type="submit" class="btn btn-info" value="OK"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>xyz</td>
-                                                        <td><input type="checkbox" name="place"></td>
-                                                        <td>
-                                                            <label class="btn btn-file">
-                                                                <input type="file">
-                                                            </label>
-                                                        </td>
-                                                        <td><input type="submit" class="btn btn-info" value="OK"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>pqr</td>
-                                                        <td><input type="checkbox" name="place"></td>
-                                                        <td>
-                                                            <label class="btn btn-file">
-                                                                <input type="file">
-                                                            </label>
-                                                        </td>
-                                                        <td><input type="submit" class="btn btn-info" value="OK"></td>
-                                                    </tr>
+
+                                                    <?php for ($i = 0; $i < $res['NO_OF_ITEMS']; $i++) { ?>
+
+                                                    <form method="post" action="" enctype="multipart/form-data">
+
+                                                        <tr>
+                                                            <td><?php echo $res['oDATA'][$i]['name'] ?></td>
+                                                            <td><input type="checkbox" <?php if ($res['oDATA'][$i]['place'] == '1') echo  "checked = 'true'" ?>name="place" value="place"></td>
+
+                                                            <td>
+                                                                <label class="btn btn-file">
+                                                                    <input type="file" name="filename">
+                                                                </label>
+                                                            </td>
+
+                                                            <td><button type="submit" class="btn btn-info" value="<?php echo $res['oDATA'][$i]['name'] ?>" name="OK">OK
+                                                                </button>
+                                                            </td>
+
+                                                        </tr>
+
+                                                    </form>
+                                                    <?php 
+												} ?>
+
                                                 </table>
                                             </div>
                                         </div>
@@ -358,4 +353,5 @@
         setInterval(blinker, 2000);
     </script>
 </body>
+
 <?php include('includes/templates/bottom_bar.php'); ?> 

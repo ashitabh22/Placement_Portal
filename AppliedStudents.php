@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once("includes/settings.php");
 require_once("includes/database.php");
 require_once("includes/functions/common.php");
@@ -23,7 +22,7 @@ if (isset($_POST['submit_changes']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
 ?>
 
 <?php include('includes/templates/header2.php'); ?>
-<?php include('includes/templates/top_bar.php'); ?>
+<?php include('includes/templates/top_bar_admin.php'); ?>
 
 
 <body>
@@ -170,51 +169,6 @@ if (isset($_POST['submit_changes']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
             <!-- footer -->
-
-
-            <div class="col-md-3">
-                <!-- generated from related link file -->
-                <h3 class='mytitle'>placement</h3>
-                <ul class='mysidebar'>
-                    <li class='active'><a href='index.php?pid=invi_letter_tnp' target='_self'> Placement
-                            Invitation</a></li>
-                    <li class='active'><a href='index.php?pid=internship_procedure' target='_self'> Internship
-                            Procedure</a></li>
-                    <li class='active'><a href='index.php?pid=placement_procedure' target='_self'> Placement
-                            Procedure</a></li>
-                    <li class='active'><a href='index.php?pid=company_portal' target='_self'> Company
-                            Registration</a></li>
-                    <li class='active'><a href='index.php?pid=placement_office' target='_self'> Placement Office</a>
-                    </li>
-                    <li class='active'><a href='
-		' target=''></a></li>
-                </ul>
-                <h3 class="mytitle">Navigation</h3>
-                <!--Tes-->
-                <ul class="mysidebar">
-                    <li><a href="PostedJobs1.html">View Posted Jobs</a></li>
-                    <li><a href="https://www.iitbhilai.ac.in:443/index.php?pid=institute_facility">Facilities</a>
-                    </li>
-                    <li><a href="https://www.iitbhilai.ac.in:443/index.php?pid=nav_research">Research and
-                            Development</a></li>
-                    <li><a href="https://www.iitbhilai.ac.in:443/index.php?pid=nav_academic">Academics</a></li>
-                    <li><a href="https://www.iitbhilai.ac.in:443/index.php?pid=nav_administration">Administration</a>
-                    </li>
-                    <li><a href="https://www.iitbhilai.ac.in:443/index.php?pid=aca_admission">Admissions</a></li>
-                </ul>
-            </div>
         </div>
     </div>
-
-
-
-    <script>
-        function blinker() {
-            $('.blink_me').fadeOut(500);
-            $('.blink_me').fadeIn(500);
-        }
-
-        setInterval(blinker, 2000);
-    </script>
 </body>
-<?php include('includes/templates/bottom_bar.php'); ?> 

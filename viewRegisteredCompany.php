@@ -4,26 +4,27 @@ require_once("includes/database.php");
 require_once("includes/functions/common.php");
 require_once("includes/classes/db.cls.php");
 require_once("includes/classes/sitedata.cls.php");
-
 $db = new SiteData();
-$sql = "SELECT * FROM " . REGISTERED_COMPANIES;
+$sql = "SELECT * FROM " . registered_companies;
 $res = $db->getData($sql);
 if (isset($_POST['delete']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
+    $company_id = $_POST['delete'];
+    $archive_query = "INSERT INTO archived_companies (company_id, company_name, email, point_of_contact, mobile, address, website, about, designation)
+SELECT company_id, company_name, email, point_of_contact, mobile, address, website, about, designation
+FROM registered_companies
+WHERE company_id = '" . $company_id . "'";
 
-	$company_id = $_POST['delete'];
-	$del_query = "DELETE FROM " . REGISTERED_COMPANIES . " WHERE company_id = '" . $company_id . "'";
-
-	if (mysql_query($del_query)) {
-		redirect('viewRegisteredCompany.php');
-	} else {
-		die(mysql_error());
-	}
+    mysql_query($archive_query);
+    $del_query = "DELETE FROM " . registered_companies . " WHERE company_id = '" . $company_id . "'";
+    if (mysql_query($del_query)) {
+        redirect('viewRegisteredCompany.php');
+    } else {
+        die(mysql_error());
+    }
 }
 ?>
-
 <?php include('includes/templates/header2.php'); ?>
-<?php include('includes/templates/top_bar.php'); ?>
-
+<?php include('includes/templates/top_bar_admin.php'); ?>
 
 <body>
     <div class="container">
@@ -49,39 +50,31 @@ if (isset($_POST['delete']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                                         <div class="panel-heading">
                                             <h3 class="panel-title">Registered Companies</h3>
                                         </div>
-
-
                                         <div class="panel-body">
                                             <div class="row">
                                                 &nbsp &nbsp &nbsp &nbsp &nbsp
                                                 <div class="col-md-3 col-xs-6 col-sm-3">
-                                                    <input type="text" placeholder="Search by Name" id="searchppt">
+                                                    <input type="text" placeholder="Search by Name" onkeyup="myFunction()" id="searchppt">
                                                 </div>
-
                                             </div>
                                             <br>
                                             <div class="ex1">
                                                 <table class="table table-hover" id="stdlist">
-
                                                     <tr>
                                                         <th>Company Id</th>
                                                         <th>Company Name</th>
                                                         <th>Details</th>
                                                         <th></th>
                                                     </tr>
-
                                                     <?php for ($i = 0; $i < $res['NO_OF_ITEMS']; $i++) { ?>
                                                     <tr>
                                                         <td><?php echo $res['oDATA'][$i]['company_id'] ?></td>
                                                         <td><?php echo $res['oDATA'][$i]['company_name'] ?></td>
                                                         <td>
-
-
                                                             <button type="button" data-toggle="modal" data-target=<?php echo "#myModal" . $i ?>>View</button>
                                                             <!-- Modal -->
                                                             <div class="modal fade" id=<?php echo "myModal" . $i ?> role="dialog">
                                                                 <div class="modal-dialog">
-
                                                                     <!-- Modal content-->
                                                                     <div class="modal-content">
                                                                         <div class="modal-header">
@@ -137,13 +130,10 @@ if (isset($_POST['delete']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                                                                                 </tr>
                                                                             </table>
                                                                         </div>
-
-
                                                                         <div class="modal-footer">
                                                                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                                                         </div>
                                                                     </div>
-
                                                                 </div>
                                                             </div>
                                                         </td>
@@ -153,21 +143,16 @@ if (isset($_POST['delete']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                                                             </td>
                                                         </form>
                                                     </tr>
+                                                    <?php
 
-
-
-
-
-
-                                                    <?php 
-																									} ?>
+                                                } ?>
                                                 </table>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <div class="col-sm-5"></div>
                                             <div class="col-sm-7" ">
-                              <button type=" submit" class="btn btn-primary" onclick="showRecord();">
+                                                <button type=" submit" class="btn btn-primary" onclick="showRecord();">
                                                 &nbsp; Print
                                                 </button>
                                             </div>
@@ -177,37 +162,42 @@ if (isset($_POST['delete']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                             </div>
                         </section>
                     </div>
-
                 </body>
             </div>
-            <div class="col-md-3">
-                <!-- generated from related link file -->
-                <h3 class='mytitle'>placement</h3>
-                <ul class='mysidebar'>
-                    <li class='active'><a href='index.php?pid=invi_letter_tnp' target='_self'> Placement Invitation</a></li>
-                    <li class='active'><a href='index.php?pid=internship_procedure' target='_self'> Internship Procedure</a></li>
-                    <li class='active'><a href='index.php?pid=placement_procedure' target='_self'> Placement Procedure</a></li>
-                    <li class='active'><a href='index.php?pid=company_portal' target='_self'> Company Registration</a></li>
-                    <li class='active'><a href='index.php?pid=placement_office' target='_self'> Placement Office</a></li>
-                    <li class='active'><a href='' target=''></a></li>
-                </ul>
-                <h3 class="mytitle">Navigation</h3>
-                <!--Tes-->
-                <ul class="mysidebar">
-                    <li><a href="https://www.iitbhilai.ac.in:443/index.php?pid=nav_department">Departments</a></li>
-                    <li><a href="https://www.iitbhilai.ac.in:443/index.php?pid=institute_facility">Facilities</a></li>
-                    <li><a href="https://www.iitbhilai.ac.in:443/index.php?pid=nav_research">Research and Development</a></li>
-                    <li><a href="https://www.iitbhilai.ac.in:443/index.php?pid=nav_academic">Academics</a></li>
-                    <li><a href="https://www.iitbhilai.ac.in:443/index.php?pid=nav_administration">Administration</a></li>
-                    <li><a href="https://www.iitbhilai.ac.in:443/index.php?pid=aca_admission">Admissions</a></li>
-                </ul>
-            </div>
+    
         </div>
     </div>
-
-
-
-
 </body>
+<script>
+    function myFunction() {
 
-<?php include('includes/templates/bottom_bar.php'); ?> 
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("searchppt");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("stdlist");
+        tr = table.getElementsByTagName("tr");
+
+        for (i = 0; i < tr.length; i = i + 1) {
+            td1 = tr[i].getElementsByTagName("td")[0];
+            td2 = tr[i].getElementsByTagName("td")[1];
+
+            console.log(td2);
+
+            if (td1 || td2) {
+                txtValue1 = td1.textContent || td1.innerText;
+                txtValue2 = td2.textContent || td2.innerText;
+
+                if ((i - 1) % 10 == 0) {
+
+                    if (txtValue1.toUpperCase().indexOf(filter) > -1 || txtValue2.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+
+
+    }
+</script>

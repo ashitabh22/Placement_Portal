@@ -34,10 +34,8 @@
     padding: 6px;
     min-height: 120px;
 }
-.navbar 
-{ 
-    background-color: #4a3c8d !important;  
-    color: #ffffff;
+.navbar > .container .navbar-brand, .navbar > .container-fluid .navbar-brand
+{
     padding: 10px 15px !important;
 }
 @media (max-width: 767px)
@@ -155,7 +153,7 @@ h2.whiteColor
 {
     .navbar-default .navbar-nav > li > a
     {
-        padding: 30px 8px !important;
+        padding: 40px 8px !important;
         color: #333;
     }
     

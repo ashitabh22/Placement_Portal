@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once("includes/settings.php");
 require_once("includes/database.php");
 require_once("includes/functions/common.php");
@@ -13,7 +12,7 @@ $res = $db->getData($sql);
 
 
 <?php include('includes/templates/header2.php'); ?>
-<?php include('includes/templates/top_bar.php'); ?>
+<?php include('includes/templates/top_bar_student.php'); ?>
 
 <!--header and top bar ends here-->
 
@@ -158,7 +157,7 @@ $res = $db->getData($sql);
                                 </td>
                                 </tr>
                                 <?php 
-							} ?>
+                            } ?>
 
                                 </table>
                             </div>
@@ -176,6 +175,4 @@ $res = $db->getData($sql);
     </div>
     </section>
     </div>
-
 </body>
-<?php include('includes/templates/bottom_bar.php'); ?> 

@@ -6,23 +6,23 @@ require_once("includes/classes/db.cls.php");
 require_once("includes/classes/sitedata.cls.php");
 
 $db = new SiteData();
-$sql = "SELECT * FROM POSTED_JOBS";
+$sql = "SELECT * FROM all_jobs";
 $res = $db->getData($sql);
 if (isset($_POST['delete']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
 
-	$company_id = $_POST['delete'];
-	$del_query = "DELETE FROM " . POSTED_JOBS . " WHERE company_id = '" . $company_id . "'";
+    $company_id = $_POST['delete'];
+    $del_query = "DELETE FROM " . ALL_JOBS . " WHERE company_id = '" . $company_id . "'";
 
-	if (mysql_query($del_query)) {
-		redirect('PostedJobs1.php');
-	} else {
-		die(mysql_error());
-	}
+    if (mysql_query($del_query)) {
+        redirect('PostedJobs1.php');
+    } else {
+        die(mysql_error());
+    }
 }
 ?>
 
 <?php include('includes/templates/header2.php'); ?>
-<?php include('includes/templates/top_bar.php'); ?>
+<?php include('includes/templates/top_bar_admin.php'); ?>
 
 <body>
     <div class="container">
@@ -62,26 +62,10 @@ if (isset($_POST['delete']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                                             <div class="row">
                                                 &nbsp &nbsp &nbsp &nbsp &nbsp
                                                 <div class="col-md-3 col-xs-6 col-sm-3">
-                                                    <input type="text" placeholder="Search by Job Title" id="search">
+                                                    <input type="text" onkeyup="myFunction()" placeholder=" &nbsp &nbsp Search" id="searchcomp">
                                                 </div>
                                                 <div class="col-md-5 col-xs-6 col-sm-5">
-                                                    <div class="form-row align-items-center">
-                                                        <div class="col-auto my-1">
-                                                            <label for="PPT date"> &nbsp &nbsp &nbsp Sort By &nbsp &nbsp </label>
-                                                            <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
-                                                                <option selected>Sort By</option>
-                                                                <option value="1">Application Deadline </option>
-                                                                <option value="2">f1</option>
-                                                                <option value="3">f2</option>
-                                                                <option value="1">f3</option>
-                                                                <option value="2">f4</option>
-                                                                <option value="3">f5</option>
-                                                            </select>
-                                                        </div>
-
-
-
-                                                    </div>
+                                                  
                                                 </div>
                                             </div>
                                             <br>
@@ -90,6 +74,7 @@ if (isset($_POST['delete']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                                                     <thead>
                                                         <tr>
                                                             <th>Company ID</th>
+                                                            <th>Company Name</th>
                                                             <th>Job Title</th>
                                                             <th>Details</th>
                                                             <th>Delete</th>
@@ -100,6 +85,7 @@ if (isset($_POST['delete']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                                                         <?php for ($i = 0; $i < $res['NO_OF_ITEMS']; $i++) { ?>
                                                         <tr>
                                                             <td><?php echo $res['oDATA'][$i]['company_id'] ?></td>
+                                                            <td><?php echo $res['oDATA'][$i]['company_name'] ?></td>
                                                             <td><?php echo $res['oDATA'][$i]['job_title'] ?></td>
                                                             <td>
 
@@ -178,6 +164,11 @@ if (isset($_POST['delete']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                                                                                         <td>Shortlisting Date</td>
                                                                                         <td><?php echo $res['oDATA'][$i]['shortlisting_date'] ?></td>
                                                                                     </tr>
+                                                                                    <tr>
+                                                                                        <td>12.</td>
+                                                                                        <td>Academic Year</td>
+                                                                                        <td><?php echo $res['oDATA'][$i]['academic_year'] ?></td>
+                                                                                    </tr>
                                                                                 </table>
                                                                             </div>
 
@@ -205,7 +196,7 @@ if (isset($_POST['delete']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                                                         </tr>
                                                     </tbody>
                                                     <?php 
-																									} ?>
+                                                    } ?>
                                                 </table>
                                             </div>
                                         </div>
@@ -224,4 +215,38 @@ if (isset($_POST['delete']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                         </section>
                     </div>
 <!--footer section starts here-->
-<?php include('includes/templates/bottom_bar.php'); ?> 
+<script>
+                function myFunction() {
+            
+                var input, filter, table, tr, td, i, txtValue;
+                input = document.getElementById("searchcomp");
+                filter = input.value.toUpperCase();
+                table = document.getElementById("stdlist");
+                tr = table.getElementsByTagName("tr");
+                
+                for (i = 0; i < tr.length; i=i+1)
+                {
+                td1 = tr[i].getElementsByTagName("td")[0];
+                td2 = tr[i].getElementsByTagName("td")[1];
+                td3 = tr[i].getElementsByTagName("td")[2];
+                console.log(td2);
+                
+                if (td1||td2) {
+                txtValue1 = td1.textContent || td1.innerText;
+                txtValue2 = td2.textContent || td2.innerText;
+                txtValue3 = td3.textContent || td3.innerText;
+                
+                if((i-1)%14==0)
+                {
+                if (txtValue1.toUpperCase().indexOf(filter) > -1 || txtValue2.toUpperCase().indexOf(filter) > -1||txtValue3.toUpperCase().indexOf(filter) > -1 )  {
+                tr[i].style.display = "";
+                } else {
+                tr[i].style.display = "none";
+                }
+                }
+                }
+                }
+                
+                
+                }
+                </script>

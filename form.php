@@ -5,6 +5,7 @@ require_once("includes/database.php");
 require_once("includes/functions/common.php");
 require_once("includes/classes/db.cls.php");
 require_once("includes/classes/sitedata.cls.php");
+
 $db = new SiteData();
 if(is_admin()){
     if(isset($_GET['uid'])){

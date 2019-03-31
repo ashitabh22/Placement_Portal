@@ -193,6 +193,7 @@ if ($_POST['save-data'] || $_POST['submit-data']) {
             }
         }
     }
+    
     for ($i = 0; $i < sizeof($_POST['pr_name']); $i++) {
         $count = $i + 1;
         if (trim($_POST['pr_slno'][$i]) != '') {
