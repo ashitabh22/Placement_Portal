@@ -1,12 +1,17 @@
 <?php
+session_start();
 require_once("includes/settings.php");
 require_once("includes/database.php");
 require_once("includes/functions/common.php");
 require_once("includes/classes/db.cls.php");
 require_once("includes/classes/sitedata.cls.php");
+if(!is_admin()){
+    redirect('new_login.php');
+}
 $db = new SiteData();
 $sql = "SELECT * FROM " . registered_companies;
 $res = $db->getData($sql);
+
 if (isset($_POST['delete']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     $company_id = $_POST['delete'];
     $archive_query = "INSERT INTO archived_companies (company_id, company_name, email, point_of_contact, mobile, address, website, about, designation)
@@ -164,7 +169,7 @@ WHERE company_id = '" . $company_id . "'";
                     </div>
                 </body>
             </div>
-    
+
         </div>
     </div>
 </body>
@@ -200,4 +205,4 @@ WHERE company_id = '" . $company_id . "'";
 
 
     }
-</script>
+</script> 

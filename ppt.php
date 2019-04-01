@@ -1,6 +1,7 @@
 <?php $title = 'ppt' ?>
 
 <?php
+session_start();
 require_once("includes/database.php");
 require_once("includes/settings.php");
 require_once("includes/functions/common.php");
@@ -8,6 +9,10 @@ require_once("includes/classes/db.cls.php");
 require_once("includes/classes/sitedata.cls.php");
 
 $db = new SiteData();
+
+if (is_loggedin()) {
+    redirect('new_login.php');
+}
 
 $sql = "SELECT company_name, company_id FROM registered_companies";
 $res = $db->getData($sql);
@@ -17,7 +22,7 @@ if (isset($_POST['submit']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     $pptdate = $_POST['pptdate'];
 
     $name = strval(strval($company) . '_' . strval($pptdate));
-    $alter_table = "ALTER TABLE ppt_list ADD `". $name."` VARCHAR(40)";
+    $alter_table = "ALTER TABLE ppt_list ADD `" . $name . "` VARCHAR(40)";
 
     if (mysql_query($alter_table)) {
         redirect('pptList.php');
@@ -131,4 +136,4 @@ if (isset($_POST['submit']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
             </body>
         </div>
     </div>
-</div>
+</div> 

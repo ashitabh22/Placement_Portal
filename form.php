@@ -10,12 +10,13 @@ $db = new SiteData();
 if(is_admin()){
     if(isset($_GET['uid'])){
         $uid = base64_decode($_GET['uid']);
+        // echo $uid;
     }else{
         redirect('admin.php');
     }
 }else{
     if (!is_loggedin()) {
-        redirect('login.php');
+        redirect('new_login.php');
     }
     $uid = $_SESSION[SES]['user'];
 }

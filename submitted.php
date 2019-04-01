@@ -5,14 +5,15 @@ require_once("includes/database.php");
 require_once("includes/functions/common.php");
 require_once("includes/classes/db.cls.php");
 require_once("includes/classes/sitedata.cls.php");
+
 $db = new SiteData();
-if(is_admin()){
-    if(isset($_GET['uid'])){
+if (is_admin()) {
+    if (isset($_GET['uid'])) {
         $uid = base64_decode($_GET['uid']);
-    }else{
+    } else {
         redirect('admin.php');
     }
-}else{
+} else {
     if (!is_loggedin()) {
         redirect('login.php');
     }
@@ -39,24 +40,32 @@ $sql = "SELECT * FROM " . PROJECT_DETAILS . " WHERE ldapid = '$uid'";
 $proj_details = $db->getData($sql);
 $sql = "SELECT * FROM " . WORK_EXP . " WHERE ldapid = '$uid'";
 $work_exp = $db->getData($sql);
-$sql = "SELECT * FROM ".STATUS." WHERE code = '".$personal_details['oDATA'][0]['status']."'";
+$sql = "SELECT * FROM " . STATUS . " WHERE code = '" . $personal_details['oDATA'][0]['status'] . "'";
 $stat_code = $db->getData($sql);
 ?>
 
-<?php include('includes/templates/header.php'); ?>
+<?php 
+
+include('includes/templates/header2.php');
+if (is_admin()) {
+    include('includes/templates/top_bar_admin.php');
+} else {
+    include('includes/templates/top_bar_student.php');
+}
+?>
+
 <body>
-    <?php include('includes/templates/navMenu.php'); ?>
-    <div class="container-fluid">
-        <div class="panel-group">
-            <div class="panel panel-primary">
-                <div class="panel-heading" style="background-color: #000;"><span style="color: #FFFFFF;"><?php echo $_SESSION[SES]['uname']; ?><b style="color: #000000;"> (<?php echo $_SESSION[SES]['email']; ?>)</b></span>
+    <div class=" container - fluid ">
+        <div class=" panel - group ">
+            <div class=" panel pane l -primar y">
+                <div class="pane l -headin g" style="backgroun d -color: ?><b style=" color: #000000;"> (<?php echo $_SESSION[SES]['email']; ?>)</b></span>
                     <span style="float: right;">
-                    <?php 
-                    echo "<span>Present Status: </span><span class='label label-".$stat_code['oDATA'][0]['color_label']."'>". $stat_code['oDATA'][0]['status_name'] ."</span>";
-                    if(is_loggedin() && $personal_details['oDATA'][0]['status'] == 2){
-                        echo " <span><a target='_blank' href='".BASE_URL.'download.php?uid='.  base64_encode($uid)."'><img src='".BASE_URL."images/download_img.png' width='30px' height='30px' /></i></a></span>";
-                    }
-                ?>
+                        <?php 
+                        echo "<span>Present Status: </span><span class='label label-" . $stat_code['oDATA'][0]['color_label'] . "'>" . $stat_code['oDATA'][0]['status_name'] . "</span>";
+                        if (is_loggedin() && $personal_details['oDATA'][0]['status'] == 2) {
+                            echo " <span><a target='_blank' href='" . BASE_URL . 'download.php?uid=' .  base64_encode($uid) . "'><img src='" . BASE_URL . "images/download_img.png' width='30px' height='30px' /></i></a></span>";
+                        }
+                        ?>
                     </span>
                 </div>
                 <div class="panel-body">
@@ -112,11 +121,13 @@ $stat_code = $db->getData($sql);
                             <tr>
                                 <th>Resume Uploaded</th>
                                 <td>
-                                    <?php if(file_exists(FILE_PATH.$uid.'.pdf')) {?>
-                                 YES
-                                    <?php } else {?>
-                                 NO
-                                    <?php } ?>
+                                    <?php if (file_exists(FILE_PATH . $uid . '.pdf')) { ?>
+                                    YES
+                                    <?php 
+                                } else { ?>
+                                    NO
+                                    <?php 
+                                } ?>
                                 </td>
                             </tr>
                         </table>
@@ -132,15 +143,15 @@ $stat_code = $db->getData($sql);
                                 <th>Marks/ CGPA/ GPA</th>
                             </tr>
                             <?php 
-                                for ($i=0; $i < $academic_details['NO_OF_ITEMS']; $i++) { 
-                                    echo "<tr>
-                                            <td>".$academic_details['oDATA'][$i]['exam']."</td>
-                                            <td>".$academic_details['oDATA'][$i]['board']."</td>
-                                            <td>".$academic_details['oDATA'][$i]['year']."</td>
-                                            <td>".$academic_details['oDATA'][$i]['discipline']."</td>
-                                            <td>".$academic_details['oDATA'][$i]['marks']."</td>
+                            for ($i = 0; $i < $academic_details['NO_OF_ITEMS']; $i++) {
+                                echo "<tr>
+                                            <td>" . $academic_details['oDATA'][$i]['exam'] . "</td>
+                                            <td>" . $academic_details['oDATA'][$i]['board'] . "</td>
+                                            <td>" . $academic_details['oDATA'][$i]['year'] . "</td>
+                                            <td>" . $academic_details['oDATA'][$i]['discipline'] . "</td>
+                                            <td>" . $academic_details['oDATA'][$i]['marks'] . "</td>
                                         </tr>";
-                                }
+                            }
                             ?>
                         </table>
                         <table class="table table-bordered table-striped table-hover">
@@ -149,9 +160,9 @@ $stat_code = $db->getData($sql);
                             </tr>
                             <tr>
                                 <?php
-                                    for ($i=0; $i < $tech_skill['NO_OF_ITEMS']; $i++) { 
-                                        echo "<td>".$tech_skill['oDATA'][$i]['skill_name']."</td>";
-                                    }
+                                for ($i = 0; $i < $tech_skill['NO_OF_ITEMS']; $i++) {
+                                    echo "<td>" . $tech_skill['oDATA'][$i]['skill_name'] . "</td>";
+                                }
                                 ?>
                             </tr>
                         </table>
@@ -160,12 +171,12 @@ $stat_code = $db->getData($sql);
                                 <th colspan="2" style="background-color: #2e6da4; color: #fff;">SCHOLASTIC ACHIEVEMENT</th>
                             </tr>
                             <?php
-                                for ($i=0; $i < $achiev_details['NO_OF_ITEMS']; $i++) { 
-                                    echo "<tr>
-                                            <td>".$achiev_details['oDATA'][$i]['achievement']."</td>
-                                            <td>".$achiev_details['oDATA'][$i]['year']."</td>
+                            for ($i = 0; $i < $achiev_details['NO_OF_ITEMS']; $i++) {
+                                echo "<tr>
+                                            <td>" . $achiev_details['oDATA'][$i]['achievement'] . "</td>
+                                            <td>" . $achiev_details['oDATA'][$i]['year'] . "</td>
                                         </tr>";
-                                }
+                            }
                             ?>
                         </table>
                         <table class="table table-bordered table-striped table-hover">
@@ -173,12 +184,12 @@ $stat_code = $db->getData($sql);
                                 <th colspan="2" style="background-color: #2e6da4; color: #fff;">INTERNSHIP</th>
                             </tr>
                             <?php
-                                for ($i=0; $i < $intern_details['NO_OF_ITEMS']; $i++) { 
-                                    echo "<tr>
-                                            <td>".$intern_details['oDATA'][$i]['company']."</td>
-                                            <td>".$intern_details['oDATA'][$i]['duration']."</td>
+                            for ($i = 0; $i < $intern_details['NO_OF_ITEMS']; $i++) {
+                                echo "<tr>
+                                            <td>" . $intern_details['oDATA'][$i]['company'] . "</td>
+                                            <td>" . $intern_details['oDATA'][$i]['duration'] . "</td>
                                         </tr>";
-                                }
+                            }
                             ?>
                         </table>
                         <table class="table table-bordered table-striped table-hover">
@@ -186,12 +197,12 @@ $stat_code = $db->getData($sql);
                                 <th colspan="2" style="background-color: #2e6da4; color: #fff;">POSITION(S) OF RESPONSIBILITY</th>
                             </tr>
                             <?php
-                                for ($i=0; $i < $responsibility['NO_OF_ITEMS']; $i++) { 
-                                    echo "<tr>
-                                            <td>".$responsibility['oDATA'][$i]['position_held']."</td>
-                                            <td>".$responsibility['oDATA'][$i]['period']."</td>
+                            for ($i = 0; $i < $responsibility['NO_OF_ITEMS']; $i++) {
+                                echo "<tr>
+                                            <td>" . $responsibility['oDATA'][$i]['position_held'] . "</td>
+                                            <td>" . $responsibility['oDATA'][$i]['period'] . "</td>
                                         </tr>";
-                                }
+                            }
                             ?>
                         </table>
                         <table class="table table-bordered table-striped table-hover">
@@ -199,12 +210,12 @@ $stat_code = $db->getData($sql);
                                 <th colspan="2" style="background-color: #2e6da4; color: #fff;">WORK EXPERIENCE(S)</th>
                             </tr>
                             <?php
-                                for ($i=0; $i < $work_exp['NO_OF_ITEMS']; $i++) { 
-                                    echo "<tr>
-                                            <td>".$work_exp['oDATA'][$i]['company']."</td>
-                                            <td>".$work_exp['oDATA'][$i]['duration']."</td>
+                            for ($i = 0; $i < $work_exp['NO_OF_ITEMS']; $i++) {
+                                echo "<tr>
+                                            <td>" . $work_exp['oDATA'][$i]['company'] . "</td>
+                                            <td>" . $work_exp['oDATA'][$i]['duration'] . "</td>
                                         </tr>";
-                                }
+                            }
                             ?>
                         </table>
                         <table class="table table-bordered table-striped table-hover">
@@ -212,12 +223,12 @@ $stat_code = $db->getData($sql);
                                 <th colspan="2" style="background-color: #2e6da4; color: #fff;">PROJECT(S)</th>
                             </tr>
                             <?php
-                                for ($i=0; $i < $proj_details['NO_OF_ITEMS']; $i++) { 
-                                    echo "<tr>
-                                            <td>".$proj_details['oDATA'][$i]['title']."</td>
-                                            <td>".$proj_details['oDATA'][$i]['duration']."</td>
+                            for ($i = 0; $i < $proj_details['NO_OF_ITEMS']; $i++) {
+                                echo "<tr>
+                                            <td>" . $proj_details['oDATA'][$i]['title'] . "</td>
+                                            <td>" . $proj_details['oDATA'][$i]['duration'] . "</td>
                                         </tr>";
-                                }
+                            }
                             ?>
                         </table>
                         <table class="table table-bordered table-striped table-hover">
@@ -225,16 +236,15 @@ $stat_code = $db->getData($sql);
                                 <th colspan="2" style="background-color: #2e6da4; color: #fff;">EXTRA-CURRICULAR ACTIVITIES</th>
                             </tr>
                             <?php
-                                for ($i=0; $i < $extra_curr_activity['NO_OF_ITEMS']; $i++) { 
-                                    echo "<tr>
-                                            <td>".$extra_curr_activity['oDATA'][$i]['activity']."</td>
+                            for ($i = 0; $i < $extra_curr_activity['NO_OF_ITEMS']; $i++) {
+                                echo "<tr>
+                                            <td>" . $extra_curr_activity['oDATA'][$i]['activity'] . "</td>
                                         </tr>";
-                                }
+                            }
                             ?>
                         </table>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <?php include('includes/templates/footer.php'); ?>
+    </div> 

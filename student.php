@@ -1,11 +1,11 @@
 <?php include('includes/templates/header2.php'); ?>
-<?php include('includes/templates/top_bar_studentp.php'); ?>
+<?php include('includes/templates/top_bar_student.php'); ?>
 
 <body>
-	<div class="container">
+	<div class="container ">
 		<div class="row">
-			<div class="col-md-2"></div>
-			<div class="col-md-8" id="content">
+			
+			<div class="col-md-8 col-md-offset-2" id="content" >
 				<body id="content">
 					<style type="text/css">
 						.red{
@@ -15,7 +15,6 @@
 							display: none;
 						}
 					</style>
-					
 					<div class="wrapper">
 						<div id="sub-header"></div>
 						<section class="content-header">

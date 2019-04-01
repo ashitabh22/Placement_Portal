@@ -1,4 +1,4 @@
-<!-- <div class=" topBar affix-top" id="topbar" data-spy="affix" data-offset-top="0" > -->
+
 <div class="topBar affix-top" id="topbar">
     <div class="container">
         <ul class="nav navbar-nav navbar-left">
@@ -7,7 +7,7 @@
             </li>
         </ul>
         <ul class="nav navbar-nav navbar-right hidden-xs">
-            <li><a class="drop" href="login.php?logout=1"><span class="glyphicon glyphicon-log-in"></span> &nbsp; Logout</a></li>
+            <li><a class="drop" href="logout.php"><span class="glyphicon glyphicon-log-in"></span> &nbsp; Logout</a></li>
         </ul>
     </div>
 </div>
@@ -19,7 +19,7 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-left">
                 <li class="dropdown">
-                    <a href="index.php?pid=administration" class="dropdown-toggle" data-toggle="dropdown">
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown">
                         <span class="main-nav-link">Home<b class="caret"></b>
                         </span>
                     </a>
@@ -28,17 +28,17 @@
                             <a href="viewRegisteredCompany.php">View Registered Company</a>
                         </li>
                         <li>
-                            <a href="postJob">Post Job</a>
+                            <a href="postJobs.php">Post Job</a>
                         </li>
                         <li>
-                            <a href="PostedJobs1.php">Posted Jobs</a>
+                            <a href="PostedJobs.php">Posted Jobs</a>
                         </li>
-                        <li>
+                        <!-- <li>
                             <a href="unverified.php">Unverified Students</a>
                         </li>
                         <li>
                             <a href="verified.php">Verified students</a>
-                        </li>
+                        </li> -->
                         <li>
                             <a href="AppliedStudents.php">Applied Students</a>
                         </li>
@@ -52,6 +52,14 @@
                             <a href="finalPlacementStatus.php">Final Placement Status</a>
                         </li>
                     </ul>
+                </li>
+                
+            </ul>
+            <ul class="nav navbar-nav navbar-right main-nav-link" id="username">
+                <li>
+                    <?php 
+                    $username = "Real admin";
+                    echo $username; ?>
                 </li>
             </ul>
         </div>

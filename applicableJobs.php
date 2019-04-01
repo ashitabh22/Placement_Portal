@@ -1,24 +1,48 @@
 <?php
+session_start();
 require_once("includes/settings.php");
 require_once("includes/database.php");
 require_once("includes/functions/common.php");
 require_once("includes/classes/db.cls.php");
 require_once("includes/classes/sitedata.cls.php");
+
 $db = new SiteData();
 
-$sql = "SELECT * FROM applicable_jobs";
+if (!is_loggedin()) {
+    redirect('new_login.php');
+} else {
+    $ldapid = $_SESSION[SES]['user'];
+
+    $query = "SELECT * from " . PERSONAL_DETAILS . "  where ldapid=" . $ldapid;
+    $res = $db->getData($query);
+
+    $degree = $res['oDATA'][0]['degree'];
+    $branch = $res['oDATA'][0]['branch'];
+
+    $query = "SELECT * from " . ACAD_DETAILS . " where ldapid=" . $ldapid;
+    $res = $db->getData($query);
+
+    $cgpa = $res['oDATA'][0]['marks'];
+}
+
+$sql = "SELECT * FROM all_jobs";
 $res = $db->getData($sql);
 
 if (isset($_POST['submit_changes']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
-    $company_name = $_POST['submit_changes'];
-    $status = 1;
-    $query = "UPDATE applicable_jobs SET status = '" . $status . "' WHERE company_name = '" . $company_name . "'";
+    $post_id = $_POST['submit_changes'];
+    $has_applied = 1;
+    $query = "insert into " . APPLICABLE_JOBS . " (ldapid, has_applied, post_id) values ($ldapid, $has_applied, $post_id)";
+    mysql_query($query);
+
+    $status = 4;
+    $query = "insert into " . APPLIED_STUDENTS . " (ldapid, post_id, status) values ($ldapid, $post_id, $status)";
     if (mysql_query($query)) {
         redirect('applicableJobs.php');
     } else {
         die(mysql_error());
     }
 }
+
 
 ?>
 
@@ -71,10 +95,17 @@ if (isset($_POST['submit_changes']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                                                         <th>Details</th>
                                                         <th></th>
                                                     </tr>
-                                                    <?php for ($i = 0; $i < $res['NO_OF_ITEMS']; $i++) { ?>
+                                                    <?php for ($i = 0; $i < $res['NO_OF_ITEMS']; $i++) {
+                                                        if ($res['oDATA'][$i]['program'] == $degree && $res['oDATA'][$i]['branch'] == $branch) { ?>
                                                     <form method="post">
                                                         <tr>
-                                                            <td><?php echo $res['oDATA'][$i]['company_name'] ?></td>
+                                                            <td>
+                                                            <?php
+                                                            $q_comp_name = "select * from registered_companies where company_id=". $res['oDATA'][$i]['company_id'];
+                                                            $res_comp_name = $db->getData($q_comp_name);
+                                                            echo $res_comp_name['oDATA'][0]['company_name'];
+                                                            ?>
+                                                            </td>
                                                             <td><?php echo $res['oDATA'][$i]['job_title'] ?></td>
                                                             <td>
                                                                 <button type="button" data-toggle="modal" data-target="<?php echo '#myModal' . $i; ?>">View</button>
@@ -124,7 +155,7 @@ if (isset($_POST['submit_changes']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                                                                                     <tr>
                                                                                         <td>6.</td>
                                                                                         <td>Minimum Package Offered</td>
-                                                                                        <td><?php echo $res['oDATA'][$i]['minimum_package_offered'] ?></td>
+                                                                                        <td><?php echo $res['oDATA'][$i]['min_package_offered'] ?></td>
                                                                                     </tr>
                                                                                     <tr>
                                                                                         <td>7.</td>
@@ -134,7 +165,7 @@ if (isset($_POST['submit_changes']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                                                                                     <tr>
                                                                                         <td>8.</td>
                                                                                         <td>PPT Date</td>
-                                                                                        <td><?php echo $res['oDATA'][$i]['ppt_data'] ?></td>
+                                                                                        <td><?php echo $res['oDATA'][$i]['ppt_date'] ?></td>
                                                                                     </tr>
                                                                                     <tr>
                                                                                         <td>9.</td>
@@ -162,13 +193,21 @@ if (isset($_POST['submit_changes']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                                                                 </div>
                                                             </td>
                                                             <td>
-                                                                <button type="submit" <?php if ($res['oDATA'][$i]['status'] == '1') echo  "disabled = 'true'" ?> value="<?php echo $res['oDATA'][$i]['company_name'] ?>" name="submit_changes">Apply
+                                                                <button type="submit" <?php
+                                                                                        $q1 = "select * from applicable_jobs where ldapid=" . $ldapid . " and post_id=" . $res['oDATA'][$i]['post_id'];
+                                                                                        $r1 = $db->getData($q1);
+                                                                                         if($r1['oDATA'][0]['has_applied'] == 1) {
+                                                                                                echo 'disabled= "true"';
+                                                                                              }
+                                                                                        ?> value="<?php echo $res['oDATA'][$i]['post_id'] ?>" name="submit_changes">Apply
                                                                 </button>
                                                             </td>
                                                         </tr>
                                                     </form>
-                                                    <?php 
-                                                } ?>
+                                                    <?php
+
+                                                }
+                                            } ?>
 
                                                 </table>
                                             </div>
@@ -185,7 +224,7 @@ if (isset($_POST['submit_changes']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                                 </div>
                             </div>
                         </section>
-                    </div>
+                     </div>
 
                 </body>
             </div>
@@ -195,4 +234,4 @@ if (isset($_POST['submit_changes']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
 
-</body> 
+</body>

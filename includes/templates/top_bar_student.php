@@ -1,4 +1,7 @@
 <!-- <div class=" topBar affix-top" id="topbar" data-spy="affix" data-offset-top="0" > -->
+<?php
+    $username="yhj";
+?>
 <div class="topBar affix-top" id="topbar">
     <div class="container">
         <ul class="nav navbar-nav navbar-left">
@@ -7,7 +10,7 @@
             </li>
         </ul>
         <ul class="nav navbar-nav navbar-right hidden-xs">
-            <li><a class="drop" href="login.php?logout=1"><span class="glyphicon glyphicon-log-in"></span> &nbsp; Logout</a></li>
+            <li><a class="drop" href="logout.php"><span class="glyphicon glyphicon-log-in"></span> &nbsp; Logout</a></li>
         </ul>
     </div>
 </div>
@@ -24,9 +27,9 @@
                         </span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li>
+                        <!-- <li>
                             <a href="profile.php">View Profile</a>
-                        </li>
+                        </li> -->
                         <li>
                             <a href="applicableJobs.php">View Applicable Jobs</a>
                         </li>
@@ -40,6 +43,11 @@
                             <a href="form.php">Form</a>
                         </li>
                     </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right main-nav-link" id="username">
+                <li>
+                    <?php echo "asdfasd";?>
                 </li>
             </ul>
         </div>

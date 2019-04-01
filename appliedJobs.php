@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once("includes/settings.php");
 require_once("includes/database.php");
 require_once("includes/functions/common.php");
@@ -6,8 +7,11 @@ require_once("includes/classes/db.cls.php");
 require_once("includes/classes/sitedata.cls.php");
 
 $db = new SiteData();
-$sql = "SELECT * FROM applied_jobs";
-$res = $db->getData($sql);
+if (!is_loggedin()) {
+    redirect("new_login.php");
+} else {
+    $ldapid = $_SESSION[SES]['user'];
+}
 ?>
 
 
@@ -69,10 +73,21 @@ $res = $db->getData($sql);
 
                                                     </tr>
 
-                                                    <?php for ($i = 0; $i < $res['NO_OF_ITEMS']; $i++) { ?>
+                                                    <?php
+                                                    $q1 = "select * from applied_students where ldapid=" . $ldapid;
+                                                    $res = $db->getData($q1);
+
+                                                    for ($i = 0; $i < $res['NO_OF_ITEMS']; $i++) { ?>
                                                     <tr>
-                                                        <td><?php echo $res['oDATA'][$i]['company_name'] ?></td>
-                                                        <td><?php echo $res['oDATA'][$i]['job_title'] ?></td>
+                                                        <td><?php 
+                                                            $q2 = "select * from all_jobs where post_id=" . $res['oDATA'][$i]['post_id'];
+                                                            $post_desc = $db->getData($q2);
+                                                            $company_id = $post_desc['oDATA'][0]['company_id'];
+                                                            $q3 = "select * from registered_companies where company_id=" . $company_id;
+                                                            $comp_info = $db->getData($q3);
+
+                                                            echo $comp_info['oDATA'][0]['company_name'] ?></td>
+                                                        <td><?php echo $post_desc['oDATA'][$i]['job_title'] ?></td>
                                                         <td>
                                                             <button type="button" data-toggle="modal" data-target=<?php echo "#myModal" . $i ?>>View</button>
                                                             <!-- Modal -->
@@ -95,60 +110,63 @@ $res = $db->getData($sql);
                                                                                 <tr>
                                                                                     <td>1.</td>
                                                                                     <td>Job Description</td>
-                                                                                    <td><?php echo $res['oDATA'][$i]['job_description'] ?></td>
+                                                                                    <td><?php echo $post_desc['oDATA'][$i]['job_description'] ?></td>
                                                                                 </tr>
                                                                                 <tr>
                                                                                     <td>2.</td>
                                                                                     <td>CGPA Requirement</td>
-                                                                                    <td><?php echo $res['oDATA'][$i]['cgpa_requirement'] ?></td>
+                                                                                    <td><?php echo $post_desc['oDATA'][$i]['cgpa_requirement'] ?></td>
                                                                                 </tr>
                                                                                 <tr>
                                                                                     <td>3.</td>
                                                                                     <td>Program</td>
-                                                                                    <td><?php echo $res['oDATA'][$i]['program'] ?></td>
+                                                                                    <td><?php echo $post_desc['oDATA'][$i]['program'] ?></td>
                                                                                 </tr>
                                                                                 <tr>
                                                                                     <td>4.</td>
                                                                                     <td>Branch</td>
-                                                                                    <td><?php echo $res['oDATA'][$i]['branch'] ?></td>
+                                                                                    <td><?php echo $post_desc['oDATA'][$i]['branch'] ?></td>
                                                                                 </tr>
                                                                                 <tr>
                                                                                     <td>5.</td>
                                                                                     <td>Application Period</td>
-                                                                                    <td><?php echo $res['oDATA'][$i]['application_period'] ?></td>
+                                                                                    <td><?php echo $post_desc['oDATA'][$i]['application_period'] ?></td>
                                                                                 </tr>
                                                                                 <tr>
                                                                                     <td>6.</td>
                                                                                     <td>Minimum Package Offered</td>
-                                                                                    <td><?php echo $res['oDATA'][$i]['minimum_package_offered'] ?></td>
+                                                                                    <td><?php echo $post_desc['oDATA'][$i]['min_package_offered'] ?></td>
                                                                                 </tr>
                                                                                 <tr>
                                                                                     <td>7.</td>
                                                                                     <td>Number of Posts</td>
-                                                                                    <td><?php echo $res['oDATA'][$i]['number_of_posts'] ?></td>
+                                                                                    <td><?php echo $post_desc['oDATA'][$i]['number_of_posts'] ?></td>
                                                                                 </tr>
                                                                                 <tr>
                                                                                     <td>8.</td>
                                                                                     <td>PPT Date</td>
-                                                                                    <td><?php echo $res['oDATA'][$i]['ppt_date'] ?></td>
+                                                                                    <td><?php echo $post_desc['oDATA'][$i]['ppt_date'] ?></td>
                                                                                 </tr>
                                                                                 <tr>
                                                                                     <td>9.</td>
                                                                                     <td>Test Date</td>
-                                                                                    <td><?php echo $res['oDATA'][$i]['test_date'] ?></td>
+                                                                                    <td><?php echo $post_desc['oDATA'][$i]['test_date'] ?></td>
                                                                                 </tr>
                                                                                 <tr>
                                                                                     <td>10.</td>
                                                                                     <td>Interview Date</td>
-                                                                                    <td><?php echo $res['oDATA'][$i]['interview_date'] ?></td>
+                                                                                    <td><?php echo $post_desc['oDATA'][$i]['interview_date'] ?></td>
                                                                                 </tr>
                                                                                 <tr>
                                                                                     <td>11.</td>
                                                                                     <td>Shortlisting Date</td>
-                                                                                    <td><?php echo $res['oDATA'][$i]['shortlisting_date'] ?></td>
+                                                                                    <td><?php echo $post_desc['oDATA'][$i]['shortlisting_date'] ?></td>
                                                                                 </tr>
                                                                             </table>
-                                                        <td><?php echo $res['oDATA'][$i]['status'] ?></td>
+                                                        <td><?php
+                                                            $q4 = "select * from status where code=" . $res['oDATA'][$i]['status'];
+                                                            $status_name = $db-> getData($q4);
+                                                            echo $status_name['oDATA'][0]['status_name'] ?></td>
                                             </div>
                                         </div>
 
@@ -171,7 +189,7 @@ $res = $db->getData($sql);
                         </div>
                     </div>
             </div>
-        </div>
+         </div>
     </div>
     </section>
     </div>

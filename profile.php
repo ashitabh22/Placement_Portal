@@ -6,7 +6,21 @@ require_once("includes/classes/db.cls.php");
 require_once("includes/classes/sitedata.cls.php");
 
 $db = new SiteData();
-$sql = "SELECT * FROM PERSONAL_DETAILS WHERE ldapid=31900020";
+if (is_admin()) {
+    if (isset($_GET['uid'])) {
+        $uid = base64_decode($_GET['uid']);
+        // echo $uid;
+    } else {
+        redirect('admin.php');
+    }
+} else {
+    if (!is_loggedin()) {
+        redirect('new_login.php');
+    }
+    $uid = $_SESSION[SES]['user'];
+}
+
+$sql = "SELECT * FROM ".PERSONAL_DETAILS." WHERE ldapid='".$uid."'";
 $res = $db->getData($sql);
 
 ?>
@@ -140,4 +154,4 @@ $res = $db->getData($sql);
             </div>
         </div>
     </div>
-</body>
+</body> 

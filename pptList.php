@@ -15,6 +15,37 @@ $sql2 = "SELECT * FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_SCHEMA`='plac
 $res2 = $db->getData($sql2);
 $res3 = $db->getData($cdate);
 // print $res3['oDATA'][0]['CURDATE()'];
+if (isset($_POST['update']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
+    for ($j = 1; $j < $res2['NO_OF_ITEMS']; $j++) {
+        $cname=$res2['oDATA'][$j]['COLUMN_NAME'];
+        $cname2=(explode("_",$res2['oDATA'][$j]['COLUMN_NAME']));
+        if ($cname2[1] != $res3['oDATA'][0]['CURDATE()']){
+            continue;
+        }
+        // echo $res['NO_OF_ITEMS'];
+    for ($i = 0; $i < $res['NO_OF_ITEMS']; $i++) {
+        $ldap_id = $_POST['roll_number'.$i];
+       
+        if($_POST['attendence_'.$i]){
+            $cvalue = "1";
+        }else{
+            $cvalue = "0";
+        }
+        echo $ldap_id;
+        echo $cvalue;
+        $query = "UPDATE ".PPT_LIST." SET `".$cname."` = '".$cvalue."' WHERE ldapid = '".$ldap_id."' ";
+        mysql_query($query);
+        // if (mysql_query($query)) {
+        //     // redirect('pptList.php');
+        // } else {
+        //     die(mysql_error());
+        // }
+    }
+    }
+    redirect('pptList.php');
+
+  
+}
 ?>
 
 
@@ -37,7 +68,7 @@ $res3 = $db->getData($cdate);
                             display: none;
                         }
                     </style>
-
+                    <form method="post" action="">
                     <div class="wrapper">
                         <div id="sub-header"></div>
                         <section class="content-header">
@@ -80,6 +111,7 @@ $res3 = $db->getData($cdate);
                                                     
                                                         <tr>
                                                             <th>Name of Students</th>
+                                                            <th>Roll Number</th>
                                                             <?php for ($i = 1; $i < $res2['NO_OF_ITEMS']; $i++) { ?> 
                                                             <th><?php $cname=(explode("_",$res2['oDATA'][$i]['COLUMN_NAME']));
                                                                                    
@@ -92,6 +124,7 @@ $res3 = $db->getData($cdate);
                                                     
                                                         <tr>
                                                             <th>#</th>
+                                                            <th></th>
                                                             <?php for ($i = 1; $i < $res2['NO_OF_ITEMS']; $i++) { ?> 
                                                             <th><?php $cname=(explode("_",$res2['oDATA'][$i]['COLUMN_NAME']));
                                                                                    
@@ -103,17 +136,18 @@ $res3 = $db->getData($cdate);
                                                     </thead>
                                                     <tbody>
                                                     <?php for ($i = 0; $i < $res['NO_OF_ITEMS']; $i++) { ?>
-                                                        <tr>
-                                                            <td><?php echo $res['oDATA'][$i]['name'] ?></td>
-                                                            <?php for ($j = 1; $j < $res2['NO_OF_ITEMS']; $j++) { 
-                                                                ?> 
-                                                            <td><input type="checkbox" <?php if ($res['oDATA'][$i][$res2['oDATA'][$j]['COLUMN_NAME']] == '1') echo  "checked"  ?> value="<?php echo $res['oDATA'][$i]['student'] ?>" name="attendence" 
-                                                            <?php $cname=(explode("_",$res2['oDATA'][$j]['COLUMN_NAME']));
-                                                            if ($cname[1] == $res3['oDATA'][0]['CURDATE()']) echo  "disabled"  ?> >
-                                                            <?php 
-												                } ?>
-                                                            </td>
-
+                                                        
+                                                            <tr>
+                                                                <td><?php echo $res['oDATA'][$i]['name'] ?></td>
+                                                                <td> <input name=<?php echo"roll_number".$i ?> value="<?php echo $res['oDATA'][$i]['ldapid'] ?>" type="text" style="display: none;">  <?php echo $res['oDATA'][$i]['roll_number'] ?></td>
+                                                                <?php for ($j = 1; $j < $res2['NO_OF_ITEMS']; $j++) { 
+                                                                    ?> 
+                                                                <td><input type="checkbox" <?php if ($res['oDATA'][$i][$res2['oDATA'][$j]['COLUMN_NAME']] == '1') echo  "checked"  ?> name=<?php echo "attendence_".$i ?>
+                                                                <?php $cname=(explode("_",$res2['oDATA'][$j]['COLUMN_NAME']));
+                                                                if ($cname[1] != $res3['oDATA'][0]['CURDATE()']) echo  "disabled"  ?> >
+                                                                <?php 
+                                                                    } ?>
+                                                                </td>
                                                         </tr>
                                                         <?php 
 												} ?>
@@ -125,10 +159,8 @@ $res3 = $db->getData($cdate);
                                         </div>
                                         <div class="form-group row">
                                             <div class="col-sm-5"></div>
-                                            <div class="col-sm-7" ">
-																<button type=" submit" class="btn btn-primary" onclick="showRecord();">
-                                                Update
-                                                </button>
+                                            <div class="save">
+                                                <button type="submit" class="btn btn-primary" name="update">Update</button>
                                             </div>
                                         </div>
                                     </div>
@@ -136,5 +168,7 @@ $res3 = $db->getData($cdate);
                             </div>
                         </section>
                     </div>
+                    </form>
                     
+                           
                 

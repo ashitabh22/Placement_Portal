@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once("includes/settings.php");
 require_once("includes/database.php");
 require_once("includes/functions/common.php");
@@ -10,11 +11,11 @@ $sql = "SELECT * FROM all_jobs";
 $res = $db->getData($sql);
 if (isset($_POST['delete']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
 
-    $company_id = $_POST['delete'];
-    $del_query = "DELETE FROM " . ALL_JOBS . " WHERE company_id = '" . $company_id . "'";
+    $post_id = $_POST['delete'];
+    $del_query = "DELETE FROM " . ALL_JOBS . " WHERE post_id = '" . $post_id . "'";
 
     if (mysql_query($del_query)) {
-        redirect('PostedJobs1.php');
+        redirect('PostedJobs.php');
     } else {
         die(mysql_error());
     }
@@ -65,7 +66,7 @@ if (isset($_POST['delete']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                                                     <input type="text" onkeyup="myFunction()" placeholder=" &nbsp &nbsp Search" id="searchcomp">
                                                 </div>
                                                 <div class="col-md-5 col-xs-6 col-sm-5">
-                                                  
+
                                                 </div>
                                             </div>
                                             <br>
@@ -85,7 +86,14 @@ if (isset($_POST['delete']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                                                         <?php for ($i = 0; $i < $res['NO_OF_ITEMS']; $i++) { ?>
                                                         <tr>
                                                             <td><?php echo $res['oDATA'][$i]['company_id'] ?></td>
-                                                            <td><?php echo $res['oDATA'][$i]['company_name'] ?></td>
+                                                            <td><?php 
+                                                                $q2 = "select * from all_jobs where post_id=" . $res['oDATA'][$i]['post_id'];
+                                                                $post_desc = $db->getData($q2);
+                                                                $company_id = $post_desc['oDATA'][0]['company_id'];
+                                                                $q3 = "select * from registered_companies where company_id=" . $company_id;
+                                                                $comp_info = $db->getData($q3);
+
+                                                                echo $comp_info['oDATA'][0]['company_name'] ?></td>
                                                             <td><?php echo $res['oDATA'][$i]['job_title'] ?></td>
                                                             <td>
 
@@ -117,7 +125,7 @@ if (isset($_POST['delete']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                                                                                     <tr>
                                                                                         <td>2.</td>
                                                                                         <td>CGPA Requirement</td>
-                                                                                        <td><?php echo $res['oDATA'][$i]['cgpa_requirements'] ?></td>
+                                                                                        <td><?php echo $res['oDATA'][$i]['cgpa_requirement'] ?></td>
                                                                                     </tr>
                                                                                     <tr>
                                                                                         <td>3.</td>
@@ -137,7 +145,7 @@ if (isset($_POST['delete']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                                                                                     <tr>
                                                                                         <td>6.</td>
                                                                                         <td>Minimum Package Offered</td>
-                                                                                        <td><?php echo $res['oDATA'][$i]['minimum_package_offered'] ?></td>
+                                                                                        <td><?php echo $res['oDATA'][$i]['min_package_offered'] ?></td>
                                                                                     </tr>
                                                                                     <tr>
                                                                                         <td>7.</td>
@@ -190,13 +198,13 @@ if (isset($_POST['delete']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                                                             </td>
                                                             <form method="post">
                                                                 <td>
-                                                                    <button type="submit" value="<?php echo $res['oDATA'][$i]['company_id'] ?>" name="delete">Delete</button>
+                                                                    <button type="submit" value="<?php echo $res['oDATA'][$i]['post_id'] ?>" name="delete">Delete</button>
                                                                 </td>
                                                             </form>
                                                         </tr>
                                                     </tbody>
                                                     <?php 
-                                                    } ?>
+                                                } ?>
                                                 </table>
                                             </div>
                                         </div>
@@ -214,39 +222,37 @@ if (isset($_POST['delete']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                             </div>
                         </section>
                     </div>
-<!--footer section starts here-->
-<script>
-                function myFunction() {
-            
-                var input, filter, table, tr, td, i, txtValue;
-                input = document.getElementById("searchcomp");
-                filter = input.value.toUpperCase();
-                table = document.getElementById("stdlist");
-                tr = table.getElementsByTagName("tr");
-                
-                for (i = 0; i < tr.length; i=i+1)
-                {
-                td1 = tr[i].getElementsByTagName("td")[0];
-                td2 = tr[i].getElementsByTagName("td")[1];
-                td3 = tr[i].getElementsByTagName("td")[2];
-                console.log(td2);
-                
-                if (td1||td2) {
-                txtValue1 = td1.textContent || td1.innerText;
-                txtValue2 = td2.textContent || td2.innerText;
-                txtValue3 = td3.textContent || td3.innerText;
-                
-                if((i-1)%14==0)
-                {
-                if (txtValue1.toUpperCase().indexOf(filter) > -1 || txtValue2.toUpperCase().indexOf(filter) > -1||txtValue3.toUpperCase().indexOf(filter) > -1 )  {
-                tr[i].style.display = "";
-                } else {
-                tr[i].style.display = "none";
-                }
-                }
-                }
-                }
-                
-                
-                }
-                </script>
+                    <!--footer section starts here-->
+                    <script>
+                        function myFunction() {
+
+                            var input, filter, table, tr, td, i, txtValue;
+                            input = document.getElementById("searchcomp");
+                            filter = input.value.toUpperCase();
+                            table = document.getElementById("stdlist");
+                            tr = table.getElementsByTagName("tr");
+
+                            for (i = 0; i < tr.length; i = i + 1) {
+                                td1 = tr[i].getElementsByTagName("td")[0];
+                                td2 = tr[i].getElementsByTagName("td")[1];
+                                td3 = tr[i].getElementsByTagName("td")[2];
+                                console.log(td2);
+
+                                if (td1 || td2) {
+                                    txtValue1 = td1.textContent || td1.innerText;
+                                    txtValue2 = td2.textContent || td2.innerText;
+                                    txtValue3 = td3.textContent || td3.innerText;
+
+                                    if ((i - 1) % 14 == 0) {
+                                        if (txtValue1.toUpperCase().indexOf(filter) > -1 || txtValue2.toUpperCase().indexOf(filter) > -1 || txtValue3.toUpperCase().indexOf(filter) > -1) {
+                                            tr[i].style.display = "";
+                                        } else {
+                                            tr[i].style.display = "none";
+                                        }
+                                    }
+                                }
+                            }
+
+
+                        }
+                    </script> 

@@ -1,7 +1,5 @@
-<?php include('includes/templates/header2.php'); ?>
-<?php include('includes/templates/top_bar_admin.php'); ?>
-
 <?php
+session_start();
 require_once("includes/settings.php");
 require_once("includes/database.php");
 require_once("includes/functions/common.php");
@@ -9,12 +7,18 @@ require_once("includes/classes/db.cls.php");
 require_once("includes/classes/sitedata.cls.php");
 
 $db = new SiteData();
+
+if(!is_admin()){
+    redirect("new_login.php");
+}
+
 $sql = "SELECT * FROM all_jobs";
 $res = $db->getData($sql);
 
 if (isset($_POST['submit']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
+
     $id = $_POST['Company_Id'];
-    $name = $_POST['Company_name'];
+    // $name = $_POST['Company_name'];
     $title = $_POST['Job_Title'];
     $des = $_POST['Job_Description'];
     $cgpa = $_POST['CGPA_Requirement'];
@@ -28,16 +32,31 @@ if (isset($_POST['submit']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     $interview = $_POST['interview_date'];
     $shortlist = $_POST['shortlist_date'];
     $year = $_POST['academic_year'];
-    $query = "INSERT INTO all_jobs (company_id, company_name , job_title , job_description,cgpa_requirement, program, branch ,application_period, min_package_offered , number_of_posts, ppt_date, test_date, interview_date, shortlisting_date ,academic_year) 
-    VALUES ('$id', '$name' , '$title' , '$des' ,'$cgpa' , '$program', '$branch', '$app_period', '$package' , '$posts', '$pptdate', '$test', '$interview', '$shortlist', '$year') ";
+    $sql2 = "SELECT * FROM " . REGISTERED_COMPANIES;
+    $res2 = $db->getData($sql2);
+    $company_exists = false;
+    for ($i = 0; $i < $res2['NO_OF_ITEMS']; $i++) {
+        if ($res2['oDATA'][$i]['company_id'] == $id) {
+            $company_exists = true;
+        }
+    }
+    if (!$company_exists) {
+        echo "<script>alert('compnay id does not exitst')</script>";
+        redirect('postJobs.php');
+    }
+    $query = "INSERT INTO all_jobs (company_id , job_title , job_description,cgpa_requirement, program, branch ,application_period, min_package_offered , number_of_posts, ppt_date, test_date, interview_date, shortlisting_date ,academic_year)
+VALUES ('$id', '$title' , '$des' ,'$cgpa' , '$program', '$branch', '$app_period', '$package' , '$posts', '$pptdate', '$test', '$interview', '$shortlist', '$year') ";
 
     if (mysql_query($query)) {
-        redirect('postJobs.php');
+        redirect('postedJobs.php');
     } else {
         die(mysql_error());
     }
 }
 ?>
+<?php include('includes/templates/header2.php'); ?>
+<?php include('includes/templates/top_bar_admin.php'); ?>
+
 <!--header and top bar ends here-->
 
 <body>
@@ -72,12 +91,12 @@ if (isset($_POST['submit']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                                                 <input type="text" class="form-control" placeholder="Enter Company ID" name="Company_Id" required />
 
                                             </div>
-                                            <div class="form-group">
+                                            <!-- <div class="form-group">
                                                 <label>
                                                     <b style="color:red;">*</b>Company Name
                                                 </label>
                                                 <input type="text" class="form-control" placeholder="Enter Company Name" name="Company_name" required />
-                                            </div>
+                                            </div> -->
                                             <div class="form-group">
                                                 <label>
                                                     <b style="color:red;">*</b>Job Title

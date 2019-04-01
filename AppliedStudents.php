@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once("includes/settings.php");
 require_once("includes/database.php");
 require_once("includes/functions/common.php");
@@ -6,19 +7,22 @@ require_once("includes/classes/db.cls.php");
 require_once("includes/classes/sitedata.cls.php");
 
 $db = new SiteData();
-$sql = "SELECT * FROM AppliedStudents";
+$sql = "SELECT * FROM applied_students";
 $res = $db->getData($sql);
 
 if (isset($_POST['submit_changes']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
-    $ldap_id = $_POST['submit_changes'];
-    $job_status = $_POST['job_status'];
-    $query = "UPDATE AppliedStudents SET status = '" . $job_status . "' WHERE ldap = '" . $ldap_id . "'";
+    $ldap_id = $_POST['ldapid'];
+    $job_status = intval($_POST['job_status']);
+    $post_id = $_POST['post_id'];
+    $query = "UPDATE applied_students SET status = " . $job_status . " WHERE ldapid = '" . $ldap_id . "' AND post_id = '".$post_id."'";
     if (mysql_query($query)) {
         redirect('AppliedStudents.php');
     } else {
         die(mysql_error());
     }
 }
+
+
 ?>
 
 <?php include('includes/templates/header2.php'); ?>
@@ -71,7 +75,6 @@ if (isset($_POST['submit_changes']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                                                             <label for="Status"> &nbsp &nbsp &nbsp Filter by Status
                                                                 &nbsp &nbsp </label>
                                                             <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
-                                                                <option value="Applied">Applied </option>
                                                                 <option value="Shortlisted">Shortlisted </option>
                                                                 <option value="Not Shortlisted">Not Shortlisted</option>
                                                                 <option value="Test Cleared">Test Cleared</option>
@@ -105,44 +108,44 @@ if (isset($_POST['submit_changes']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                                                     <table class="table" id="stdlist">
                                                         <thead>
                                                             <tr>
-                                                                <th>Sr.</th>
-                                                                <th>LDAP</th>
+                                                                <th>ROLL NO</th>
+                                                                <th>POST ID</th>
                                                                 <th>Status</th>
                                                                 <th></th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
                                                             <?php for ($i = 0; $i < $res['NO_OF_ITEMS']; $i++) { ?>
-                                                            <form method="post">
-                                                                <tr>
-                                                                    <td><?php echo $res['oDATA'][$i]['sr'] ?></td>
-                                                                    <td><?php echo $res['oDATA'][$i]['ldap'] ?></td>
+                                                            <tr>
+                                                                <form method="post">
+                                                                    <td><input type="hidden" name="ldapid" value= <?php echo $res['oDATA'][$i]['ldapid'] ?> ><?php echo $res['oDATA'][$i]['ldapid'] ?></td>
+                                                                    <td><input type="hidden" name="post_id" value= <?php echo $res['oDATA'][$i]['post_id'] ?> ><?php echo $res['oDATA'][$i]['post_id'] ?></td>
                                                                     <td>
                                                                         <div class="col-auto my-1">
                                                                             <label for="Status"> &nbsp &nbsp &nbsp &nbsp
                                                                                 &nbsp </label>
                                                                             <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="job_status">
 
-                                                                                <option value="0" <?php if ($res['oDATA'][$i]['status'] == '0') echo  "selected = 'selected'" ?>>Applied </option>
-                                                                                <option value="1" <?php if ($res['oDATA'][$i]['status'] == '1') echo  "selected = 'selected'" ?>>Shortlisted </option>
-                                                                                <option value="2" <?php if ($res['oDATA'][$i]['status'] == '2') echo  "selected = 'selected'" ?>>Not Shortlisted</option>
-                                                                                <option value="3" <?php if ($res['oDATA'][$i]['status'] == '3') echo  "selected = 'selected'" ?>>Test Cleared</option>
-                                                                                <option value="4" <?php if ($res['oDATA'][$i]['status'] == '4') echo  "selected = 'selected'" ?>>Test Failed</option>
-                                                                                <option value="5" <?php if ($res['oDATA'][$i]['status'] == '5') echo  "selected = 'selected'" ?>>Selected for interview</option>
-                                                                                <option value="6" <?php if ($res['oDATA'][$i]['status'] == '6') echo  "selected = 'selected'" ?>>Job Cleared</option>
-                                                                                <option value="7" <?php if ($res['oDATA'][$i]['status'] == '7') echo  "selected = 'selected'" ?>>Rejected from Job</option>
+                                                                                <option value="4" <?php if ($res['oDATA'][$i]['status'] == '4') echo  "selected = 'selected'" ?>>Applied </option>
+                                                                                <option value="5" <?php if ($res['oDATA'][$i]['status'] == '5') echo  "selected = 'selected'" ?>>Shortlisted </option>
+                                                                                <option value="6" <?php if ($res['oDATA'][$i]['status'] == '6') echo  "selected = 'selected'" ?>>Not Shortlisted</option>
+                                                                                <option value="7" <?php if ($res['oDATA'][$i]['status'] == '7') echo  "selected = 'selected'" ?>>Test Cleared</option>
+                                                                                <option value="8" <?php if ($res['oDATA'][$i]['status'] == '8') echo  "selected = 'selected'" ?>>Test Failed</option>
+                                                                                <option value="9" <?php if ($res['oDATA'][$i]['status'] == '9') echo  "selected = 'selected'" ?>>Selected for interview</option>
+                                                                                <option value="10" <?php if ($res['oDATA'][$i]['status'] == '10') echo  "selected = 'selected'" ?>>Job Cleared</option>
+                                                                                <option value="11" <?php if ($res['oDATA'][$i]['status'] == '11') echo  "selected = 'selected'" ?>>Rejected from Job</option>
                                                                             </select>
                                                                         </div>
                                                                     </td>
                                                                     <td>
                                                                         <div class="save">
-                                                                            <button type="submit" value="<?php echo $res['oDATA'][$i]['ldap'] ?>" name="submit_changes">Save
+                                                                            <button type="submit" value="<?php echo $res['oDATA'][$i]['ldap'] ?>" name="submit_changes" id="save_changes">Save
                                                                                 Changes
                                                                             </button>
                                                                         </div>
                                                                     </td>
-                                                                </tr>
-                                                            </form>
+                                                                </form>
+                                                            </tr>
                                                         </tbody> <?php 
                                                                 } ?>
                                                     </table>
@@ -164,11 +167,7 @@ if (isset($_POST['submit_changes']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                         </section>
                     </div>
             </div>
-
-
-
-
-            <!-- footer -->
         </div>
     </div>
-</body>
+
+</body> 

@@ -12,4 +12,9 @@
         define('ADMIN', 'is_admin');
 	define('STATUS', 'status');
 	define('APPLICABLE_JOBS', 'applicable_jobs');
+	define('ALL_JOBS', 'all_jobs');
+	define('REGISTERED_COMPANIES', 'registered_companies');
+	define('PERSONAL_DETAILS', 'personal_details');
+	define('APPLIED_STUDENTS', 'applied_students');
+
 ?>
