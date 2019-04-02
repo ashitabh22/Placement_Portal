@@ -9,14 +9,14 @@ $db = new SiteData();
 if (!is_loggedin()) {
 redirect('new_login.php');
 } else {
-$ldapid = $_SESSION[SES]['user'];
-$query = "SELECT * from " . PERSONAL_DETAILS . "  where ldapid=" . $ldapid;
-$res = $db->getData($query);
-$degree = $res['oDATA'][0]['degree'];
-$branch = $res['oDATA'][0]['branch'];
-$query = "SELECT * from " . ACAD_DETAILS . " where ldapid=" . $ldapid;
-$res = $db->getData($query);
-$cgpa = $res['oDATA'][0]['marks'];
+	$ldapid = $_SESSION[SES]['user'];
+	$query = "SELECT * from " . PERSONAL_DETAILS . "  where ldapid=" . $ldapid;
+	$res = $db->getData($query);
+	$degree = $res['oDATA'][0]['degree'];
+	$branch = $res['oDATA'][0]['branch'];
+	$query = "SELECT * from " . ACAD_DETAILS . " where ldapid=" . $ldapid;
+	$res = $db->getData($query);
+	$cgpa = $res['oDATA'][0]['marks'];
 }
 
 
