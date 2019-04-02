@@ -1,7 +1,56 @@
-<!-- <div class=" topBar affix-top" id="topbar" data-spy="affix" data-offset-top="0" > -->
-<?php
-    $username="yhj";
-?>
+<!-- header begin -->
+<!DOCTYPE html>
+<html lang=en-US>
+
+<head>
+    <title><?php echo $title; ?></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="Description" content="IIT Bhilai Main Page" />
+    <meta name="KeyWords" content="IIT Bhilai, Youngest IIT, Premier Engineering Institute of India, IIT Bhilai" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/a.css">
+    <link rel="stylesheet" href="./css/b.css">
+    <link rel="stylesheet" href="./css/c.css">
+    <link rel="stylesheet" href="./css/table.css">
+
+    <script type="text/javascript" src="./js/d.js"></script>
+
+    <style type="text/css">
+        .modal-dialog {
+            max-width: 700px;
+            /* New width for default modal */
+        }
+
+        .modal {
+            overflow-y: auto
+        }
+
+        .modal-backdrop {
+            visibility: hidden !important;
+        }
+
+        .modal.in {
+            background-color: rgba(0, 0, 0, 0.5);
+
+        }
+
+        td,
+        th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+
+<!-- header end -->
 <div class="topBar affix-top" id="topbar">
     <div class="container">
         <ul class="nav navbar-nav navbar-left">
@@ -27,27 +76,21 @@
                         </span>
                     </a>
                     <ul class="dropdown-menu">
-                        <!-- <li>
-                            <a href="profile.php">View Profile</a>
-                        </li> -->
                         <li>
-                            <a href="applicableJobs.php">View Applicable Jobs</a>
+                            <a href="form.php">View Profile</a>
                         </li>
                         <li>
-                            <a href="appliedJobs.php">View Applied Jobs</a>
+                            <a href="applicableJobs.php">Applicable Jobs</a>
                         </li>
                         <li>
-                            <a href="allJobs.php">View All Jobs</a>
-                        </li>
-                        <li>
-                            <a href="form.php">Form</a>
+                            <a href="allJobs.php">All Jobs</a>
                         </li>
                     </ul>
                 </li>
             </ul>
-            <ul class="nav navbar-nav navbar-right main-nav-link" id="username">
+            <ul class="nav navbar-nav navbar-right main-nav-link" id="student_username">
                 <li>
-                    <?php echo "asdfasd";?>
+                    pradeep Kumar
                 </li>
             </ul>
         </div>
@@ -55,4 +98,4 @@
     </div>
     <!-- /.container -->
 </nav>
-<!--header and top bar ends here-->  
+<!--header and top bar ends here--> 

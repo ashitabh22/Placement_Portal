@@ -6,17 +6,16 @@ require_once("includes/functions/common.php");
 require_once("includes/classes/db.cls.php");
 require_once("includes/classes/sitedata.cls.php");
 
+
 $db = new SiteData();
 if (!is_loggedin()) {
     redirect("new_login.php");
 } else {
     $ldapid = $_SESSION[SES]['user'];
+    include('includes/templates/top_bar_student.php');
 }
 ?>
 
-
-<?php include('includes/templates/header2.php'); ?>
-<?php include('includes/templates/top_bar_student.php'); ?>
 
 <!--header and top bar ends here-->
 
@@ -165,7 +164,7 @@ if (!is_loggedin()) {
                                                                             </table>
                                                         <td><?php
                                                             $q4 = "select * from status where code=" . $res['oDATA'][$i]['status'];
-                                                            $status_name = $db-> getData($q4);
+                                                            $status_name = $db->getData($q4);
                                                             echo $status_name['oDATA'][0]['status_name'] ?></td>
                                             </div>
                                         </div>
@@ -189,8 +188,8 @@ if (!is_loggedin()) {
                         </div>
                     </div>
             </div>
-         </div>
+        </div>
     </div>
     </section>
     </div>
-</body>
+</body> 

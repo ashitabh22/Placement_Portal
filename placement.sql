@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 01, 2019 at 05:59 PM
+-- Generation Time: Apr 02, 2019 at 08:35 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 5.6.40
 
@@ -87,37 +87,6 @@ INSERT INTO `achievement_details` (`slno`, `ldapid`, `achievement`, `year`) VALU
 -- --------------------------------------------------------
 
 --
--- Table structure for table `all_jobs`
---
-
-CREATE TABLE `all_jobs` (
-  `post_id` int(11) NOT NULL,
-  `company_id` int(30) NOT NULL,
-  `job_title` text NOT NULL,
-  `job_description` text NOT NULL,
-  `cgpa_requirement` float NOT NULL,
-  `program` text NOT NULL,
-  `branch` text NOT NULL,
-  `application_period` date NOT NULL,
-  `min_package_offered` bigint(20) NOT NULL,
-  `number_of_posts` int(11) NOT NULL,
-  `ppt_date` date NOT NULL,
-  `test_date` date NOT NULL,
-  `interview_date` date NOT NULL,
-  `shortlisting_date` date NOT NULL,
-  `academic_year` year(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `all_jobs`
---
-
-INSERT INTO `all_jobs` (`post_id`, `company_id`, `job_title`, `job_description`, `cgpa_requirement`, `program`, `branch`, `application_period`, `min_package_offered`, `number_of_posts`, `ppt_date`, `test_date`, `interview_date`, `shortlisting_date`, `academic_year`) VALUES
-(13, 5, 'sdf', 'sdfasdf', 6, 'B.Tech', 'Electrical Engineering and Computer Science', '2019-04-19', 678, 3, '2019-04-18', '2019-04-18', '2019-04-11', '2019-04-25', 2019);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `applicable_jobs`
 --
 
@@ -127,12 +96,33 @@ CREATE TABLE `applicable_jobs` (
   `post_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `applicable_jobs`
+-- Table structure for table `archived_companies`
 --
 
-INSERT INTO `applicable_jobs` (`ldapid`, `has_applied`, `post_id`) VALUES
-(11640680, 1, 13);
+CREATE TABLE `archived_companies` (
+  `company_id` varchar(10) NOT NULL,
+  `company_name` text NOT NULL,
+  `email` text NOT NULL,
+  `point_of_contact` text NOT NULL,
+  `mobile` int(10) NOT NULL,
+  `address` text NOT NULL,
+  `website` text NOT NULL,
+  `about` text NOT NULL,
+  `designation` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `archived_companies`
+--
+
+INSERT INTO `archived_companies` (`company_id`, `company_name`, `email`, `point_of_contact`, `mobile`, `address`, `website`, `about`, `designation`) VALUES
+('1', 'ABC', 'alpha@gmail.com', 'director', 1255155987, 'fweuivgwdjbvcwiocnwdochwdon ', 'www.fffffff.com', 'wfwriovucbkjwdcngdwcbn', 'frdwcxdswd'),
+('2', 'GHI', 'ghi@gmail.com', 'kljszdfkldf', 134235345, 'arjfoairef, hdfogidofg, oiiajroigjap.', 'akljhfolshdfolasdf.com', 'uaierfhoiahfbkbj akjsdfga jaklwlfkj.', 'ioidfjgksdg'),
+('3', 'FGH', 'fgh@gmail.com', '643512', 456132, 'olikugyjSATD', 'www.fgh.com', 'oiugyghlk', 'ihugyftdhc'),
+('4', 'IJK', 'iukyjthd', '94562312', 95622, 'posiukdysf', 'www.ijk.com', 'iukgaySj', 'oilugsadysv');
 
 -- --------------------------------------------------------
 
@@ -245,6 +235,18 @@ INSERT INTO `personal_details` (`ldapid`, `name`, `roll_number`, `dob`, `degree`
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `placement_status`
+--
+
+CREATE TABLE `placement_status` (
+  `ldapid` int(8) DEFAULT NULL,
+  `upload` text,
+  `post_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `positions_of_responsibility_details`
 --
 
@@ -268,6 +270,37 @@ INSERT INTO `positions_of_responsibility_details` (`slno`, `ldapid`, `position_h
 (6, 61900020, 'ACCOUNTS HO', '3 YRS'),
 (7, 41800070, 'Web Dev', '1 year'),
 (8, 41800070, 'Web Programmer', '1 Year');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ppt_list`
+--
+
+CREATE TABLE `ppt_list` (
+  `ldapid` varchar(30) NOT NULL,
+  `c4_2019-03-30` int(11) NOT NULL,
+  `DEF_2019-03-18` varchar(40) DEFAULT NULL,
+  `DEF_2019-03-19` varchar(40) DEFAULT NULL,
+  `DEF_2019-03-31` varchar(40) DEFAULT NULL,
+  `DEF_2019-03-15` varchar(40) DEFAULT NULL,
+  `IJK_2019-04-01` varchar(40) DEFAULT NULL,
+  `KLM_2019-04-16` varchar(40) DEFAULT NULL,
+  `IJK_2019-04-23` varchar(40) DEFAULT NULL,
+  `IJK_2019-04-19` varchar(40) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ppt_list`
+--
+
+INSERT INTO `ppt_list` (`ldapid`, `c4_2019-03-30`, `DEF_2019-03-18`, `DEF_2019-03-19`, `DEF_2019-03-31`, `DEF_2019-03-15`, `IJK_2019-04-01`, `KLM_2019-04-16`, `IJK_2019-04-23`, `IJK_2019-04-19`) VALUES
+('31900020', 0, '0', '1', '1', '1', '0', NULL, NULL, NULL),
+('31900110', 0, '0', '0', '1', '1', '1', NULL, NULL, NULL),
+('41800060', 1, '1', '1', '1', '1', '0', NULL, NULL, NULL),
+('41800070', 1, '0', '0', '1', '1', '0', NULL, NULL, NULL),
+('61900020', 1, '1', '1', '1', '1', '0', NULL, NULL, NULL),
+('91600070', 0, '1', '0', '0', '1', '0', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -318,8 +351,16 @@ CREATE TABLE `registered_companies` (
 --
 
 INSERT INTO `registered_companies` (`company_id`, `company_name`, `email`, `point_of_contact`, `mobile`, `address`, `website`, `about`, `designation`) VALUES
+(1, 'CRB TECH SOLUTIONS', 'crbtech@yahoo.com', 'phone/email', 21431245, 'Bhopal, Madhya Pradesh', 'www.crbtechsolutions.com', 'akjsfggkjsabdf', 'HR'),
+(2, 'AMBC', 'ambc@gmail.com', 'email/phone', 123451425, 'XYZ Street, New Delhi', 'ambc.com', 'segfserger', 'HR'),
+(3, 'SS World InfoTech', 'ssworld@hotmail.com', 'phone/ email', 12343452, 'New Delhi', 'www.ssworld.com', 'lalalala', 'HR'),
+(4, 'Micro Academy India', 'macademy@gmail.com', 'phone', 2341223, 'Here', 'www.macademy.com', 'ertwer', 'HR3'),
 (5, 'Reliance', 'rel@ert.com', 'Pradeep', 56565656, 'adgafa sahsga%%$$$', 'www.reliance.com', 'We are good', 'HR '),
-(6, 'comp1', 'email1', 'p1', 1341234, 'address 1', 'www.somem. com', 'about 6', 'HR 6');
+(6, 'comp1', 'email1', 'p1', 1341234, 'address 1', 'www.somem. com', 'about 6', 'HR 6'),
+(7, '3I Infotech', 'infotech3@outlook.com', 'phone/email', 1234324, 'Nagpur, Maharashtra', 'infotech.com', 'We are just great', 'HR7'),
+(8, 'Split Vision Technologies', 'splitvision@rediffmail.com', 'phone/landline/fax', 12341, 'Jaipur, Rajasthan', 'www.splitvision.co.in', 'hfasdofasjfb', 'HR8'),
+(9, 'Digitech Solutions', 'digitech@hotmail.com', 'email', 123434, 'xyz street, Mumbai', 'www.digitech.com', 'erferf', 'HR9'),
+(10, 'Aspire technology', 'aspire@hotmail.com', 'phone/email', 134134213, 'Jodhpur, Rajasthan', 'digitech.com', 'sergfedgfr', 'HR10');
 
 -- --------------------------------------------------------
 
@@ -338,6 +379,7 @@ CREATE TABLE `resume_usr` (
 
 INSERT INTO `resume_usr` (`ldapid`, `login_timestamp`) VALUES
 (11640680, '2019-03-19 09:35:40'),
+(11740160, '2019-04-01 17:34:57'),
 (11740320, '2019-03-07 09:29:37'),
 (11740860, '2019-03-07 09:29:48'),
 (31900020, '2019-03-11 07:59:03'),
@@ -451,18 +493,16 @@ ALTER TABLE `achievement_details`
   ADD KEY `ldapid` (`ldapid`);
 
 --
--- Indexes for table `all_jobs`
---
-ALTER TABLE `all_jobs`
-  ADD PRIMARY KEY (`post_id`),
-  ADD KEY `company_id` (`company_id`);
-
---
 -- Indexes for table `applicable_jobs`
 --
 ALTER TABLE `applicable_jobs`
-  ADD KEY `ldapid` (`ldapid`),
-  ADD KEY `post_id` (`post_id`);
+  ADD KEY `ldapid` (`ldapid`);
+
+--
+-- Indexes for table `archived_companies`
+--
+ALTER TABLE `archived_companies`
+  ADD PRIMARY KEY (`company_id`);
 
 --
 -- Indexes for table `extra_curricular_activities_details`
@@ -491,11 +531,24 @@ ALTER TABLE `personal_details`
   ADD PRIMARY KEY (`ldapid`);
 
 --
+-- Indexes for table `placement_status`
+--
+ALTER TABLE `placement_status`
+  ADD KEY `ldapid` (`ldapid`),
+  ADD KEY `post_id` (`post_id`);
+
+--
 -- Indexes for table `positions_of_responsibility_details`
 --
 ALTER TABLE `positions_of_responsibility_details`
   ADD PRIMARY KEY (`slno`),
   ADD KEY `ldapid` (`ldapid`);
+
+--
+-- Indexes for table `ppt_list`
+--
+ALTER TABLE `ppt_list`
+  ADD PRIMARY KEY (`ldapid`);
 
 --
 -- Indexes for table `project_details`
@@ -554,12 +607,6 @@ ALTER TABLE `achievement_details`
   MODIFY `slno` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT for table `all_jobs`
---
-ALTER TABLE `all_jobs`
-  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
-
---
 -- AUTO_INCREMENT for table `extra_curricular_activities_details`
 --
 ALTER TABLE `extra_curricular_activities_details`
@@ -613,12 +660,6 @@ ALTER TABLE `achievement_details`
   ADD CONSTRAINT `achievement_details_ibfk_2` FOREIGN KEY (`ldapid`) REFERENCES `resume_usr` (`ldapid`);
 
 --
--- Constraints for table `all_jobs`
---
-ALTER TABLE `all_jobs`
-  ADD CONSTRAINT `all_jobs_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `registered_companies` (`company_id`) ON DELETE CASCADE;
-
---
 -- Constraints for table `applicable_jobs`
 --
 ALTER TABLE `applicable_jobs`
@@ -643,6 +684,13 @@ ALTER TABLE `internship_details`
 ALTER TABLE `personal_details`
   ADD CONSTRAINT `personal_details_ibfk_1` FOREIGN KEY (`ldapid`) REFERENCES `resume_usr` (`ldapid`),
   ADD CONSTRAINT `personal_details_ibfk_2` FOREIGN KEY (`ldapid`) REFERENCES `resume_usr` (`ldapid`);
+
+--
+-- Constraints for table `placement_status`
+--
+ALTER TABLE `placement_status`
+  ADD CONSTRAINT `placement_status_ibfk_1` FOREIGN KEY (`ldapid`) REFERENCES `personal_details` (`ldapid`) ON DELETE CASCADE,
+  ADD CONSTRAINT `placement_status_ibfk_2` FOREIGN KEY (`post_id`) REFERENCES `all_jobs` (`post_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `positions_of_responsibility_details`

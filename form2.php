@@ -6,51 +6,52 @@ require_once("includes/functions/common.php");
 require_once("includes/classes/db.cls.php");
 require_once("includes/classes/sitedata.cls.php");
 
-$db = new SiteData();
-if(is_admin()){
-    if(isset($_GET['uid'])){
-        $uid = base64_decode($_GET['uid']);
-        // echo $uid;
-    }else{
-        redirect('admin.php');
-    }
-}else{
-    if (!is_loggedin()) {
-        redirect('new_login.php');
-    }
-    $uid = $_SESSION[SES]['user'];
-}
-$sql = "SELECT status FROM " . STUD_DETAILS . " WHERE ldapid = '$uid'";
-$res = $db->getData($sql);
-if(is_admin() && $res['NO_OF_ITEMS'] == 0){
-    redirect('admin.php');
-}
-if (($res['oDATA'][0]['status'] >= 1) && is_loggedin()) {
-    redirect($BASE_URL . "submitted.php");
-}
-$sql = "SELECT * FROM " . STUD_DETAILS . " WHERE ldapid = '$uid'";
-$stud_data = $db->getData($sql);
-$sql = "SELECT * FROM " . ACAD_DETAILS . " WHERE ldapid = '$uid'";
-$acad_data = $db->getData($sql);
-$sql = "SELECT * FROM " . TECH_SKILL . " WHERE ldapid = '$uid'";
-$tech_skill = $db->getData($sql);
-$sql = "SELECT * FROM " . ACHIVE_DETAILS . " WHERE ldapid = '$uid'";
-$achive_data = $db->getData($sql);
-$sql = "SELECT * FROM " . INTERN_DETAILS . " WHERE ldapid = '$uid'";
-$intern_data = $db->getData($sql);
-$sql = "SELECT * FROM " . TECH_SKILL . " WHERE ldapid = '$uid'";
-$techskill_data = $db->getData($sql);
-$sql = "SELECT * FROM " . RESPONSIBILITY . " WHERE ldapid = '$uid'";
-$responsbility_data = $db->getData($sql);
-$sql = "SELECT * FROM " . WORK_EXP . " WHERE ldapid = '$uid'";
-$work_experience = $db->getData($sql);
-$sql = "SELECT * FROM " . PROJECT_DETAILS . " WHERE ldapid = '$uid'";
-$projects = $db->getData($sql);
-$sql = "SELECT * FROM " . EXTRA_CURR_ACTIVITY . " WHERE ldapid = '$uid'";
-$extra_curr_activity = $db->getData($sql);
+// $db = new SiteData();
+// if(is_admin()){
+//     if(isset($_GET['uid'])){
+//         $uid = base64_decode($_GET['uid']);
+//         // echo $uid;
+//     }else{
+//         redirect('admin.php');
+//     }
+// }else{
+//     if (!is_loggedin()) {
+//         redirect('new_login.php');
+//     }
+//     $uid = $_SESSION[SES]['user'];
+// // }
+// $sql = "SELECT status FROM " . STUD_DETAILS . " WHERE ldapid = '$uid'";
+// $res = $db->getData($sql);
+// if(is_admin() && $res['NO_OF_ITEMS'] == 0){
+//     redirect('admin.php');
+// }
+// if (($res['oDATA'][0]['status'] >= 1) && is_loggedin()) {
+//     redirect($BASE_URL . "submitted.php");
+// }
+// $sql = "SELECT * FROM " . STUD_DETAILS . " WHERE ldapid = '$uid'";
+// $stud_data = $db->getData($sql);
+// $sql = "SELECT * FROM " . ACAD_DETAILS . " WHERE ldapid = '$uid'";
+// $acad_data = $db->getData($sql);
+// $sql = "SELECT * FROM " . TECH_SKILL . " WHERE ldapid = '$uid'";
+// $tech_skill = $db->getData($sql);
+// $sql = "SELECT * FROM " . ACHIVE_DETAILS . " WHERE ldapid = '$uid'";
+// $achive_data = $db->getData($sql);
+// $sql = "SELECT * FROM " . INTERN_DETAILS . " WHERE ldapid = '$uid'";
+// $intern_data = $db->getData($sql);
+// $sql = "SELECT * FROM " . TECH_SKILL . " WHERE ldapid = '$uid'";
+// $techskill_data = $db->getData($sql);
+// $sql = "SELECT * FROM " . RESPONSIBILITY . " WHERE ldapid = '$uid'";
+// $responsbility_data = $db->getData($sql);
+// $sql = "SELECT * FROM " . WORK_EXP . " WHERE ldapid = '$uid'";
+// $work_experience = $db->getData($sql);
+// $sql = "SELECT * FROM " . PROJECT_DETAILS . " WHERE ldapid = '$uid'";
+// $projects = $db->getData($sql);
+// $sql = "SELECT * FROM " . EXTRA_CURR_ACTIVITY . " WHERE ldapid = '$uid'";
+// $extra_curr_activity = $db->getData($sql);
 ?>
+
+<?php include('includes/templates/top_bar_student.php'); ?>
 <body>
-    <?php include('includes/templates/top_bar_student.php'); ?>
     <div class="container-fluid">
         <div class="panel-group">
             <div class="panel panel-primary">
@@ -678,3 +679,4 @@ $extra_curr_activity = $db->getData($sql);
             </div>
         </div>
     </div>
+    

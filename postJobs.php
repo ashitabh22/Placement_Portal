@@ -54,7 +54,6 @@ VALUES ('$id', '$title' , '$des' ,'$cgpa' , '$program', '$branch', '$app_period'
     }
 }
 ?>
-<?php include('includes/templates/header2.php'); ?>
 <?php include('includes/templates/top_bar_admin.php'); ?>
 
 <!--header and top bar ends here-->

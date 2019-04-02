@@ -22,7 +22,6 @@ if (isset($_POST['delete']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 ?>
 
-<?php include('includes/templates/header2.php'); ?>
 <?php include('includes/templates/top_bar_admin.php'); ?>
 
 <body>

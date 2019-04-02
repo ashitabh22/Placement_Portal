@@ -5,6 +5,7 @@ require_once("includes/database.php");
 require_once("includes/functions/common.php");
 require_once("includes/classes/db.cls.php");
 require_once("includes/classes/sitedata.cls.php");
+
 $db = new SiteData();
 
 if (!is_admin()) {
@@ -13,14 +14,13 @@ if (!is_admin()) {
 $sql = "SELECT * FROM " . STUD_DETAILS . " ORDER BY degree";
 $res = $db->getData($sql);
 ?>
-<?php include('includes/templates/header2.php'); ?>
 
 <body>
     <?php include('includes/templates/top_bar_admin.php'); ?>
     <div class="container-fluid">
         <div class="panel-group">
             <div class="panel panel-primary">
-                <div class="panel-heading" style="background-color: #000;"><span style="color: #FFFFFF;"><?php echo $_SESSION[SES]['uname']; ?><b style="color: #000000;"> (<?php echo $_SESSION[SES]['email']; ?>)</b></span><span style="float: right;">Admin</span></div>
+                <div class="panel-heading" style="background-color: #6153a8;"><span style="color: #FFFFFF;"><?php echo $_SESSION[SES]['uname']; ?><b style="color: #000000;"> (<?php echo $_SESSION[SES]['email']; ?>)</b></span><span style="float: right;">Admin</span></div>
                 <div class="panel-body">
                     <?php
                     getMessage();

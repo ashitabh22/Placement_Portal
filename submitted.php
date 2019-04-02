@@ -46,10 +46,11 @@ $stat_code = $db->getData($sql);
 
 <?php 
 
-include('includes/templates/header2.php');
 if (is_admin()) {
+    $title = "View students";
     include('includes/templates/top_bar_admin.php');
 } else {
+    $title = "View profile";
     include('includes/templates/top_bar_student.php');
 }
 ?>
@@ -58,7 +59,7 @@ if (is_admin()) {
     <div class=" container - fluid ">
         <div class=" panel - group ">
             <div class=" panel pane l -primar y">
-                <div class="pane l -headin g" style="backgroun d -color: ?><b style=" color: #000000;"> (<?php echo $_SESSION[SES]['email']; ?>)</b></span>
+                <div class="pane l -headin g" style="background-color: ><b style=" color: #000000;"> (<?php echo $_SESSION[SES]['email']; ?>)</b></span>
                     <span style="float: right;">
                         <?php 
                         echo "<span>Present Status: </span><span class='label label-" . $stat_code['oDATA'][0]['color_label'] . "'>" . $stat_code['oDATA'][0]['status_name'] . "</span>";
@@ -72,7 +73,7 @@ if (is_admin()) {
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <table class="table table-bordered table-striped table-hover">
                             <tr>
-                                <th colspan="3" style="background-color: #2e6da4; color: #fff;">Personal Details</th>
+                                <th colspan="3" style="background-color: #6153a8; color: #fff;">Personal Details</th>
                             </tr>
                             <tr>
                                 <th>Name</th>
@@ -133,7 +134,7 @@ if (is_admin()) {
                         </table>
                         <table class="table table-bordered table-striped table-hover">
                             <tr>
-                                <th colspan="5" style="background-color: #2e6da4; color: #fff;">EDUCATIONAL QUALIFICATION</th>
+                                <th colspan="5" style="background-color: #6153a8; color: #fff;">EDUCATIONAL QUALIFICATION</th>
                             </tr>
                             <tr>
                                 <th>Exam</th>
@@ -156,7 +157,7 @@ if (is_admin()) {
                         </table>
                         <table class="table table-bordered table-striped table-hover">
                             <tr>
-                                <th colspan="40" style="background-color: #2e6da4; color: #fff;">TECHNICAL SKILLS</th>
+                                <th colspan="40" style="background-color: #6153a8; color: #fff;">TECHNICAL SKILLS</th>
                             </tr>
                             <tr>
                                 <?php
@@ -168,7 +169,7 @@ if (is_admin()) {
                         </table>
                         <table class="table table-bordered table-striped table-hover">
                             <tr>
-                                <th colspan="2" style="background-color: #2e6da4; color: #fff;">SCHOLASTIC ACHIEVEMENT</th>
+                                <th colspan="2" style="background-color: #6153a8; color: #fff;">SCHOLASTIC ACHIEVEMENT</th>
                             </tr>
                             <?php
                             for ($i = 0; $i < $achiev_details['NO_OF_ITEMS']; $i++) {
@@ -181,7 +182,7 @@ if (is_admin()) {
                         </table>
                         <table class="table table-bordered table-striped table-hover">
                             <tr>
-                                <th colspan="2" style="background-color: #2e6da4; color: #fff;">INTERNSHIP</th>
+                                <th colspan="2" style="background-color: #6153a8; color: #fff;">INTERNSHIP</th>
                             </tr>
                             <?php
                             for ($i = 0; $i < $intern_details['NO_OF_ITEMS']; $i++) {
@@ -194,7 +195,7 @@ if (is_admin()) {
                         </table>
                         <table class="table table-bordered table-striped table-hover">
                             <tr>
-                                <th colspan="2" style="background-color: #2e6da4; color: #fff;">POSITION(S) OF RESPONSIBILITY</th>
+                                <th colspan="2" style="background-color: #6153a8; color: #fff;">POSITION(S) OF RESPONSIBILITY</th>
                             </tr>
                             <?php
                             for ($i = 0; $i < $responsibility['NO_OF_ITEMS']; $i++) {
@@ -207,7 +208,7 @@ if (is_admin()) {
                         </table>
                         <table class="table table-bordered table-striped table-hover">
                             <tr>
-                                <th colspan="2" style="background-color: #2e6da4; color: #fff;">WORK EXPERIENCE(S)</th>
+                                <th colspan="2" style="background-color: #6153a8; color: #fff;">WORK EXPERIENCE(S)</th>
                             </tr>
                             <?php
                             for ($i = 0; $i < $work_exp['NO_OF_ITEMS']; $i++) {
@@ -220,7 +221,7 @@ if (is_admin()) {
                         </table>
                         <table class="table table-bordered table-striped table-hover">
                             <tr>
-                                <th colspan="2" style="background-color: #2e6da4; color: #fff;">PROJECT(S)</th>
+                                <th colspan="2" style="background-color: #6153a8; color: #fff;">PROJECT(S)</th>
                             </tr>
                             <?php
                             for ($i = 0; $i < $proj_details['NO_OF_ITEMS']; $i++) {
@@ -233,7 +234,7 @@ if (is_admin()) {
                         </table>
                         <table class="table table-bordered table-striped table-hover">
                             <tr>
-                                <th colspan="2" style="background-color: #2e6da4; color: #fff;">EXTRA-CURRICULAR ACTIVITIES</th>
+                                <th colspan="2" style="background-color: #6153a8; color: #fff;">EXTRA-CURRICULAR ACTIVITIES</th>
                             </tr>
                             <?php
                             for ($i = 0; $i < $extra_curr_activity['NO_OF_ITEMS']; $i++) {

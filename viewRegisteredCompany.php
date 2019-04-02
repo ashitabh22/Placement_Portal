@@ -28,7 +28,6 @@ WHERE company_id = '" . $company_id . "'";
     }
 }
 ?>
-<?php include('includes/templates/header2.php'); ?>
 <?php include('includes/templates/top_bar_admin.php'); ?>
 
 <body>
