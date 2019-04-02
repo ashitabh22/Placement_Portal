@@ -7,29 +7,17 @@ require_once("includes/classes/db.cls.php");
 require_once("includes/classes/sitedata.cls.php");
 $db = new SiteData();
 
-$sql = "SELECT * FROM all_jobs";
+$sql = "SELECT * FROM all_jobs INNER JOIN registered_companies WHERE registered_companies.company_id=all_jobs.company_id";
 $res = $db->getData($sql);
 ?>
 
-<?php
-if (isset($_POST['print']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
-
-
-$db = new SiteData();
-$sql = "SELECT * FROM all_jobs";
-$res = $db->getData($sql);
-
-}
-
-?>
-<?php $title = "All Jobs"; ?>
 <?php include('includes/templates/top_bar_student.php'); ?>
 
 <!--header and top bar ends here-->
 <body>
 	<div class="container">
 		<div class="row">
-			<div class="col-md-9" id="content">
+			<div class="col-md-10 col-md-offset-1" id="content">
 				<body id="content">
 					<style type="text/css">
 						.red{
@@ -68,24 +56,24 @@ $res = $db->getData($sql);
 												<div class="ex1">
 													<table class="table" id="myTable">
 														<tr>
-															<th>Company ID</th>
+															
 															<th>Company Name <button type="button" class="btn btn-default btn-xs">
 																<span class="glyphicon glyphicon-sort" aria-hidden="true"></span>
 															</button></th>
 															<th>Job Title <button type="button" class="btn btn-default btn-xs">
 																<span class="glyphicon glyphicon-sort" aria-hidden="true"></span>
 															</button></th>
+															<th>Program</th>
+															<th>Branch</th>
 															<th>Details</th>
 															
 														</tr>
 														<?php for($i = 0;$i < $res['NO_OF_ITEMS'] ;$i++){ ?>
 														<tr>
-															<td id="one"><?php echo $res['oDATA'][$i]['company_id']?></td>
-															<td id="two">Need to fetch from registered_companies table</td>
-															<td id="three"><?php echo $res['oDATA'][$i]['job_title']?></td>
-															<td style="display:none"><?php echo $res['oDATA'][$i]['branch']?></td>
-
-														
+															<td id="one"><?php echo $res['oDATA'][$i]['company_name']?></td>
+															<td id="two"><?php echo $res['oDATA'][$i]['job_title']?></td>
+															<td id="three"><?php echo $res['oDATA'][$i]['program']?></td>
+															<td id="four"><?php echo $res['oDATA'][$i]['branch']?></td>													
 															<td>
 																 <button type="button" data-toggle="modal" data-target= <?php echo "#myModal" . $i ?>>View</button>
 																
@@ -108,56 +96,52 @@ $res = $db->getData($sql);
 																					</tr>
 																					<tr>
 																						<td>1.</td>
+																						<td>Company ID</td>
+																						<td><?php echo $res['oDATA'][$i]['company_id']?></td>
+																						</td>
+																					</tr>
+																					<tr>
+																						<td>2.</td>
 																						<td>Job Description</td>
 																						<td><?php echo $res['oDATA'][$i]['job_description']?></td>
 																					</tr>
 																					<tr>
-																						<td>2.</td>
-																						<td>CGPA Requirement</td>
-																						<td><?php echo $res['oDATA'][$i]['cgpa_requireatePDF()rement']?></td>
-																					</tr>
-																					<tr>
 																						<td>3.</td>
-																						<td>Program</td>
-																						<td><?php echo $res['oDATA'][$i]['program']?></td>
-																					</tr>
+																						<td>CGPA Requirement</td>
+																						<td><?php echo $res['oDATA'][$i]['cgpa_requirement']?></td>
+																					</tr>				
 																					<tr>
 																						<td>4.</td>
-																						<td>Branch</td>
-																						<td><?php echo $res['oDATA'][$i]['branch']?></td>
-																					</tr>
-																					<tr>
-																						<td>5.</td>
 																						<td>Application Period</td>
 																						<td><?php echo $res['oDATA'][$i]['application_period']?></td>
 																					</tr>
 																					<tr>
-																						<td>6.</td>
+																						<td>5.</td>
 																						<td>Minimum Package Offered</td>
 																						<td><?php echo $res['oDATA'][$i]['min_package_offered']?></td>
 																					</tr>
 																					<tr>
-																						<td>7.</td>
+																						<td>6.</td>
 																						<td>Number of Posts</td>
 																						<td><?php echo $res['oDATA'][$i]['number_of_posts']?></td>
 																					</tr>
 																					<tr>
-																						<td>8.</td>
+																						<td>7.</td>
 																						<td>PPT Date</td>
 																						<td><?php echo $res['oDATA'][$i]['ppt_date']?></td>
 																					</tr>
 																					<tr>
-																						<td>9.</td>
+																						<td>8.</td>
 																						<td>Test Date</td>
 																						<td><?php echo $res['oDATA'][$i]['test_date']?></td>
 																					</tr>
 																					<tr>
-																						<td>10.</td>
+																						<td>9.</td>
 																						<td>Interview Date</td>
 																						<td><?php echo $res['oDATA'][$i]['interview_date']?></td>
 																					</tr>
 																					<tr>
-																						<td>11.</td>
+																						<td>10.</td>
 																						<td>Shortlisting Date</td>
 																						<td><?php echo $res['oDATA'][$i]['shortlisting_date']?></td>
 																					</tr>

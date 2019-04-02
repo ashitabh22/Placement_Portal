@@ -65,4 +65,3 @@ $res = $db->getData($sql);
             </div>
         </div>
     </div>
-    <?php include('includes/templates/footer.php'); ?> 

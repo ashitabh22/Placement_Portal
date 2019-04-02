@@ -1,11 +1,13 @@
 <!-- header begin -->
 <!DOCTYPE html>
 <html lang=en-US>
+
 <head>
     <title><?php echo $title; ?></title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="Description" content="IIT Bhilai Main Page" />
     <meta name="KeyWords" content="IIT Bhilai, Youngest IIT, Premier Engineering Institute of India, IIT Bhilai" />
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
@@ -47,7 +49,7 @@
             background-color: #dddddd;
         }
     </style>
-    </head>
+</head>
 <!-- header end -->
 <div class="topBar affix-top" id="topbar">
     <div class="container">
@@ -96,9 +98,9 @@
                 </li>
 
             </ul>
-            <ul class="nav navbar-nav navbar-right main-nav-link" id="admin_username">
+            <ul class="nav navbar-nav navbar-right username" id="username" style="color: #4a3c8d;">
                 <li>
-                    Pradeep admin
+                    <?php echo $_SESSION[SES]['uname']; ?>
                 </li>
             </ul>
         </div>

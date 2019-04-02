@@ -18,21 +18,23 @@ $sql = "SELECT company_name, company_id FROM registered_companies";
 $res = $db->getData($sql);
 
 if (isset($_POST['submit']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
-    $company = $_POST['company'];
-    $pptdate = $_POST['pptdate'];
+    $company_id = $_POST['company_id'];
+    //$pptdate = $_POST['pptdate'];
 
-    $name = strval(strval($company) . '_' . strval($pptdate));
-    $alter_table = "ALTER TABLE ppt_list ADD `" . $name . "` VARCHAR(40)";
+    //$name = strval(strval($company) . '_' . strval($pptdate));
+    //$alter_table = "ALTER TABLE ppt_list ADD `" . $name . "` VARCHAR(40)";
 
-    if (mysql_query($alter_table)) {
+    //if (mysql_query($alter_table)) {
         redirect('pptList.php');
-    } else {
-        die(mysql_error());
-    }
+    //} else {
+     //   die(mysql_error());
+   // }
 }
 
 ?>
 
+
+<?php include('includes/templates/header2.php'); ?>
 <?php include('includes/templates/top_bar_admin.php'); ?>
 
 <!-- <body> -->
@@ -80,12 +82,12 @@ if (isset($_POST['submit']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                                                         <div class="col-md-2 col-xs-2">
                                                         </div>
                                                         <div class="col-md-8 col-xs-8">
-                                                            <form name="myform" method="POST" action="">
+                                                            <form name="myform" method="POST" action="pptList.php">
                                                                 <label for="PPT date">Company &nbsp &nbsp</label>
-                                                                <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="company">
+                                                                <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="company_id">
                                                                     <option selected>Choose...</option>
                                                                     <?php for ($i = 0; $i < ($res['NO_OF_ITEMS']); $i++) { ?>
-                                                                    <option value=<?php echo $res['oDATA'][$i]['company_name'] ?>><?php echo $res['oDATA'][$i]['company_name'] ?></option>
+                                                                    <option value=<?php echo $res['oDATA'][$i]['company_id'] ?>><?php echo $res['oDATA'][$i]['company_name'] ?></option>
                                                                     <?php 
                                                                 } ?>
                                                                 </select>
@@ -93,8 +95,8 @@ if (isset($_POST['submit']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                                                                 <br>
                                                                 <br>
 
-                                                                <label for="PPT date">Date &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp</label>
-                                                                <input type="date" name="pptdate" id="pptdate">
+                                                                <!-- <label for="PPT date">Date &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp</label> -->
+                                                                <!-- <input type="date" name="pptdate" id="pptdate"> -->
                                                                 <br>
                                                                 <br>
                                                                 <br>

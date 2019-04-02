@@ -7,54 +7,47 @@ require_once("includes/classes/db.cls.php");
 require_once("includes/classes/sitedata.cls.php");
 
 $db = new SiteData();
-
-if(!is_admin()){
-    redirect("new_login.php");
-}
-
 $sql = "SELECT * FROM all_jobs";
+
 $res = $db->getData($sql);
+$sql1 = "SELECT company_name FROM registered_companies";
+$result = $db->getData($sql1);
+
 
 if (isset($_POST['submit']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
 
-    $id = $_POST['Company_Id'];
-    // $name = $_POST['Company_name'];
+    $name = $_POST['Company_Name'];
     $title = $_POST['Job_Title'];
     $des = $_POST['Job_Description'];
     $cgpa = $_POST['CGPA_Requirement'];
-    $program = $_POST['Program'];
+
     $branch = $_POST['Branch'];
     $app_period = $_POST['Application_Period'];
     $package = $_POST['Minimum_Package_Offered'];
-    $posts = $_POST['No_of_Posts'];
+
     $pptdate = $_POST['ppt_date'];
     $test = $_POST['test_date'];
     $interview = $_POST['interview_date'];
     $shortlist = $_POST['shortlist_date'];
     $year = $_POST['academic_year'];
-    $sql2 = "SELECT * FROM " . REGISTERED_COMPANIES;
-    $res2 = $db->getData($sql2);
-    $company_exists = false;
-    for ($i = 0; $i < $res2['NO_OF_ITEMS']; $i++) {
-        if ($res2['oDATA'][$i]['company_id'] == $id) {
-            $company_exists = true;
-        }
-    }
-    if (!$company_exists) {
-        echo "<script>alert('compnay id does not exitst')</script>";
+    foreach ($_POST['Program'] as $value) {
+        echo $value;
+        $query = "INSERT INTO all_jobs ( company_name , job_title , job_description,cgpa_requirement, program, branch ,application_period, min_package_offered , ppt_date, test_date, interview_date, shortlisting_date ,academic_year) 
+    VALUES ( '$name' , '$title' , '$des' ,'$cgpa' , '$value', '$branch', '$app_period', '$package' , '$pptdate', '$test', '$interview', '$shortlist', '$year') ";
+        // echo $query;
+        /*if (mysql_query($query)) {
         redirect('postJobs.php');
-    }
-    $query = "INSERT INTO all_jobs (company_id , job_title , job_description,cgpa_requirement, program, branch ,application_period, min_package_offered , number_of_posts, ppt_date, test_date, interview_date, shortlisting_date ,academic_year)
-VALUES ('$id', '$title' , '$des' ,'$cgpa' , '$program', '$branch', '$app_period', '$package' , '$posts', '$pptdate', '$test', '$interview', '$shortlist', '$year') ";
-
-    if (mysql_query($query)) {
-        redirect('postedJobs.php');
     } else {
         die(mysql_error());
+    }*/
     }
 }
+include('includes/templates/top_bar_admin.php');
 ?>
-<?php include('includes/templates/top_bar_admin.php'); ?>
+<!-- to include multipe select picker -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.8.1/css/bootstrap-select.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.8.1/js/bootstrap-select.js"></script>
+<!-- end -->
 
 <!--header and top bar ends here-->
 
@@ -83,19 +76,22 @@ VALUES ('$id', '$title' , '$des' ,'$cgpa' , '$program', '$branch', '$app_period'
 
 
 
-                                            <div class="form-group">
-                                                <label>
-                                                    <b style="color:red;">*</b>Company Id
-                                                </label>
-                                                <input type="text" class="form-control" placeholder="Enter Company ID" name="Company_Id" required />
 
-                                            </div>
-                                            <!-- <div class="form-group">
+                                            <div class="form-group">
                                                 <label>
                                                     <b style="color:red;">*</b>Company Name
                                                 </label>
-                                                <input type="text" class="form-control" placeholder="Enter Company Name" name="Company_name" required />
-                                            </div> -->
+
+                                                <select name="Company_Name" class="selectpicker" data-live-search = "true" required>
+                                                    <option>Select a Company Name</option>
+                                                    <?php
+
+                                                    for ($i = 0; $i < $result['NO_OF_ITEMS']; $i++) {
+                                                        echo "<option > " . $result['oDATA'][$i]['company_name'] . " </option>";
+                                                    } ?>
+                                                </select>
+
+                                            </div>
                                             <div class="form-group">
                                                 <label>
                                                     <b style="color:red;">*</b>Job Title
@@ -106,31 +102,39 @@ VALUES ('$id', '$title' , '$des' ,'$cgpa' , '$program', '$branch', '$app_period'
                                                 <label>
                                                     <b style="color:red;">*</b>Job Description
                                                 </label>
-                                                <input type="tex" class="form-control" placeholder="Enter Job Description" name="Job_Description" required />
+                                                <input type="text" class="form-control" placeholder="Enter Job Description" name="Job_Description" required />
                                             </div>
                                             <div class="form-group">
                                                 <label>
                                                     <b style="color:red;">*</b>CGPA Requirement
                                                 </label>
-                                                <input type="text" class="form-control" placeholder="Enter CGPA Requirement" name="CGPA_Requirement" required />
+                                                <input type="number" min="0" step="any" class="form-control" placeholder="Enter CGPA Requirement" name="CGPA_Requirement" required />
                                             </div>
                                             <div class="form-group">
                                                 <label>
                                                     <b style="color:red;">*</b>Program
                                                 </label>
-                                                <input type="text" class="form-control" placeholder="Enter Program" name="Program" required />
+                                                <select name="Program" class="selectpicker" multiple data-live-search="true" required>
+                                                    <option value="B.Tech">B.Tech</option>
+                                                    <option value="M.Tech">M.Tech</option>
+                                                    <option value="PhD">PhD</option>
+
+                                                </select>
                                             </div>
                                             <div class="form-group">
                                                 <label>
                                                     <b style="color:red;">*</b>Branch
                                                 </label>
-                                                <input type="text" class="form-control" placeholder="Enter Branch" name="Branch" required />
+                                                <select name="Branch" class="selectpicker" multiple data-live-search="true" required>
+                                                    <option value="EECS">EECS</option>
+                                                    <option value="ME">ME</option>
+                                                </select>
                                             </div>
                                             <div class="form-group">
                                                 <label>
-                                                    <b style="color:red;">*</b>Application Period
+                                                    Application Period
                                                 </label>
-                                                <input type="date" name="Application_Period" id="interviewdate" required>
+                                                <input type="date" name="Application_Period" id="interviewdate">
                                             </div>
                                             <div class="form-group">
                                                 <label>
@@ -140,44 +144,38 @@ VALUES ('$id', '$title' , '$des' ,'$cgpa' , '$program', '$branch', '$app_period'
                                             </div>
                                             <div class="form-group">
                                                 <label>
-                                                    <b style="color:red;">*</b>Number of Posts
+                                                    PPT Date
                                                 </label>
-                                                <input type="text" class="form-control" placeholder="Enter Number of Posts" name="No_of_Posts" required />
+                                                <input type="date" name="ppt_date" id="pptdate">
                                             </div>
                                             <div class="form-group">
                                                 <label>
-                                                    <b style="color:red;">*</b> PPT Date
+                                                    Shortlisting Date
                                                 </label>
-                                                <input type="date" name="ppt_date" id="pptdate" required>
+                                                <input type="date" name="shortlist_date" id="shortlistdate">
                                             </div>
                                             <div class="form-group">
                                                 <label>
-                                                    <b style="color:red;">*</b>Test Date
+                                                    Test Date
                                                 </label>
-                                                <input type="date" name="test_date" id="testdate" required>
+                                                <input type="date" name="test_date" id="testdate">
                                             </div>
                                             <div class="form-group">
                                                 <label>
-                                                    <b style="color:red;">*</b> Interview Date
-                                                    <input type="date" name="interview_date" id="interviewdate" required>
+                                                    Interview Date
+                                                    <input type="date" name="interview_date" id="interviewdate">
                                             </div>
                                             <div class="form-group">
                                                 <label>
-                                                    <b style="color:red;">*</b>Shortlisting Date
+                                                    Academic-Year
                                                 </label>
-                                                <input type="date" name="shortlist_date" id="shortlistdate" required>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>
-                                                    <b style="color:red;">*</b>Academic-Year
-                                                </label>
-                                                <input type="text" class="form-control" placeholder="Enter Academic Year" name="academic_year" id="academic_year" required>
+                                                <input type="number" min="0" step="any" class="form-control" placeholder="Enter Academic Year" name="academic_year" id="academic_year">
                                             </div>
 
                                             <hr />
                                             <div class="form-group">
                                                 <button type="submit" class="btn btn-primary" id="btn-login" name="submit">
-                                                    <span class="glyphicon glyphicon-log-in"></span> &nbsp; Register
+                                                    <span class="glyphicon glyphicon-log-in"></span> &nbsp; Post
                                                 </button>
                                             </div>
                                         </form>
@@ -193,8 +191,7 @@ VALUES ('$id', '$title' , '$des' ,'$cgpa' , '$program', '$branch', '$app_period'
 
                 </body>
             </div>
+
         </div>
     </div>
-
-</body>
-<!--footer section starts here--> 
+</body> 

@@ -36,7 +36,7 @@ if (is_admin()) {
                         <center><img height="150x" src="images/75.png"></center>
                     </h2>
                     <hr />
-                    <div style="text-align: center; margin-bottom: 20px; padding: 5px 0 5px 0; background-color: #1179b3; border-radius: 5px; color: #fff;">Login Here</div>
+                    <div style="text-align: center; margin-bottom: 20px; padding: 5px 0 5px 0; background-color: #4a3c8d ; border-radius: 5px; color: #fff;">Login Here</div>
                     <center>
                         <p>
                             <?php

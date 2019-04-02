@@ -88,9 +88,9 @@
                     </ul>
                 </li>
             </ul>
-            <ul class="nav navbar-nav navbar-right main-nav-link" id="student_username">
+            <ul class="nav navbar-nav navbar-right" id="username" style="color: #4a3c8d;">
                 <li>
-                    pradeep Kumar
+                    <?php echo $_SESSION[SES]['uname']; ?>
                 </li>
             </ul>
         </div>
