@@ -81,7 +81,9 @@ if (isset($_POST['submit_changes']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                                                         <thead>
                                                             <tr>
                                                                 <th>ROLL NO</th>
-                                                                <th>POST ID</th>
+                                                                <th>Name</th>
+                                                                <th>Company Name</th>
+                                                                <th>Job Title</th>
                                                                 <th>Status</th>
                                                                 <th></th>
                                                             </tr>
@@ -91,7 +93,27 @@ if (isset($_POST['submit_changes']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                                                             <tr>
                                                                 <form method="post">
                                                                     <td><input type="hidden" name="ldapid" value= <?php echo $res['oDATA'][$i]['ldapid'] ?> ><?php echo $res['oDATA'][$i]['ldapid'] ?></td>
-                                                                    <td><input type="hidden" name="post_id" value= <?php echo $res['oDATA'][$i]['post_id'] ?> ><?php echo $res['oDATA'][$i]['post_id'] ?></td>
+                                                                    
+                                                                    
+                                                                    <?php $post_id =$res['oDATA'][$i]['post_id'];
+                                                                            $query2 = "SELECT * FROM posted_jobs_B_P WHERE post_id = ' " . $post_id . " ' " ; 
+                                                                            $res2 = $db->getData($query2);
+
+                                                                            $company_id=$res2['oDATA'][0]['company_id'];
+                                                                            $query3 = "SELECT * FROM registered_companies WHERE company_id = ' " . $company_id . " ' " ; 
+                                                                            $res3 = $db->getData($query3);
+
+                                                                            $ldap_id=$res['oDATA'][$i]['ldapid'];
+                                                                            $query4 = "SELECT * FROM personal_details WHERE ldapid = ' " . $ldap_id . " ' " ; 
+                                                                            $res4 = $db->getData($query4);
+                                                                            
+                                                                            $query5 = "SELECT * FROM all_jobs WHERE company_id = ' " . $company_id . " ' " ; 
+                                                                            $res5 = $db->getData($query5);
+
+                                                                    ?> <td><input type="hidden" name="post_id" value= <?php echo $res['oDATA'][$i]['post_id'] ?> ><?php echo $res4['oDATA'][$i]['name'] ?></td>
+                                                                    
+                                                                    <td><?php echo $res3['oDATA'][0]['company_name'] ?></td>
+                                                                    <td><?php echo $res5['oDATA'][0]['job_title'] ?></td>
                                                                     <td>
                                                                         <div class="col-auto my-1">
                                                                             <label for="Status"> &nbsp &nbsp &nbsp &nbsp

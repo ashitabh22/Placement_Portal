@@ -7,8 +7,9 @@ require_once("includes/classes/db.cls.php");
 require_once("includes/classes/sitedata.cls.php");
 $db = new SiteData();
 
-$sql = "SELECT * FROM all_jobs INNER JOIN registered_companies WHERE registered_companies.company_id=all_jobs.company_id";
+$sql = "SELECT * FROM all_jobs INNER JOIN registered_companies ON registered_companies.company_id=all_jobs.company_id  INNER JOIN posted_jobs_B_P ON posted_jobs_B_P.company_id=all_jobs.company_id INNER JOIN program ON  posted_jobs_B_P.program_code=program.p_code INNER JOIN branch ON posted_jobs_B_P.branch_code=branch.b_code"  ;
 $res = $db->getData($sql);
+
 ?>
 
 <?php include('includes/templates/top_bar_student.php'); ?>
@@ -57,12 +58,12 @@ $res = $db->getData($sql);
 													<table class="table" id="myTable">
 														<tr>
 															
-															<th>Company Name <button type="button" class="btn btn-default btn-xs">
-																<span class="glyphicon glyphicon-sort" aria-hidden="true"></span>
-															</button></th>
-															<th>Job Title <button type="button" class="btn btn-default btn-xs">
-																<span class="glyphicon glyphicon-sort" aria-hidden="true"></span>
-															</button></th>
+															<th>Company Name 
+																
+															</th>
+															<th>Job Title
+																
+															</th>
 															<th>Program</th>
 															<th>Branch</th>
 															<th>Details</th>
@@ -72,8 +73,8 @@ $res = $db->getData($sql);
 														<tr>
 															<td id="one"><?php echo $res['oDATA'][$i]['company_name']?></td>
 															<td id="two"><?php echo $res['oDATA'][$i]['job_title']?></td>
-															<td id="three"><?php echo $res['oDATA'][$i]['program']?></td>
-															<td id="four"><?php echo $res['oDATA'][$i]['branch']?></td>													
+															<td id="three"><?php echo $res['oDATA'][$i]['p_name']?></td>
+															<td id="four"><?php echo $res['oDATA'][$i]['b_name']?></td>													
 															<td>
 																 <button type="button" data-toggle="modal" data-target= <?php echo "#myModal" . $i ?>>View</button>
 																
@@ -119,11 +120,6 @@ $res = $db->getData($sql);
 																						<td>5.</td>
 																						<td>Minimum Package Offered</td>
 																						<td><?php echo $res['oDATA'][$i]['min_package_offered']?></td>
-																					</tr>
-																					<tr>
-																						<td>6.</td>
-																						<td>Number of Posts</td>
-																						<td><?php echo $res['oDATA'][$i]['number_of_posts']?></td>
 																					</tr>
 																					<tr>
 																						<td>7.</td>
@@ -184,7 +180,7 @@ $res = $db->getData($sql);
 				<script>
 				function myFunction() {
 				table = document.getElementById("newtable");
-				var input, filter, table, tr, td, i, txtValue;
+				var input, filter, table, tr,  td1,td2,td3,td4, i, txtValue1,txtValue2, txtValue3 , txtValue4;
 				input = document.getElementById("searchcomp");
 				filter = input.value.toUpperCase();
 				table = document.getElementById("myTable");
@@ -192,27 +188,24 @@ $res = $db->getData($sql);
 				
 				for (i = 0; i < tr.length; i=i+1)
 				{
+					if((i-1)%11==0)
+				{
 				td1 = tr[i].getElementsByTagName("td")[0];
 				td2 = tr[i].getElementsByTagName("td")[1];
-				td5 = tr[i].getElementsByTagName("td")[2];
-				if((i-1)%13==0)
-				{
-					td3 = tr[i+5].getElementsByTagName("td")[2];
-					td4 = tr[i+4].getElementsByTagName("td")[2];
-				}
+				td3 = tr[i].getElementsByTagName("td")[2];
+				td4 = tr[i].getElementsByTagName("td")[3];
+				console.log(td1);
 				
-				console.log(td2);
-				
-				if (td1||td2) {
+				if (td1||td2||td3||td4) {
 				txtValue1 = td1.textContent || td1.innerText;
 				txtValue2 = td2.textContent || td2.innerText;
-				txtValue5 = td5.textContent || td5.innerText;
-				
-				if((i-1)%13==0)
-				{
 				txtValue3 = td3.textContent || td3.innerText;
 				txtValue4 = td4.textContent || td4.innerText;
-				if (txtValue1.toUpperCase().indexOf(filter) > -1 || txtValue2.toUpperCase().indexOf(filter) > -1||txtValue3.toUpperCase().indexOf(filter) > -1 ||txtValue4.toUpperCase().indexOf(filter) > -1 ||txtValue5.toUpperCase().indexOf(filter) > -1 )  {
+				
+				
+				
+				
+				if (txtValue1.toUpperCase().indexOf(filter) > -1 || txtValue2.toUpperCase().indexOf(filter) > -1||txtValue3.toUpperCase().indexOf(filter) > -1 ||txtValue4.toUpperCase().indexOf(filter) > -1 )  {
 				tr[i].style.display = "";
 				} else {
 				tr[i].style.display = "none";
