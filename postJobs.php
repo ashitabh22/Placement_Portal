@@ -20,17 +20,16 @@ $sql4 = "SELECT * FROM posted_jobs_B_P";
 $result3 = $db->getData($sql4);
 
 
-
-
-
 if (isset($_POST['submit']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
 
+    
+    
     $id = $_POST['Company_Id'];
     $title = $_POST['Job_Title'];
     $des = $_POST['Job_Description'];
     $cgpa = $_POST['CGPA_Requirement'];
     $program = $_POST['Program'];
-    $branch = $_POST['Branch'];
+   // $branch = $_POST['Branch'];
     $app_period = $_POST['Application_Period'];
     $package = $_POST['Minimum_Package_Offered'];
     $pptdate = $_POST['ppt_date'];
@@ -40,19 +39,57 @@ if (isset($_POST['submit']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     $year = $_POST['academic_year'];
 
 
-    foreach ($_POST['Branch'] as $value) {
-        // echo $value;
+    // $q7 = "select * from program where p_code='$program'";
+    // $comp_info5 = $db->getData($q7);
+    // pr($comp_info5);
+   
+    // $program_code = $comp_info5['oDATA'][0]['p_code'];
+    echo $_POST['Branch'];
+
+
+
+        foreach ($_POST['Branch'] as $value ) {
+            
+        
+           // $branch_code = $db->getData("select * from branch where b_name='$value'")['oDATA'][0]['b_code'];
+
+
+            $q9 = "select * from posted_jobs_B_P where company_id='$id' AND program_code= '$program' AND branch_code = '$value'";
+            $posted = $db->getData($q9);
+
+            if(intval($posted['NO_OF_ITEMS'])!=0){
+
+               
+                
+                echo "<script type='text/javascript'>
+               alert('Job already present!');
+                </script>";
+               }
+            
+            else{
+           
+           
             $query2="INSERT INTO posted_jobs_B_P (company_id, branch_code, program_code) VALUES ('$id','$value','$program')";
             mysql_query($query2);
+
+            $q10 = "select * from all_jobs where company_id='$id'";
+            $all_jobs= $db->getData($q10);
+            
+            if(intval($all_jobs['NO_OF_ITEMS'])==0){
+            $query = "INSERT INTO all_jobs ( company_id , job_title , job_description,cgpa_requirement ,application_period, min_package_offered , ppt_date, test_date, interview_date, shortlisting_date ,academic_year) VALUES ( '$id' , '$title' ,'$des' , '$cgpa' , '$app_period', '$package' , '$pptdate', '$test', '$interview', '$shortlist', '$year')";
+            mysql_query($query);    
         }
-    $query = "INSERT INTO all_jobs ( company_id , job_title , job_description,cgpa_requirement ,application_period, min_package_offered , ppt_date, test_date, interview_date, shortlisting_date ,academic_year) VALUES ( '$id' , '$title' ,'$des' , '$cgpa' , '$app_period', '$package' , '$pptdate', '$test', '$interview', '$shortlist', '$year')";
+           
+                redirect('PostedJobs.php');
     
-    if (mysql_query($query)) {
-        redirect('postedJobs.php');
-    } else {
-        die(mysql_error());
+        
+            }
+        }
+       
+
+
     }
-}
+
 include('includes/templates/top_bar_admin.php');
 ?>
 
@@ -166,7 +203,7 @@ include('includes/templates/top_bar_admin.php');
                                                 <label>
                                                     <b style="color:red;">*</b>Branch
                                                 </label>
-                                                <select name="Branch" class="selectpicker" multiple data-live-search="true" required>
+                                                <select name="Branch[]" class="selectpicker" multiple data-live-search="true" required>
 
                                                     <?php
 

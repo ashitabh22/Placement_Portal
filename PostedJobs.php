@@ -211,9 +211,7 @@ if (isset($_POST['delete']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
 																														</table>
 																													</div>
 																													<div class="modal-footer">
-																														<a href="AppliedStudents.php">
-																															<button type="button" name="abc">View Applied Students</button>
-																														</a>
+																							
 																														<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 																													</div>
 																												</div>
@@ -228,7 +226,7 @@ if (isset($_POST['delete']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
 																														</td>
 
 																														<td>
-																															<form method="post" action="editJobs.php">
+																															<form method="post" action="editjobs.php">
 
 																																<button type="submit" value="<?php echo $res['oDATA'][$i]['post_id'] ?>" name="edit">Edit</button>
 																															</form>

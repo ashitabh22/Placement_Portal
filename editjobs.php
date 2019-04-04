@@ -47,8 +47,10 @@ $comp_info4 = $db->getData($q6);
 
 if (isset($_POST['submit']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     
-
-// echo $GLOBALS['post_id'];
+//     global $company_id;
+//     echo $company_id;
+//    die();
+// // echo $GLOBALS['post_id'];
    $post_id = $_POST['post_id'];
 
     $id = $_POST['submit'];
@@ -77,32 +79,66 @@ if (isset($_POST['submit']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     $comp_info6 = $db->getData($q8);
     $branch_code = $comp_info6['oDATA'][0]['b_code'];
     
-
+    $q9 = "select * from posted_jobs_B_P where company_id='$id' AND program_code= '$program_code' AND branch_code = '$branch_code'";
+    $posted = $db->getData($q9);
    
-
-    $query2="UPDATE posted_jobs_B_P SET branch_code='$branch_code', program_code='$program_code' WHERE post_id='$post_id'";
-    mysql_query($query2);
-   
-
-    $query = "UPDATE all_jobs SET 
-                    job_title='$title' 
-                    , job_description='$des'
-                    , cgpa_requirement='$cgpa'
-                    , application_period='$app_period'
-                    , min_package_offered='$package'
-                    , ppt_date='$ppt_date'
-                    , test_date='$test'
-                    , interview_date='$interview'
-                    , shortlisting_date='$shortlist'
-                    , academic_year='$year'
-                     WHERE company_id='$id'";
-
-    if (mysql_query($query)) {
-        redirect('postedjobs.php');
-    } else {
-        echo "error:";
-        die(mysql_error());
     
+    // $present =false;
+
+    // for ($i = 0; $i < $posted['NO_OF_ITEMS']; $i++) {
+
+    //     if($program_code == $posted['oDATA'][$i]['program_code'] && $branch_code == $posted['oDATA'][$i]['branch_code']){
+    //        $present = true;
+    //     }  
+    // } 
+
+
+   if(intval($posted['NO_OF_ITEMS'])!=0){
+
+    echo "<script type='text/javascript'>
+   alert('Job already present!');
+
+    </script>";
+    ?>
+    <form method="post" action="editjobs.php">
+        <button name="edit" value=<?php echo $post_id ?> id = "btn_sub"> 
+    </form>
+    <script>
+        document.getElementById("btn_sub").click();
+    </script>
+
+    <?php 
+
+
+   }
+
+    else{
+
+        $query2="UPDATE posted_jobs_B_P SET branch_code='$branch_code', program_code='$program_code' WHERE post_id='$post_id'";
+        mysql_query($query2);
+    
+
+        $query = "UPDATE all_jobs SET 
+                        job_title='$title' 
+                        , job_description='$des'
+                        , cgpa_requirement='$cgpa'
+                        , application_period='$app_period'
+                        , min_package_offered='$package'
+                        , ppt_date='$ppt_date'
+                        , test_date='$test'
+                        , interview_date='$interview'
+                        , shortlisting_date='$shortlist'
+                        , academic_year='$year'
+                        WHERE company_id='$id'";
+
+        if (mysql_query($query)) {
+            redirect('PostedJobs.php');
+        } else {
+            echo "error:";
+            die(mysql_error());
+        
+        }
+
     }
 }
 include('includes/templates/top_bar_admin.php');
@@ -176,7 +212,7 @@ include('includes/templates/top_bar_admin.php');
                                                     <?php
                                                     for ($i = 0; $i < $result2['NO_OF_ITEMS']; $i++) {
 
-                                                        if($result2['oDATA'][$i]['name']==$comp_info3['oDATA'][0]['p_name']){
+                                                        if($result2['oDATA'][$i]['p_name']==$comp_info3['oDATA'][0]['p_name']){
                                                         echo "<option selected  > " . $result2['oDATA'][$i]['p_name'] . " </option>";
                                                         }
                                                         else

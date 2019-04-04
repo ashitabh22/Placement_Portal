@@ -59,3 +59,10 @@ background: #888;
 ::-webkit-scrollbar-thumb:hover {
 background: #555;
 }
+
+
+#total
+{
+	float:right;
+	font-size:20px; 
+}
