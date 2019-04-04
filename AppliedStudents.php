@@ -7,14 +7,20 @@ require_once("includes/classes/db.cls.php");
 require_once("includes/classes/sitedata.cls.php");
 
 $db = new SiteData();
-$sql = "SELECT * FROM applied_students";
+$sql = "SELECT * FROM ".APPLICABLE_JOBS.",".STATUS." WHERE ".STATUS.".code=".APPLICABLE_JOBS.".status";
 $res = $db->getData($sql);
+$sql1 = "SELECT * FROM ".STATUS;
+$res1 = $db->getData($sql1);
 
 if (isset($_POST['submit_changes']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     $ldap_id = $_POST['ldapid'];
+    // echo $ldap_id;
+    // die();
     $job_status = intval($_POST['job_status']);
+    
     $post_id = $_POST['post_id'];
-    $query = "UPDATE applied_students SET status = " . $job_status . " WHERE ldapid = '" . $ldap_id . "' AND post_id = '".$post_id."'";
+    
+    $query = "UPDATE ".APPLICABLE_JOBS." SET status = " . $job_status . " WHERE ldapid = '" . $ldap_id . "' AND post_id = '".$post_id."'";
     if (mysql_query($query)) {
         redirect('AppliedStudents.php');
     } else {
@@ -67,40 +73,8 @@ if (isset($_POST['submit_changes']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                                                 <div class="col-md-3 col-xs-6 col-sm-3">
                                                     <input type="text" placeholder="Search by Name" id="searchppt">
                                                 </div>
-                                                <div class="col-md-5 col-xs-6 col-sm-5">
-                                                    <div class="form-row align-items-center">
-                                                        <div class="col-auto my-1">
-                                                            <label for="Status"> &nbsp &nbsp &nbsp Filter by Status
-                                                                &nbsp &nbsp </label>
-                                                            <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
-                                                                <option value="Shortlisted">Shortlisted </option>
-                                                                <option value="Not Shortlisted">Not Shortlisted</option>
-                                                                <option value="Test Cleared">Test Cleared</option>
-                                                                <option value="Test Failed">Test Failed</option>
-                                                                <option value="Selected for interview">Selected for interview</option>
-                                                                <option value="Job Cleared">Job Cleared</option>
-                                                                <option value="Rejected from Job">Rejected from Job</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-3 col-xs-6 col-sm-3">
-                                                    <div class="form-row align-items-center">
-                                                        <div class="col-auto my-1">
-                                                            <label for="PPT date"> &nbsp &nbsp &nbsp Sort Branch
-                                                                Wise &nbsp &nbsp </label>
-                                                            <select name="drop_down" class="custom-select mr-sm-2" id="inlineFormCustomSelect">
-                                                                <option selected>Sort Branch Wise</option>
-                                                                <option value="1">B.Tech CSE</option>
-                                                                <option value="2">B.Tech ME</option>
-                                                                <option value="3">B.Tech EE</option>
-                                                                <option value="1">M.Tech CSE</option>
-                                                                <option value="2">M.Tech ME</option>
-                                                                <option value="3">M.Tech EE</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                
+                                                
                                                 <br>
                                                 <div class="ex1">
                                                     <table class="table" id="stdlist">
@@ -124,20 +98,20 @@ if (isset($_POST['submit_changes']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                                                                                 &nbsp </label>
                                                                             <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="job_status">
 
-                                                                                <option value="4" <?php if ($res['oDATA'][$i]['status'] == '4') echo  "selected = 'selected'" ?>>Applied </option>
-                                                                                <option value="5" <?php if ($res['oDATA'][$i]['status'] == '5') echo  "selected = 'selected'" ?>>Shortlisted </option>
-                                                                                <option value="6" <?php if ($res['oDATA'][$i]['status'] == '6') echo  "selected = 'selected'" ?>>Not Shortlisted</option>
-                                                                                <option value="7" <?php if ($res['oDATA'][$i]['status'] == '7') echo  "selected = 'selected'" ?>>Test Cleared</option>
-                                                                                <option value="8" <?php if ($res['oDATA'][$i]['status'] == '8') echo  "selected = 'selected'" ?>>Test Failed</option>
-                                                                                <option value="9" <?php if ($res['oDATA'][$i]['status'] == '9') echo  "selected = 'selected'" ?>>Selected for interview</option>
-                                                                                <option value="10" <?php if ($res['oDATA'][$i]['status'] == '10') echo  "selected = 'selected'" ?>>Job Cleared</option>
-                                                                                <option value="11" <?php if ($res['oDATA'][$i]['status'] == '11') echo  "selected = 'selected'" ?>>Rejected from Job</option>
+                                                                            <option><?php echo $res['oDATA'][$i]['status_name'] ?></option>
+                                                                                <?php
+
+                                                                                for ($i = 5; $i < $res1['NO_OF_ITEMS']; $i++) {
+
+                                                                                    
+                                                                                    echo "<option value=".$res1['oDATA'][$i]['code']."  > " . $res1['oDATA'][$i]['status_name'] . " </option>";
+                                                                                } ?>
                                                                             </select>
                                                                         </div>
                                                                     </td>
                                                                     <td>
                                                                         <div class="save">
-                                                                            <button type="submit" value="<?php echo $res['oDATA'][$i]['ldap'] ?>" name="submit_changes" id="save_changes">Save
+                                                                            <button type="submit" value="<?php echo $res['oDATA'][$i]['ldapid'] ?>" name="submit_changes" id="save_changes">Save
                                                                                 Changes
                                                                             </button>
                                                                         </div>

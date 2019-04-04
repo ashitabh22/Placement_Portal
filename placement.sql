@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 02, 2019 at 05:34 PM
+-- Generation Time: Apr 04, 2019 at 01:53 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 5.6.40
 
@@ -92,9 +92,16 @@ INSERT INTO `achievement_details` (`slno`, `ldapid`, `achievement`, `year`) VALU
 
 CREATE TABLE `applicable_jobs` (
   `ldapid` int(8) DEFAULT NULL,
-  `has_applied` int(11) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
   `post_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `applicable_jobs`
+--
+
+INSERT INTO `applicable_jobs` (`ldapid`, `status`, `post_id`) VALUES
+(11640680, 5, 2);
 
 -- --------------------------------------------------------
 
@@ -278,29 +285,21 @@ INSERT INTO `positions_of_responsibility_details` (`slno`, `ldapid`, `position_h
 --
 
 CREATE TABLE `ppt_list` (
-  `ldapid` varchar(30) NOT NULL,
-  `c4_2019-03-30` int(11) NOT NULL,
-  `DEF_2019-03-18` varchar(40) DEFAULT NULL,
-  `DEF_2019-03-19` varchar(40) DEFAULT NULL,
-  `DEF_2019-03-31` varchar(40) DEFAULT NULL,
-  `DEF_2019-03-15` varchar(40) DEFAULT NULL,
-  `IJK_2019-04-01` varchar(40) DEFAULT NULL,
-  `KLM_2019-04-16` varchar(40) DEFAULT NULL,
-  `IJK_2019-04-23` varchar(40) DEFAULT NULL,
-  `IJK_2019-04-19` varchar(40) DEFAULT NULL
+  `ldapid` int(8) NOT NULL,
+  `ppt_date` date NOT NULL,
+  `company_id` int(30) NOT NULL,
+  `attendance` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `ppt_list`
 --
 
-INSERT INTO `ppt_list` (`ldapid`, `c4_2019-03-30`, `DEF_2019-03-18`, `DEF_2019-03-19`, `DEF_2019-03-31`, `DEF_2019-03-15`, `IJK_2019-04-01`, `KLM_2019-04-16`, `IJK_2019-04-23`, `IJK_2019-04-19`) VALUES
-('31900020', 0, '0', '1', '1', '1', '0', NULL, NULL, NULL),
-('31900110', 0, '0', '0', '1', '1', '1', NULL, NULL, NULL),
-('41800060', 1, '1', '1', '1', '1', '0', NULL, NULL, NULL),
-('41800070', 1, '0', '0', '1', '1', '0', NULL, NULL, NULL),
-('61900020', 1, '1', '1', '1', '1', '0', NULL, NULL, NULL),
-('91600070', 0, '1', '0', '0', '1', '0', NULL, NULL, NULL);
+INSERT INTO `ppt_list` (`ldapid`, `ppt_date`, `company_id`, `attendance`) VALUES
+(41800060, '2019-04-03', 7, 0),
+(61900020, '2019-04-03', 7, 0),
+(11640680, '2019-04-03', 7, 0),
+(31900110, '2019-04-03', 7, 0);
 
 -- --------------------------------------------------------
 
@@ -544,12 +543,6 @@ ALTER TABLE `placement_status`
 ALTER TABLE `positions_of_responsibility_details`
   ADD PRIMARY KEY (`slno`),
   ADD KEY `ldapid` (`ldapid`);
-
---
--- Indexes for table `ppt_list`
---
-ALTER TABLE `ppt_list`
-  ADD PRIMARY KEY (`ldapid`);
 
 --
 -- Indexes for table `project_details`

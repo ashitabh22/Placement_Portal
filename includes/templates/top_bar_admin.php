@@ -88,9 +88,9 @@
                         <li>
                             <a href="AppliedStudents.php">Applied Students</a>
                         </li>
-                        <li>
+                        <!-- <li>
                             <a href="pptList.php">Pre-Placement List</a>
-                        </li>
+                        </li> -->
                         <li>
                             <a href="ppt.php">PPT Attendence</a>
                         </li>

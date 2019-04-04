@@ -9,6 +9,7 @@ require_once("includes/classes/sitedata.cls.php");
 require_once 'includes/library/dompdf/autoload.inc.php';
 $db = new SiteData();
 
+
 if (isset($_GET['uid'])) {
     
     $uid = base64_decode($_GET['uid']);

@@ -16,5 +16,9 @@
 	define('REGISTERED_COMPANIES', 'registered_companies');
 	define('PERSONAL_DETAILS', 'personal_details');
 	define('APPLIED_STUDENTS', 'applied_students');
+	define('PPT_LIST', 'ppt_list');
+	define('POSTED_JOBS_B_P', 'posted_jobs_b_p');
+	define('BRANCH', 'branch');
+	define('PROGRAM', 'program');
 
 ?>
