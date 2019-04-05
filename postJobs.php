@@ -16,12 +16,14 @@ $sql2 = "SELECT * FROM program";
 $result1 = $db->getData($sql2);
 $sql3 = "SELECT * FROM branch";
 $result2 = $db->getData($sql3);
-$sql4 = "SELECT * FROM posted_jobs_B_P";
-$result3 = $db->getData($sql4);
-
+//$sql4 = "SELECT * FROM posted_jobs_B_P";
+//$result3 = $db->getData($sql4);
+$q10 = "select * from all_jobs where company_id='$id'";
+$all_jobs= $db->getData($q10);
 
 if (isset($_POST['submit']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
 
+    
     
     
     $id = $_POST['Company_Id'];
@@ -29,8 +31,9 @@ if (isset($_POST['submit']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     $des = $_POST['Job_Description'];
     $cgpa = $_POST['CGPA_Requirement'];
     $program = $_POST['Program'];
-   // $branch = $_POST['Branch'];
-    $app_period = $_POST['Application_Period'];
+    $branch = $_POST['Branch'];
+    $app_period_from = $_POST['Application_Period_from'];
+    $app_period_to = $_POST['Application_Period_to'];
     $package = $_POST['Minimum_Package_Offered'];
     $pptdate = $_POST['ppt_date'];
     $test = $_POST['test_date'];
@@ -38,53 +41,50 @@ if (isset($_POST['submit']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     $shortlist = $_POST['shortlist_date'];
     $year = $_POST['academic_year'];
 
-
-    // $q7 = "select * from program where p_code='$program'";
-    // $comp_info5 = $db->getData($q7);
-    // pr($comp_info5);
-   
-    // $program_code = $comp_info5['oDATA'][0]['p_code'];
-    echo $_POST['Branch'];
-
-
-
-        foreach ($_POST['Branch'] as $value ) {
+    foreach ($_POST['Branch'] as $value ) {
             
-        
-           // $branch_code = $db->getData("select * from branch where b_name='$value'")['oDATA'][0]['b_code'];
+         
+        // $branch_code = $db->getData("select * from branch where b_name='$value'")['oDATA'][0]['b_code'];
+        foreach ($_POST['Program'] as $value2 ) {
+         
+         $q9 = "select * from all_jobs where company_id='$id' AND program_code= '$value2' AND branch_code = '$value'";
+         $posted = $db->getData($q9);
 
-
-            $q9 = "select * from posted_jobs_B_P where company_id='$id' AND program_code= '$program' AND branch_code = '$value'";
-            $posted = $db->getData($q9);
-
-            if(intval($posted['NO_OF_ITEMS'])!=0){
-
-               
-                
-                echo "<script type='text/javascript'>
-               alert('Job already present!');
-                </script>";
-               }
+         if(intval($posted['NO_OF_ITEMS'])!=0){
             
-            else{
-           
-           
-            $query2="INSERT INTO posted_jobs_B_P (company_id, branch_code, program_code) VALUES ('$id','$value','$program')";
-            mysql_query($query2);
+             $query1 = "UPDATE all_jobs SET 
+             job_title='$title' 
+             , job_description='$des'
+             , cgpa_requirement='$cgpa'
+             , application_period_from ='$app_period_from'
+             , application_period_to ='$app_period_to'
+             , min_package_offered='$package'
+             , ppt_date='$ppt_date'
+             , test_date='$test'
+             , interview_date='$interview'
+             , shortlisting_date='$shortlist'
+             , academic_year='$year'
+             , branch_code='$value'
+             , program_code='$value2'
+             , company_id='$id'
+             WHERE company_id='$id' AND branch_code='$value'
+             AND program_code='$value2' "; 
 
-            $q10 = "select * from all_jobs where company_id='$id'";
-            $all_jobs= $db->getData($q10);
-            
-            if(intval($all_jobs['NO_OF_ITEMS'])==0){
-            $query = "INSERT INTO all_jobs ( company_id , job_title , job_description,cgpa_requirement ,application_period, min_package_offered , ppt_date, test_date, interview_date, shortlisting_date ,academic_year) VALUES ( '$id' , '$title' ,'$des' , '$cgpa' , '$app_period', '$package' , '$pptdate', '$test', '$interview', '$shortlist', '$year')";
-            mysql_query($query);    
-        }
-           
-                redirect('PostedJobs.php');
-    
-        
-            }
-        }
+             mysql_query($query1);
+            } 
+         
+         else{
+             
+         $query = "INSERT INTO all_jobs ( company_id , branch_code, program_code, job_title , job_description,cgpa_requirement ,application_period_from,application_period_to, min_package_offered , ppt_date, test_date, interview_date, shortlisting_date ,academic_year) VALUES ( '$id' ,'$value','$value2', '$title' ,'$des' , '$cgpa' , '$app_period_from','$app_period_to', '$package' , '$pptdate', '$test', '$interview', '$shortlist', '$year')";
+         mysql_query($query); 
+
+         }   
+      
+     }
+         
+ }
+
+     redirect('PostedJobs.php');
        
 
 
@@ -105,18 +105,18 @@ include('includes/templates/top_bar_admin.php');
 <body>
     <div class="container">
         <div class="row">
-            <div class="col-md-9" id="content">
+        <div class="col-md-8 col-md-offset-2" id="content">
 
                 <body id="content">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h3 class="panel-title">Company Register</h3>
+                            <h3 class="panel-title">Post Job</h3>
                         </div>
 
                         <div class="panel-body">
                             <div class="col-md-2">
                             </div>
-                            <div class="col-md-8">
+                            <div class="col-md-12">
                                 <div class="container-fluid">
                                     <br>
 
@@ -140,7 +140,7 @@ include('includes/templates/top_bar_admin.php');
                                                         ?>
                                                     </select>
 
-                                                <p><span id="total"></span></p>
+                                                <div id="total" style =" font-size :14px; padding-right:120px;"></div>
 
                                                 <script type="text/javascript">
                                                     function alpha(value) {
@@ -152,7 +152,7 @@ include('includes/templates/top_bar_admin.php');
                                                             var xmlhttp = new XMLHttpRequest();
                                                             xmlhttp.onreadystatechange = function() {
                                                                 if (this.readyState == 4 && this.status == 200) {
-                                                                    document.getElementById("total").innerHTML = this.responseText;
+                                                                    document.getElementById("total").innerHTML = "No. of Jobs: " + this.responseText;
                                                                 }
                                                             };
                                                             xmlhttp.open("GET", "temp.php?q=" + value, true);
@@ -189,12 +189,11 @@ include('includes/templates/top_bar_admin.php');
                                                 <label>
                                                     <b style="color:red;">*</b>Program
                                                 </label>
-                                                <select name="Program" class="selectpicker" required>
-                                                    <option>Select a Program</option>
+                                                <select name="Program[]" class="selectpicker" multiple data-live-search="true" required>
                                                     <?php
 
                                                     for ($i = 0; $i < $result1['NO_OF_ITEMS']; $i++) {
-                                                        echo "<option value=" . $result1['oDATA'][$i]['p_code'] . " > " . $result1['oDATA'][$i]['p_name'] . " </option>";
+                                                        echo "<option value=" . $result1['oDATA'][$i]['o_code'] . " > " . $result1['oDATA'][$i]['program_name'] . " </option>";
                                                     } ?>
 
                                                 </select>
@@ -208,15 +207,20 @@ include('includes/templates/top_bar_admin.php');
                                                     <?php
 
                                                     for ($i = 0; $i < $result2['NO_OF_ITEMS']; $i++) {
-                                                        echo "<option value= " . $result2['oDATA'][$i]['b_code'] . " > " . $result2['oDATA'][$i]['b_name'] . " </option>";
+                                                        echo "<option value= " . $result2['oDATA'][$i]['o_code'] . " > " . $result2['oDATA'][$i]['branch_name'] . " </option>";
                                                     } ?>
                                                 </select>
-                                            </div>
-                                            <div class="form-group">
+                                                <div class="form-group"></div>
+                                                
+                                                <div class="form-group">
                                                 <label>
-                                                    Application Period
+                                                Application Period: From: 
                                                 </label>
-                                                <input type="date" name="Application_Period" id="interviewdate">
+                                                <input type="date"  name="Application_Period_from" id="interviewdate" value="<?php echo $comp_info2['oDATA'][0]['application_period_from']?>"/>
+                                                <label>
+                                                   To:
+                                                </label>
+                                                <input type="date"  name="Application_Period_to" id="interviewdate" value="<?php echo $comp_info2['oDATA'][0]['application_period_to']?>"/>
                                             </div>
                                             <div class="form-group">
                                                 <label>

@@ -14,10 +14,16 @@ $q = $_REQUEST['q'];
 $que1 = "SELECT * FROM all_jobs WHERE company_id = '" . $q . "' ";
 $r = $db->getData($que1);
 
-$que2 = "SELECT * FROM posted_jobs_B_P WHERE company_id = '" . $q . "' ";
+$que2 = "SELECT * FROM all_jobs WHERE company_id = '" . $q . "' ";
 $r1 = $db->getData($que2);
 
 $value = $r1['NO_OF_ITEMS'];
+
+$que3 = "SELECT * FROM program";
+$program= $db->getData($que3);
+
+$que4 = "SELECT * FROM branch ";
+$branch = $db->getData($que4);
 
 ?>
 
@@ -42,21 +48,41 @@ $value = $r1['NO_OF_ITEMS'];
 						<th>Branch</th>
 						<th>Job Title</th>
 					</tr>
-						
+					<?php $programs = Array();
+							for($i=0; $i<$program['NO_OF_ITEMS'];$i++) {
+								//$programs[$i] = $program['oDATA'][$i]['program_code'];
+								array_push($programs,$program['oDATA'][$i]['program_code']);
+							}
+
+							$branches = Array();
+							for($i=0; $i<$branch['NO_OF_ITEMS'];$i++) {
+								//$branches[$i] = $branch['oDATA'][$i]['branch_code'];
+								array_push($branches,$branch['oDATA'][$i]['branch_code']);
+							}
+							//pr($programs);
+							//die();
+
+					?>
 					<?php for($i=0; $i<$r1['NO_OF_ITEMS'];$i++) { ?>
 						<tr>
 							<td><?php echo $i+1 ?></td>
 							<td>
 								<?php 
-							 		if($r1['oDATA'][$i]['program_code'] == 0) {echo 'B.Tech';}
-							 		elseif($r1['oDATA'][$i]['program_code'] == 1) {echo 'M.Tech';}
-							 		elseif($r1['oDATA'][$i]['program_code'] == 2) {echo 'Ph.D';}
+									$j = $r1['oDATA'][$i]['program_code'];
+									echo $programs[$j-1];
+
+									
+							 		// if($r1['oDATA'][$i]['program_code'] == 0) {echo 'B.Tech';}
+							 		// elseif($r1['oDATA'][$i]['program_code'] == 1) {echo 'M.Tech';}
+							 		// elseif($r1['oDATA'][$i]['program_code'] == 2) {echo 'Ph.D';}
 							 	?>							 	
 							 </td>
 							<td>
 								<?php 
-							 		if($r1['oDATA'][$i]['branch_code'] == 0) {echo 'EECS';}
-							 		elseif($r1['oDATA'][$i]['branch_code'] == 1) {echo 'ME';}
+									$j = $r1['oDATA'][$i]['branch_code'];
+									echo $branches[$j-1];
+							 		// if($r1['oDATA'][$i]['branch_code'] == 0) {echo 'EECS';}
+							 		// elseif($r1['oDATA'][$i]['branch_code'] == 1) {echo 'ME';}
 							 	?>							 	
 							 </td>
 							<td><?php echo $r['oDATA'][0]['job_title'] ?></td>

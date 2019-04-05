@@ -19,37 +19,43 @@ redirect('new_login.php');
 	$cgpa = $res['oDATA'][0]['marks'];
 }
 
+$post_id = $_POST['post_id'];
+
+
 
 
 $query10 = "SELECT * from personal_details where ldapid =" . $ldapid;
+
 $res10 = $db->getData($query10);
 $status = $res10['oDATA'][0]['status'];
 
 if($status == 2)
 {
+
  $degree = $res10['oDATA'][0]['degree'];
 	
  $branch = $res10['oDATA'][0]['branch'];
-	    
-	$p_code_query = "SELECT * from  program where p_name = '$degree'";
+
+	$p_code_query = "SELECT * from  program where program_code = '$degree'";
 	$res_p = $db->getData($p_code_query);
-	$p_code = $res_p['oDATA'][0]['p_code'];
+	$p_code = $res_p['oDATA'][0]['o_code'];
     
      
 
-	$b_code_query = "SELECT * from branch where b_name =  '$branch'";
+	$b_code_query = "SELECT * from branch where branch_name =  '$branch'";
 	$res_b = $db->getData($b_code_query);
-	$b_code = $res_b['oDATA'][0]['b_code'];
+	$b_code = $res_b['oDATA'][0]['o_code'];
 
 
-	$var11 = "SELECT * from posted_jobs_B_P where program_code = '$p_code' AND branch_code = '$b_code' ";
+
+	$var11 = "SELECT * from all_jobs where program_code = '$p_code' AND branch_code = '$b_code' ";
 	$res_11 = $db->getData($var11);
 	
 	
 	for( $i = 0; $i<$res_11['NO_OF_ITEMS']; $i++ ) {
 					$post_ids = $res_11['oDATA'][$i]['post_id'];
-				
-					$query = "select * from applicable_jobs where post_id = '$post_ids'";
+
+					$query = "select * from applicable_jobs where post_id = '$post_ids' and ldapid=". $ldapid;
 				
 					if($db->getData($query)['NO_OF_ITEMS'] == 0){
 						$status = 2;
@@ -61,7 +67,7 @@ if($status == 2)
     //  $res_job = $db->getData($all_job_inf);
 }
 
-$sql = "SELECT * FROM all_jobs, applicable_jobs, posted_jobs_B_P WHERE posted_jobs_B_P.company_id=all_jobs.company_id and posted_jobs_B_P.post_id=applicable_jobs.post_id and applicable_jobs.ldapid=". $ldapid ;
+$sql = "SELECT * FROM all_jobs, applicable_jobs WHERE  all_jobs.post_id=applicable_jobs.post_id and applicable_jobs.ldapid=". $ldapid ;
 $res2 = $db->getData($sql);
 
 if (isset($_POST['submit_changes']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -93,6 +99,7 @@ die(mysql_error());
 					#webdet {
 					display: none;
 					}
+		
 					</style>
 					<div class="wrapper">
 						<div id="sub-header"></div>
@@ -107,7 +114,7 @@ die(mysql_error());
 											<div class="row">
 												&nbsp &nbsp &nbsp &nbsp &nbsp
 												<div class="col-md-3 col-xs-6 col-sm-3">
-													<input type="text" placeholder="Search by Name" id="searchppt">
+													<input type="text" onkeyup="myFunction()" placeholder="Search by Name" id="searchppt">
 												</div>
 											</div>
 											<br>
@@ -123,7 +130,7 @@ die(mysql_error());
 													</tr>
 													<?php for ($i = 0; $i < $res2['NO_OF_ITEMS']; $i++) { ?>
 													<tr>
-														<td id="one"><?php
+														<td id="one" value=<?php echo $res2['oDATA'][$i]['post_id'];?> name="post_id"><?php
 																$comp_id = $res2['oDATA'][$i]['company_id'];
 																$reg_com = "SELECT * from " . registered_companies . "  where company_id =" . $comp_id;
 															$res3 = $db->getData($reg_com);
@@ -131,6 +138,25 @@ die(mysql_error());
 															echo $comp_name
 														?></td>
 														<td id="one"><?php echo $res2['oDATA'][$i]['job_title'] ?></td>
+
+                                  <td>
+																		<?php 
+																		$hoverq="SELECT * FROM applicable_jobs WHERE ldapid ='$ldapid' AND post_id=".$res2['oDATA'][$i]['post_id'] ;
+																		$hover = $db->getData($hoverq);
+
+																		?>
+																		<a href="#" onclick="alert('<?php echo ' Time-Stamp: ' .$hover['oDATA'][0]['time_stamp'] ; ?>')">
+																				<?php 
+																			$status = $res2['oDATA'][$i]['status'];
+																			$reg_sts = "SELECT * from  status  where code =" . $status;
+																			$res4 = $db->getData($reg_sts);
+																			echo $res4['oDATA'][0]['status_name'];
+																		?>
+
+																		</a>
+																	
+																	</td>
+
 														<td id="one"> <button type="button" data-toggle="modal" data-target= <?php echo "#myModal" . $i ?>>View</button>
 																
 																<!-- Modal -->
@@ -166,10 +192,20 @@ die(mysql_error());
 																						<td>CGPA Requirement</td>
 																						<td><?php echo $res2['oDATA'][$i]['cgpa_requirement']?></td>
 																					</tr>				
-																					<tr>
+																						<tr>
 																						<td>4.</td>
-																						<td>Application Period</td>
-																						<td><?php echo $res2['oDATA'][$i]['application_period']?></td>
+																						<td><b>Application Period</b></td>
+																						<td></td>
+																					</tr>
+																					<tr>
+																						<td></td>
+																						<td>From</td>
+																						<td><?php echo $res2['oDATA'][$i]['application_period_from']?></td>
+																					</tr>
+																					<tr>
+																						<td></td>
+																						<td>To</td>
+																						<td><?php echo $res2['oDATA'][$i]['application_period_to']?></td>
 																					</tr>
 																					<tr>
 																						<td>5.</td>
@@ -205,18 +241,12 @@ die(mysql_error());
 																		</div>
 																	</div>
 																</div></td>
-														
-														<td>
-															<?php 
-																$status = $res2['oDATA'][$i]['status'];
-																$reg_sts = "SELECT * from  status  where code =" . $status;
-																$res4 = $db->getData($reg_sts);
-																echo $res4['oDATA'][0]['status_name'];
-															?>
-														</td>
+																
+
+												
 														<td id="one">
 															
-																<button type="submit" value="<?php echo $res2['oDATA'][$i]['post_id'] ?>" name="submit_changes" <?php if ($res2['oDATA'][$i]['status'] != '2'){ ?> disabled <?php   } ?> >apply</button>
+																	<button <?php if ($res2['oDATA'][$i]['status'] != '2'){ ?> style = "opacity: 0.3; " <?php   } ?>  type="submit" value="<?php echo $res2['oDATA'][$i]['post_id'] ?>" name="submit_changes" <?php if ($res2['oDATA'][$i]['status'] != '2'){ ?> disabled <?php   } ?> >apply</button>
 															
 														</td>
 														
@@ -246,3 +276,42 @@ die(mysql_error());
 		</div>
 	</div>
 </body>
+<script>
+				function myFunction() {
+			
+				var input, filter, table, tr,  td1,td2,td3,td4, i, txtValue1,txtValue2, txtValue4;
+				input = document.getElementById("searchppt");
+				filter = input.value.toUpperCase();
+				table = document.getElementById("stdlist");
+				tr = table.getElementsByTagName("tr");
+				
+				for (i = 0; i < tr.length; i=i+1)
+				{
+					if((i-1)%13==0)
+				{
+				td1 = tr[i].getElementsByTagName("td")[0];
+				td2 = tr[i].getElementsByTagName("td")[1];
+				td4 = tr[i].getElementsByTagName("td")[2];
+                console.log(td4);
+			
+				
+				if (td1||td2||td4) {
+				txtValue1 = td1.textContent || td1.innerText;
+				txtValue2 = td2.textContent || td2.innerText;
+				txtValue4 = td4.textContent || td4.innerText;
+				
+				
+				
+				
+				if (txtValue1.toUpperCase().indexOf(filter) > -1 || txtValue2.toUpperCase().indexOf(filter) > -1 ||txtValue4.toUpperCase().indexOf(filter) > -1 )  {
+				tr[i].style.display = "";
+				} else {
+				tr[i].style.display = "none";
+				}
+				}
+				}
+				}
+				
+				
+				}
+				</script>

@@ -22,7 +22,7 @@ $result2 = $db->getData($sql3);
 $post_id = $_POST['edit'];
 
 
-$q2 = "select * from posted_jobs_B_P where post_id='$post_id'";
+$q2 = "select * from all_jobs where post_id='$post_id'";
 $post_desc = $db->getData($q2);
 
 $company_id = $post_desc['oDATA'][0]['company_id'];
@@ -35,11 +35,11 @@ $q4 = "select * from all_jobs where company_id='$company_id'";
 $comp_info2 = $db->getData($q4);
 
 $program_code=$post_desc['oDATA'][0]['program_code'];
-$q5 = "select * from program where p_code='$program_code'";
+$q5 = "select * from program where o_code='$program_code'";
 $comp_info3 = $db->getData($q5);
 
 $branch_code=$post_desc['oDATA'][0]['branch_code'];
-$q6 = "select * from branch where b_code='$branch_code'";
+$q6 = "select * from branch where o_code='$branch_code'";
 $comp_info4 = $db->getData($q6);
 
 
@@ -60,7 +60,8 @@ if (isset($_POST['submit']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     $cgpa = $_POST['CGPA_Requirement'];
     $program = $_POST['Program'];
     $branch = $_POST['Branch'];
-    $app_period = $_POST['Application_Period'];
+    $app_period_from = $_POST['Application_Period_from'];
+    $app_period_to = $_POST['Application_Period_to'];
     $package = $_POST['Minimum_Package_Offered'];
     $pptdate = $_POST['ppt_date'];
     $test = $_POST['test_date'];
@@ -68,68 +69,44 @@ if (isset($_POST['submit']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     $shortlist = $_POST['shortlist_date'];
     $year = $_POST['academic_year'];
   
-    
+    $q2 = "select * from all_jobs where post_id='$post_id'";
+$post_desc = $db->getData($q2);
 
-    $q7 = "select * from program where p_name='$program'";
+$program_code=$post_desc['oDATA'][0]['program_code'];
+$q5 = "select * from program where o_code='$program_code'";
+$comp_info3 = $db->getData($q5);
+
+$branch_code=$post_desc['oDATA'][0]['branch_code'];
+$q6 = "select * from branch where o_code='$branch_code'";
+$comp_info4 = $db->getData($q6);
+
+    $q7 = "select * from program where program_code='$program'";
     $comp_info5 = $db->getData($q7);
    
-    $program_code = $comp_info5['oDATA'][0]['p_code'];
+    $program_code = $comp_info5['oDATA'][0]['o_code'];
 
-    $q8 = "select * from branch where b_name='$branch'";
+    $q8 = "select * from branch where branch_code='$branch'";
     $comp_info6 = $db->getData($q8);
-    $branch_code = $comp_info6['oDATA'][0]['b_code'];
+    $branch_code = $comp_info6['oDATA'][0]['o_code'];
     
-    $q9 = "select * from posted_jobs_B_P where company_id='$id' AND program_code= '$program_code' AND branch_code = '$branch_code'";
+    $q9 = "select * from all_jobs where company_id='$id' AND program_code= '$program_code' AND branch_code = '$branch_code'";
     $posted = $db->getData($q9);
    
-    
-    // $present =false;
-
-    // for ($i = 0; $i < $posted['NO_OF_ITEMS']; $i++) {
-
-    //     if($program_code == $posted['oDATA'][$i]['program_code'] && $branch_code == $posted['oDATA'][$i]['branch_code']){
-    //        $present = true;
-    //     }  
-    // } 
-
-
-   if(intval($posted['NO_OF_ITEMS'])!=0){
-
-    echo "<script type='text/javascript'>
-   alert('Job already present!');
-
-    </script>";
-    ?>
-    <form method="post" action="editjobs.php">
-        <button name="edit" value=<?php echo $post_id ?> id = "btn_sub"> 
-    </form>
-    <script>
-        document.getElementById("btn_sub").click();
-    </script>
-
-    <?php 
-
-
-   }
-
-    else{
-
-        $query2="UPDATE posted_jobs_B_P SET branch_code='$branch_code', program_code='$program_code' WHERE post_id='$post_id'";
-        mysql_query($query2);
-    
-
+   
         $query = "UPDATE all_jobs SET 
                         job_title='$title' 
                         , job_description='$des'
                         , cgpa_requirement='$cgpa'
-                        , application_period='$app_period'
+                        , application_period_from='$app_period_from'
+                        , application_period_to='$app_period_to'
                         , min_package_offered='$package'
                         , ppt_date='$ppt_date'
                         , test_date='$test'
                         , interview_date='$interview'
                         , shortlisting_date='$shortlist'
                         , academic_year='$year'
-                        WHERE company_id='$id'";
+                        
+                        , company_id='$id'  WHERE post_id=".$post_id;
 
         if (mysql_query($query)) {
             redirect('PostedJobs.php');
@@ -139,8 +116,10 @@ if (isset($_POST['submit']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
         
         }
 
-    }
+
+    
 }
+
 include('includes/templates/top_bar_admin.php');
 ?>
 <!-- to include multipe select picker -->
@@ -153,18 +132,18 @@ include('includes/templates/top_bar_admin.php');
 <body>
     <div class="container">
         <div class="row">
-            <div class="col-md-9" id="content">
+        <div class="col-md-8 col-md-offset-2" id="content">
 
                 <body id="content">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h3 class="panel-title">Company Register</h3>
+                            <h3 class="panel-title">Edit Job</h3>
                         </div>
 
                         <div class="panel-body">
                             <div class="col-md-2">
                             </div>
-                            <div class="col-md-8">
+                            <div class="col-md-12">
                                 <div class="container-fluid">
                                     <br>
 
@@ -208,20 +187,8 @@ include('includes/templates/top_bar_admin.php');
                                                 <label>
                                                     <b style="color:red;">*</b>Program
                                                 </label>
-                                                <select name="Program" class="selectpicker" required>
-                                                    <?php
-                                                    for ($i = 0; $i < $result2['NO_OF_ITEMS']; $i++) {
-
-                                                        if($result2['oDATA'][$i]['p_name']==$comp_info3['oDATA'][0]['p_name']){
-                                                        echo "<option selected  > " . $result2['oDATA'][$i]['p_name'] . " </option>";
-                                                        }
-                                                        else
-                                                        echo "<option > " . $result2['oDATA'][$i]['p_name'] . " </option>";
-                                                    } 
-                                                    
-                                                    
-                                                    
-                                                    ?>
+                                                <select name="Program" class="selectpicker" disabled>
+                                                <option selected value="<?php echo $comp_info3['oDATA'][0]['o_code']  ?>"> <?php echo $comp_info3['oDATA'][0]['program_name']  ?> </option>
 
                                                 </select>
                                             </div>
@@ -229,25 +196,23 @@ include('includes/templates/top_bar_admin.php');
                                                 <label>
                                                     <b style="color:red;">*</b>Branch
                                                 </label>
-                                                <select name="Branch" class="selectpicker" data-live-search="true" required>
-                                        
-                                                <?php
-                                                    for ($i = 0; $i < $result1['NO_OF_ITEMS']; $i++) {
-
-                                                        if($result1['oDATA'][$i]['b_name']==$comp_info4['oDATA'][0]['b_name']){
-                                                        echo "<option selected > " . $result1['oDATA'][$i]['b_name'] . " </option>";
-                                                        }
-                                                        else
-                                                        echo "<option > " . $result1['oDATA'][$i]['b_name'] . " </option>";
-                                                    } 
-                                                ?>
+                                                <select name="Branch" class="selectpicker" data-live-search="true" disabled>
+                                                <option selected value="<?php echo $comp_info4['oDATA'][0]['o_code']  ?>"> <?php echo $comp_info4['oDATA'][0]['branch_name'] ?> </option>
+                                               
                                                 </select>
                                             </div>
                                             <div class="form-group">
                                                 <label>
                                                     Application Period
                                                 </label>
-                                                <input type="date" name="Application_Period" id="interviewdate" value="<?php echo $comp_info2['oDATA'][0]['application_period']?>"/>
+                                                <label>
+                                                    FROM
+                                                </label>
+                                                <input type="date" name="Application_Period_from" id="interviewdate" value="<?php echo $comp_info2['oDATA'][0]['application_period_from']?>"/>
+                                                <label>
+                                                   TO
+                                                </label>
+                                                <input type="date" name="Application_Period_to" id="interviewdate" value="<?php echo $comp_info2['oDATA'][0]['application_period_to']?>"/>
                                             </div>
                                             <div class="form-group">
                                                 <label>

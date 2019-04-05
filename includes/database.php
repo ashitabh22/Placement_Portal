@@ -17,7 +17,6 @@
 	define('PERSONAL_DETAILS', 'personal_details');
 	define('APPLIED_STUDENTS', 'applied_students');
 	define('PPT_LIST', 'ppt_list');
-	define('POSTED_JOBS_B_P', 'posted_jobs_B_P');
 	define('BRANCH', 'branch');
 	define('PROGRAM', 'program');
 

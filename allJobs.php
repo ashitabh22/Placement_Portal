@@ -7,8 +7,10 @@ require_once("includes/classes/db.cls.php");
 require_once("includes/classes/sitedata.cls.php");
 $db = new SiteData();
 
-$sql = "SELECT * FROM all_jobs INNER JOIN registered_companies ON registered_companies.company_id=all_jobs.company_id  INNER JOIN posted_jobs_B_P ON posted_jobs_B_P.company_id=all_jobs.company_id INNER JOIN program ON  posted_jobs_B_P.program_code=program.p_code INNER JOIN branch ON posted_jobs_B_P.branch_code=branch.b_code"  ;
+
+$sql = "SELECT * FROM all_jobs INNER JOIN registered_companies ON registered_companies.company_id=all_jobs.company_id INNER JOIN branch ON all_jobs.branch_code = branch.o_code INNER JOIN program ON all_jobs.program_code = program.o_code"  ;
 $res = $db->getData($sql);
+
 
 ?>
 
@@ -73,8 +75,8 @@ $res = $db->getData($sql);
 														<tr>
 															<td id="one"><?php echo $res['oDATA'][$i]['company_name']?></td>
 															<td id="two"><?php echo $res['oDATA'][$i]['job_title']?></td>
-															<td id="three"><?php echo $res['oDATA'][$i]['p_name']?></td>
-															<td id="four"><?php echo $res['oDATA'][$i]['b_name']?></td>													
+															<td id="three"><?php echo $res['oDATA'][$i]['branch_name']?></td>
+															<td id="four"><?php echo $res['oDATA'][$i]['program_code']?></td>													
 															<td>
 																 <button type="button" data-toggle="modal" data-target= <?php echo "#myModal" . $i ?>>View</button>
 																
@@ -113,8 +115,18 @@ $res = $db->getData($sql);
 																					</tr>				
 																					<tr>
 																						<td>4.</td>
-																						<td>Application Period</td>
-																						<td><?php echo $res['oDATA'][$i]['application_period']?></td>
+																						<td><b>Application Period</b></td>
+																						<td></td>
+																					</tr>
+																					<tr>
+																						<td></td>
+																						<td>From</td>
+																						<td><?php echo $res['oDATA'][$i]['application_period_from']?></td>
+																					</tr>
+																					<tr>
+																						<td></td>
+																						<td>To</td>
+																						<td><?php echo $res['oDATA'][$i]['application_period_to']?></td>
 																					</tr>
 																					<tr>
 																						<td>5.</td>
@@ -188,7 +200,7 @@ $res = $db->getData($sql);
 				
 				for (i = 0; i < tr.length; i=i+1)
 				{
-					if((i-1)%11==0)
+					if((i-1)%13==0)
 				{
 				td1 = tr[i].getElementsByTagName("td")[0];
 				td2 = tr[i].getElementsByTagName("td")[1];
