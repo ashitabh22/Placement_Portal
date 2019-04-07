@@ -144,7 +144,7 @@ if (isset($_POST['new_update']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                                                 <div class="row">
                                                     &nbsp &nbsp &nbsp &nbsp &nbsp
                                                     <div class="col-md-3 col-xs-6 col-sm-3">
-                                                         <input type="text" onkeyup="myFunction()" placeholder=" &nbsp &nbsp Search " id="searchcomp">
+                                                        <input type="text" onkeyup="myFunction()" placeholder=" &nbsp &nbsp Search " id="searchcomp">
                                                     </div>
 
 
@@ -163,13 +163,13 @@ if (isset($_POST['new_update']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                                                                 <th> <input type="hidden" value=<?php echo $company_id ?> name='company_id'>
                                                                     <input type="hidden" value=<?php echo $ppt_date ?> name='ppt_date'>
                                                                     <?php //$cname=(explode("_",$res2['oDATA'][$i]['COLUMN_NAME']));
-                                                                                                echo $res4['oDATA'][0]['company_name'];
+                                                                    echo $res4['oDATA'][0]['company_name'];
 
 
-                                                                                                ?></th>
+                                                                    ?></th>
                                                                 <?php
 
-                                                                                                ?>
+                                                                ?>
 
                                                             </tr>
                                                         </thead>
@@ -179,14 +179,14 @@ if (isset($_POST['new_update']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                                                                 <th>#</th>
                                                                 <th></th>
                                                                 <?php
-                                                                                                ?>
+                                                                ?>
                                                                 <th><?php //$cname=(explode("_",$res2['oDATA'][$i]['COLUMN_NAME']));
-                                                                                                echo $res2['oDATA'][0]['ppt_date'];
+                                                                    echo $res2['oDATA'][0]['ppt_date'];
 
-                                                                                                ?></th>
+                                                                    ?></th>
                                                                 <?php
 
-                                                                                                ?>
+                                                                ?>
 
                                                             </tr>
 
@@ -194,56 +194,56 @@ if (isset($_POST['new_update']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                                                         <tbody>
 
                                                             <?php
-                                                                                                if ($res5['NO_OF_ITEMS'] == 0) {
-                                                                                                    $k = intval(0);
-                                                                                                    for ($i = 0; $i < count($list); $i++) { ?>
-                                                                                                        <?php for ($j = 0; $j < $list[$i]['NO_OF_ITEMS']; $j++) {
-                                                                                                            $k++; ?>
-                                                                                                            <tr>
+                                                            if ($res5['NO_OF_ITEMS'] == 0) {
+                                                                $k = intval(0);
+                                                                for ($i = 0; $i < count($list); $i++) { ?>
+                                                                    <?php for ($j = 0; $j < $list[$i]['NO_OF_ITEMS']; $j++) {
+                                                                        $k++; ?>
+                                                                        <tr>
 
-                                                                                                                <td><?php echo $list[$i]['oDATA'][$j]['name']; ?></td>
-                                                                                                            <td> <input name=<?php echo "roll_number" . $k ?> value="<?php echo $list[$i]['oDATA'][$j]['ldapid'] ?>" type="text" style="display: none;"> <?php echo $list[$i]['oDATA'][$j]['roll_number'] ?></td>
-
-
-                                                                                                                                                                                                                <td><input type="checkbox" <?php
-                                                                                                                                                                                                                if ($res2['oDATA'][0]['ppt_date'] != $res3['oDATA'][0]['CURDATE()']) echo  "disabled" // if($res2['oDATA'][$j]['ppt_date']==$res5['oDATA'][$i]['ppt_date']){
-                                                                                                                                                                                                                //     if ($res5['oDATA'][$i]['attendance'] == '1'){
-                                                                                                                                                                                                                //         echo  "checked";
-                                                                                                                                                                                                                //     }
-                                                                                                                                                                                                                // }
-                                                                                                                                                                                                                ?> name=<?php echo "attendance_" . $k ?> <?php //$cname=(explode("_",$res2['oDATA'][$j]['COLUMN_NAME']));
-
-                                                                                                                                                                                                                                                            ?>>
-
-                                                                                                                                                                                                                                                            </tr>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                        <?php
-                                                                                                                                                                                                                                                        }
-                                                                                                                                                                                                                                                    }
-                                                                                                                                                                                                                                                } else { ?>
-                                                                                                                                                                                                                                                    <?php
-
-                                                                                                                                                                                                                                                    for ($i = 0; $i < $rest['NO_OF_ITEMS']; $i++) { ?>
-
-                                                                                                                                                                                                                                                        <tr>
-
-                                                                                                                                                                                                                                                            <td><?php echo $rest['oDATA'][$i]['name'] ?></td>
-                                                                                                                                                                                                                                                        <td> <input name=<?php echo "roll_number" . $i ?> value="<?php echo $rest['oDATA'][$i]['ldapid'] ?>" type="text" style="display: none;"> <?php echo $rest['oDATA'][$i]['roll_number'] ?></td>
+                                                                            <td><?php echo $list[$i]['oDATA'][$j]['name']; ?></td>
+                                                                            <td> <input name=<?php echo "roll_number" . $k ?> value="<?php echo $list[$i]['oDATA'][$j]['ldapid'] ?>" type="text" style="display: none;"> <?php echo $list[$i]['oDATA'][$j]['roll_number'] ?></td>
 
 
-                                                                                                                                                                                                                                                        <td><input type="checkbox" <?php
-                                                                                                                                                                                                                                                        // if($res['oDATA'][$i]['ppt_date']==$res5['oDATA'][$i]['ppt_date']){
-                                                                                                                                                                                                                                                        if ($rest['oDATA'][$i]['attendance'] == '1') {
-                                                                                                                                                                                                                                                            echo  "checked";
-                                                                                                                                                                                                                                                        }
-                                                                                                                                                                                                                                                        // }
-                                                                                                                                                                                                                                                        ?> name=<?php echo "attendance_" . $i ?> <?php //$cname=(explode("_",$res2['oDATA'][$j]['COLUMN_NAME']));
-                                                                                                                                                                                                                                                                                                    if ($rest['oDATA'][$i]['ppt_date'] != $res3['oDATA'][0]['CURDATE()']) echo  "disabled"
-                                                                                                                                                                                                                                                                                                    ?>>
+                                                                            <td><input type="checkbox" <?php
+                                                                                                        if ($res2['oDATA'][0]['ppt_date'] != $res3['oDATA'][0]['CURDATE()']) echo  "disabled" // if($res2['oDATA'][$j]['ppt_date']==$res5['oDATA'][$i]['ppt_date']){
+                                                                                                        //     if ($res5['oDATA'][$i]['attendance'] == '1'){
+                                                                                                        //         echo  "checked";
+                                                                                                        //     }
+                                                                                                        // }
+                                                                                                        ?> name=<?php echo "attendance_" . $k ?> <?php //$cname=(explode("_",$res2['oDATA'][$j]['COLUMN_NAME']));
 
-                                                                                                                                                                                                                                                                                                    </tr>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <?php
-                                                                                                                                                                                                                                                                                                }
-                                                                                                                                                                                                                                                                                            } ?>
+                                                                                                                                                                                                                                                                        ?>>
+
+                                                                        </tr>
+                                                                    <?php
+                                                                }
+                                                            }
+                                                        } else { ?>
+                                                                <?php
+
+                                                                for ($i = 0; $i < $rest['NO_OF_ITEMS']; $i++) { ?>
+
+                                                                    <tr>
+
+                                                                        <td><?php echo $rest['oDATA'][$i]['name'] ?></td>
+                                                                        <td> <input name=<?php echo "roll_number" . $i ?> value="<?php echo $rest['oDATA'][$i]['ldapid'] ?>" type="text" style="display: none;"> <?php echo $rest['oDATA'][$i]['roll_number'] ?></td>
+
+
+                                                                        <td><input type="checkbox" <?php
+                                                                                                    // if($res['oDATA'][$i]['ppt_date']==$res5['oDATA'][$i]['ppt_date']){
+                                                                                                    if ($rest['oDATA'][$i]['attendance'] == '1') {
+                                                                                                        echo  "checked";
+                                                                                                    }
+                                                                                                    // }
+                                                                                                    ?> name=<?php echo "attendance_" . $i ?> <?php //$cname=(explode("_",$res2['oDATA'][$j]['COLUMN_NAME']));
+                                                                                                                                                                                                                                                                                                            if ($rest['oDATA'][$i]['ppt_date'] != $res3['oDATA'][0]['CURDATE()']) echo  "disabled"
+                                                                                                                                                                                                                                                                                                            ?>>
+
+                                                                    </tr>
+                                                                <?php
+                                                            }
+                                                        } ?>
 
 
 
@@ -266,36 +266,40 @@ if (isset($_POST['new_update']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                         </div>
                     </form>
                     <script>
-                function myFunction() {
-                table = document.getElementById("newtable");
-                var input, filter, table, tr,  td1,td2,td3,td4, i, txtValue1,txtValue2, txtValue3 , txtValue4;
-                input = document.getElementById("searchcomp");
-                filter = input.value.toUpperCase();
-                table = document.getElementById("stdlist");
-                tr = table.getElementsByTagName("tr");
-                
-                for (i = 0; i < tr.length; i=i+1)
-                {
-                    
-                td1 = tr[i].getElementsByTagName("td")[0];
-                td2 = tr[i].getElementsByTagName("td")[1];
-             
-                if (td1||td2) {
-                txtValue1 = td1.textContent || td1.innerText;
-                txtValue2 = td2.textContent || td2.innerText;
-              
-                
-                
-                
-                if (txtValue1.toUpperCase().indexOf(filter) > -1 || txtValue2.toUpperCase().indexOf(filter) > -1 )  {
-                tr[i].style.display = "";
-                } else {
-                tr[i].style.display = "none";
-                }
-                }
-                
-                }
-                
-                
-                }
-                </script>
+                        function myFunction() {
+                            table = document.getElementById("newtable");
+                            var input, filter, table, tr, td1, td2, td3, td4, i, txtValue1, txtValue2, txtValue3, txtValue4;
+                            input = document.getElementById("searchcomp");
+                            filter = input.value.toUpperCase();
+                            table = document.getElementById("stdlist");
+                            tr = table.getElementsByTagName("tr");
+
+                            for (i = 0; i < tr.length; i = i + 1) {
+
+                                td1 = tr[i].getElementsByTagName("td")[0];
+                                td2 = tr[i].getElementsByTagName("td")[1];
+
+                                if (td1 || td2) {
+                                    txtValue1 = td1.textContent || td1.innerText;
+                                    txtValue2 = td2.textContent || td2.innerText;
+
+
+
+
+                                    if (txtValue1.toUpperCase().indexOf(filter) > -1 || txtValue2.toUpperCase().indexOf(filter) > -1) {
+                                        tr[i].style.display = "";
+                                    } else {
+                                        tr[i].style.display = "none";
+                                    }
+                                }
+
+                            }
+
+
+                        }
+                    </script>
+
+
+
+
+                    <?php include('includes/templates/footer2.php') ?>

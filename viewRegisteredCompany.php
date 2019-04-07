@@ -72,123 +72,123 @@ if (isset($_POST['delete']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                                                             <td><?php echo $res['oDATA'][$i]['job_profile'] ?></td>
                                                             <td>
                                                                 <button type="button" data-toggle="modal" data-target=<?php echo "#myModal" . $i ?>>View</button>
-                                                                                                                    <!-- Modal -->
-                                                                                                                    <div class="modal fade" id=<?php echo "myModal" . $i ?> role="dialog">
-                                                                                                                    <div class="modal-dialog">
-                                                                                                                        <!-- Modal content-->
-                                                                                                                        <div class="modal-content">
-                                                                                                                            <div class="modal-header">
-                                                                                                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                                                                                                <h4 class="modal-title">Details</h4>
-                                                                                                                            </div>
-                                                                                                                            <div class="modal-body">
-                                                                                                                                <table class="table" id="stdlist">
-                                                                                                                                    <tr>
-                                                                                                                                        <th> Sr.</th>
-                                                                                                                                        <th>Company Info.</th>
-                                                                                                                                        <th>Details</th>
-                                                                                                                                    </tr>
-                                                                                                                                    <tr>
-                                                                                                                                        <td>1.</td>
-                                                                                                                                        <td>Company Name</td>
-                                                                                                                                        <td><?php echo $res['oDATA'][$i]['company_name'] ?></td>
-                                                                                                                    </tr>
-                                                                                                                    <tr>
-                                                                                                                        <td>2.</td>
-                                                                                                                        <td>About Company</td>
-                                                                                                                        <td><?php echo $res['oDATA'][$i]['about_company'] ?></td>
-                                                                                                                    </tr>
-                                                                                                                    <tr>
-                                                                                                                        <td>3.</td>
-                                                                                                                        <td>Mobile</td>
-                                                                                                                        <td><?php echo $res['oDATA'][$i]['office_contact'] ?></td>
-                                                                                                                    </tr>
-                                                                                                                    <tr>
-                                                                                                                        <td>4.</td>
-                                                                                                                        <td>Address</td>
-                                                                                                                        <td><?php echo $res['oDATA'][$i]['postal_address'] ?></td>
-                                                                                                                    </tr>
-                                                                                                                    <tr>
-                                                                                                                        <td>5.</td>
-                                                                                                                        <td>Website</td>
-                                                                                                                        <td><?php echo $res['oDATA'][$i]['website'] ?></td>
-                                                                                                                    </tr>
-                                                                                                                    <tr>
-                                                                                                                        <td>6.</td>
-                                                                                                                        <td>Job Profile</td>
-                                                                                                                        <td><?php echo $res['oDATA'][$i]['job_profile'] ?></td>
-                                                                                                                    </tr>
-                                                                                                                    <tr>
-                                                                                                                        <td></td>
-                                                                                                                        <td><b>First point of contact</b></td>
-                                                                                                                        <td></td>
+                                                                <!-- Modal -->
+                                                                <div class="modal fade" id=<?php echo "myModal" . $i ?> role="dialog">
+                                                                    <div class="modal-dialog">
+                                                                        <!-- Modal content-->
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                                <h4 class="modal-title">Details</h4>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                <table class="table" id="stdlist">
+                                                                                    <tr>
+                                                                                        <th> Sr.</th>
+                                                                                        <th>Company Info.</th>
+                                                                                        <th>Details</th>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td>1.</td>
+                                                                                        <td>Company Name</td>
+                                                                                        <td><?php echo $res['oDATA'][$i]['company_name'] ?></td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td>2.</td>
+                                                                                        <td>About Company</td>
+                                                                                        <td><?php echo $res['oDATA'][$i]['about_company'] ?></td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td>3.</td>
+                                                                                        <td>Mobile</td>
+                                                                                        <td><?php echo $res['oDATA'][$i]['office_contact'] ?></td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td>4.</td>
+                                                                                        <td>Address</td>
+                                                                                        <td><?php echo $res['oDATA'][$i]['postal_address'] ?></td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td>5.</td>
+                                                                                        <td>Website</td>
+                                                                                        <td><?php echo $res['oDATA'][$i]['website'] ?></td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td>6.</td>
+                                                                                        <td>Job Profile</td>
+                                                                                        <td><?php echo $res['oDATA'][$i]['job_profile'] ?></td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td></td>
+                                                                                        <td><b>First point of contact</b></td>
+                                                                                        <td></td>
 
-                                                                                                                    </tr>
-                                                                                                                    <tr>
-                                                                                                                        <td>1.</td>
-                                                                                                                        <td>Full Name</td>
-                                                                                                                        <td><?php echo $res['oDATA'][$i]['poc1_name'] ?></td>
-                                                                                                                    </tr>
-                                                                                                                    <tr>
-                                                                                                                        <td>2.</td>
-                                                                                                                        <td>Designation</td>
-                                                                                                                        <td><?php echo $res['oDATA'][$i]['poc1_designation'] ?></td>
-                                                                                                                    </tr>
-                                                                                                                    <tr>
-                                                                                                                        <td>3.</td>
-                                                                                                                        <td>Email</td>
-                                                                                                                        <td><?php echo $res['oDATA'][$i]['poc1_email'] ?></td>
-                                                                                                                    </tr>
-                                                                                                                    <tr>
-                                                                                                                        <td>4.</td>
-                                                                                                                        <td>Contact Number</td>
-                                                                                                                        <td><?php echo $res['oDATA'][$i]['poc1_contact'] ?></td>
-                                                                                                                    </tr>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td>1.</td>
+                                                                                        <td>Full Name</td>
+                                                                                        <td><?php echo $res['oDATA'][$i]['poc1_name'] ?></td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td>2.</td>
+                                                                                        <td>Designation</td>
+                                                                                        <td><?php echo $res['oDATA'][$i]['poc1_designation'] ?></td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td>3.</td>
+                                                                                        <td>Email</td>
+                                                                                        <td><?php echo $res['oDATA'][$i]['poc1_email'] ?></td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td>4.</td>
+                                                                                        <td>Contact Number</td>
+                                                                                        <td><?php echo $res['oDATA'][$i]['poc1_contact'] ?></td>
+                                                                                    </tr>
 
-                                                                                                                    <tr>
-                                                                                                                        <td></td>
-                                                                                                                        <td><b>Second point of contact</em></td>
-                                                                                                                        <b>
-                                                                                            </td>
+                                                                                    <tr>
+                                                                                        <td></td>
+                                                                                        <td><b>Second point of contact</em></td>
+                                                                                        <b>
+                                                            </td>
 
-                                                                                        </tr>
-                                                                                        <tr>
-                                                                                            <td>1.</td>
-                                                                                            <td>Full Name</td>
-                                                                                            <td><?php echo $res['oDATA'][$i]['poc2_name'] ?></td>
-                                                                                                                    </tr>
-                                                                                                                    <tr>
-                                                                                                                        <td>2.</td>
-                                                                                                                        <td>Designation</td>
-                                                                                                                        <td><?php echo $res['oDATA'][$i]['poc2_designation'] ?></td>
-                                                                                                                    </tr>
-                                                                                                                    <tr>
-                                                                                                                        <td>3.</td>
-                                                                                                                        <td>Email</td>
-                                                                                                                        <td><?php echo $res['oDATA'][$i]['poc2_email'] ?></td>
-                                                                                                                    </tr>
-                                                                                                                    <tr>
-                                                                                                                        <td>4.</td>
-                                                                                                                        <td>Contact Number</td>
-                                                                                                                        <td><?php echo $res['oDATA'][$i]['poc2_contact'] ?></td>
-                                                                                                                    </tr>
-                                                                                                                </table>
-                                                                                                            </div>
-                                                                                                            <div class="modal-footer">
-                                                                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                                                                            </div>
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                                </td>
-                                                                                                <form method="post">
-                                                                                                    <td>
-                                                                                                        <button type="submit" value="<?php echo $res['oDATA'][$i]['company_id'] ?>" name="delete">Delete</button>
-                                                                                                                    </td>
-                                                                                                                </form>
-                                                                                                                </tr>
-                                                                                                                                                                                            <?php
-                                                                                                                } ?>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>1.</td>
+                                                            <td>Full Name</td>
+                                                            <td><?php echo $res['oDATA'][$i]['poc2_name'] ?></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>2.</td>
+                                                            <td>Designation</td>
+                                                            <td><?php echo $res['oDATA'][$i]['poc2_designation'] ?></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>3.</td>
+                                                            <td>Email</td>
+                                                            <td><?php echo $res['oDATA'][$i]['poc2_email'] ?></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>4.</td>
+                                                            <td>Contact Number</td>
+                                                            <td><?php echo $res['oDATA'][$i]['poc2_contact'] ?></td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </td>
+                                    <form method="post">
+                                        <td>
+                                            <button type="submit" value="<?php echo $res['oDATA'][$i]['company_id'] ?>" name="delete">Delete</button>
+                                        </td>
+                                    </form>
+                                    </tr>
+                                <?php
+                            } ?>
                                 </table>
                             </div>
                     </div>
@@ -244,3 +244,6 @@ if (isset($_POST['delete']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
 
     }
 </script>
+
+
+<?php include('includes/templates/footer2.php') ?>

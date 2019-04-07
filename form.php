@@ -7,14 +7,14 @@ require_once("includes/classes/db.cls.php");
 require_once("includes/classes/sitedata.cls.php");
 
 $db = new SiteData();
-if(is_admin()){
-    if(isset($_GET['uid'])){
+if (is_admin()) {
+    if (isset($_GET['uid'])) {
         $uid = base64_decode($_GET['uid']);
         // echo $uid;
-    }else{
+    } else {
         redirect('admin.php');
     }
-}else{
+} else {
     if (!is_loggedin()) {
         redirect('new_login.php');
     }
@@ -22,7 +22,7 @@ if(is_admin()){
 }
 $sql = "SELECT status FROM " . STUD_DETAILS . " WHERE ldapid = '$uid'";
 $res = $db->getData($sql);
-if(is_admin() && $res['NO_OF_ITEMS'] == 0){
+if (is_admin() && $res['NO_OF_ITEMS'] == 0) {
     redirect('admin.php');
 }
 if (($res['oDATA'][0]['status'] >= 1) && is_loggedin()) {
@@ -49,6 +49,7 @@ $projects = $db->getData($sql);
 $sql = "SELECT * FROM " . EXTRA_CURR_ACTIVITY . " WHERE ldapid = '$uid'";
 $extra_curr_activity = $db->getData($sql);
 ?>
+
 <body>
     <?php include('includes/templates/top_bar_student.php'); ?>
     <div class="container-fluid">
@@ -83,17 +84,17 @@ $extra_curr_activity = $db->getData($sql);
                                         <div class="form-group">
                                             <label class="control-label col-sm-3">DoB <span style="color: red;">*</span>:</label>
                                             <div class="col-sm-9">
-                                                <input class="form-control" id="date" name="usr_dob" placeholder="YYYY-MM-DD "type="text" value="<?php echo $stud_data['oDATA'][0]['dob']; ?>"/>
+                                                <input class="form-control" id="date" name="usr_dob" placeholder="YYYY-MM-DD " type="text" value="<?php echo $stud_data['oDATA'][0]['dob']; ?>" />
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label col-sm-3">Degree <span style="color: red;">*</span>:</label>
                                             <div class="col-sm-9">
                                                 <select class="form-control" name="usr_degree">
-                                                    <?php if ($stud_data['NO_OF_ITEMS'] > 0) { ?> 
+                                                    <?php if ($stud_data['NO_OF_ITEMS'] > 0) { ?>
                                                         <option value="<?php echo $stud_data['oDATA'][0]['degree'] ?>"><?php echo $stud_data['oDATA'][0]['degree'] ?></option>
                                                     <?php }
-                                                    ?>
+                                                ?>
                                                     <option>--select--</option>
                                                     <option value="B.Tech">B.Tech</option>
                                                     <option value="M.Tech">M.Tech</option>
@@ -107,10 +108,10 @@ $extra_curr_activity = $db->getData($sql);
                                             <label class="control-label col-sm-3">Branch <span style="color: red;">*</span>:</label>
                                             <div class="col-sm-9">
                                                 <select class="form-control" name="usr_branch">
-                                                    <?php if ($stud_data['NO_OF_ITEMS'] > 0) { ?> 
+                                                    <?php if ($stud_data['NO_OF_ITEMS'] > 0) { ?>
                                                         <option value="<?php echo $stud_data['oDATA'][0]['branch'] ?>"><?php echo $stud_data['oDATA'][0]['branch'] ?></option>
                                                     <?php }
-                                                    ?>
+                                                ?>
                                                     <option>--select--</option>
                                                     <option value="Electrical Engineering and Computer Science">Electrical Engineering and Computer Science</option>
                                                     <option value="Mechanical Engineering">Mechanical Engineering</option>
@@ -125,11 +126,11 @@ $extra_curr_activity = $db->getData($sql);
                                             <label class="control-label col-sm-3">Semester <span style="color: red;">*</span>:</label>
                                             <div class="col-sm-9">
                                                 <select class="form-control" name="usr_semester">
-                                                    <?php if ($stud_data['NO_OF_ITEMS'] > 0) { ?> 
+                                                    <?php if ($stud_data['NO_OF_ITEMS'] > 0) { ?>
                                                         <option value="<?php echo $stud_data['oDATA'][0]['semester'] ?>"><?php echo $stud_data['oDATA'][0]['semester'] ?></option>
-                                                        <?php
-                                                    }
-                                                    ?>
+                                                    <?php
+                                                }
+                                                ?>
                                                     <option value="">--Select--</option>
                                                     <option value="1">1</option>
                                                     <option value="2">2</option>
@@ -148,12 +149,12 @@ $extra_curr_activity = $db->getData($sql);
                                             <label class="control-label col-sm-3">Upload Resume :</label>
                                             <div class="col-sm-9">
                                                 <input type="file" class="form-control" name="usr_file">
-                                                    <?php if(file_exists(FILE_PATH.$uid.'.pdf')) {?>
-                                                        <span style="color: green;">UPLOADED</span>
-                                                           <?php } else {?>
-                                                        <span style="color: red;">NOT UPLOADED</span>
-                                                           <?php } 
-                                                    ?>
+                                                <?php if (file_exists(FILE_PATH . $uid . '.pdf')) { ?>
+                                                    <span style="color: green;">UPLOADED</span>
+                                                <?php } else { ?>
+                                                    <span style="color: red;">NOT UPLOADED</span>
+                                                <?php }
+                                            ?>
                                             </div>
                                         </div>
                                     </div>
@@ -216,16 +217,16 @@ $extra_curr_activity = $db->getData($sql);
                                                 <td><input type="text" name="board1" class="form-control" value="<?php echo $acad_data['oDATA'][0]['board']; ?>"></td>
                                                 <td>
                                                     <select class="form-control" name="year1">
-                                                        <?php if ($acad_data['NO_OF_ITEMS'] > 0) { ?> 
+                                                        <?php if ($acad_data['NO_OF_ITEMS'] > 0) { ?>
                                                             <option value="<?php echo $acad_data['oDATA'][0]['year'] ?>"><?php echo $acad_data['oDATA'][0]['year'] ?></option>
-                                                            <?php
-                                                        }
-                                                        foreach ($yearList as $k1 => $v1) {
-                                                            ?>
-                                                            <option value="<?php echo $v1; ?>"><?php echo $k1; ?></option>
-                                                            <?php
-                                                        }
+                                                        <?php
+                                                    }
+                                                    foreach ($yearList as $k1 => $v1) {
                                                         ?>
+                                                            <option value="<?php echo $v1; ?>"><?php echo $k1; ?></option>
+                                                        <?php
+                                                    }
+                                                    ?>
 
                                                     </select>
                                                 </td>
@@ -240,16 +241,16 @@ $extra_curr_activity = $db->getData($sql);
                                                 <td><input type="text" name="board2" class="form-control" value="<?php echo $acad_data['oDATA'][1]['board']; ?>"></td>
                                                 <td>
                                                     <select class="form-control" name="year2">
-                                                        <?php if ($acad_data['NO_OF_ITEMS'] > 0) { ?> 
+                                                        <?php if ($acad_data['NO_OF_ITEMS'] > 0) { ?>
                                                             <option value="<?php echo $acad_data['oDATA'][1]['year'] ?>"><?php echo $acad_data['oDATA'][1]['year'] ?></option>
-                                                            <?php
-                                                        }
-                                                        foreach ($yearList as $k1 => $v1) {
-                                                            ?>
-                                                            <option value="<?php echo $v1; ?>"><?php echo $k1; ?></option>
-                                                            <?php
-                                                        }
+                                                        <?php
+                                                    }
+                                                    foreach ($yearList as $k1 => $v1) {
                                                         ?>
+                                                            <option value="<?php echo $v1; ?>"><?php echo $k1; ?></option>
+                                                        <?php
+                                                    }
+                                                    ?>
 
                                                     </select>
                                                 </td>
@@ -264,16 +265,16 @@ $extra_curr_activity = $db->getData($sql);
                                                 <td><input type="text" name="board3" class="form-control" value="<?php echo $acad_data['oDATA'][2]['board']; ?>"></td>
                                                 <td>
                                                     <select class="form-control" name="year3">
-                                                        <?php if ($acad_data['NO_OF_ITEMS'] > 0) { ?> 
+                                                        <?php if ($acad_data['NO_OF_ITEMS'] > 0) { ?>
                                                             <option value="<?php echo $acad_data['oDATA'][2]['year'] ?>"><?php echo $acad_data['oDATA'][2]['year'] ?></option>
-                                                            <?php
-                                                        }
-                                                        foreach ($yearList as $k1 => $v1) {
-                                                            ?>
-                                                            <option value="<?php echo $v1; ?>"><?php echo $k1; ?></option>
-                                                            <?php
-                                                        }
+                                                        <?php
+                                                    }
+                                                    foreach ($yearList as $k1 => $v1) {
                                                         ?>
+                                                            <option value="<?php echo $v1; ?>"><?php echo $k1; ?></option>
+                                                        <?php
+                                                    }
+                                                    ?>
 
                                                     </select>
                                                 </td>
@@ -288,16 +289,16 @@ $extra_curr_activity = $db->getData($sql);
                                                 <td><input type="text" name="board4" class="form-control" value="<?php echo $acad_data['oDATA'][3]['board']; ?>"></td>
                                                 <td>
                                                     <select class="form-control" name="year4">
-                                                        <?php if ($acad_data['NO_OF_ITEMS'] > 0) { ?> 
+                                                        <?php if ($acad_data['NO_OF_ITEMS'] > 0) { ?>
                                                             <option value="<?php echo $acad_data['oDATA'][3]['year'] ?>"><?php echo $acad_data['oDATA'][3]['year'] ?></option>
-                                                            <?php
-                                                        }
-                                                        foreach ($yearList as $k1 => $v1) {
-                                                            ?>
-                                                            <option value="<?php echo $v1; ?>"><?php echo $k1; ?></option>
-                                                            <?php
-                                                        }
+                                                        <?php
+                                                    }
+                                                    foreach ($yearList as $k1 => $v1) {
                                                         ?>
+                                                            <option value="<?php echo $v1; ?>"><?php echo $k1; ?></option>
+                                                        <?php
+                                                    }
+                                                    ?>
 
                                                     </select>
                                                 </td>
@@ -312,16 +313,16 @@ $extra_curr_activity = $db->getData($sql);
                                                 <td><input type="text" name="board5" class="form-control" value="<?php echo $acad_data['oDATA'][4]['board']; ?>"></td>
                                                 <td>
                                                     <select class="form-control" name="year5">
-                                                        <?php if ($acad_data['NO_OF_ITEMS'] > 0) { ?> 
+                                                        <?php if ($acad_data['NO_OF_ITEMS'] > 0) { ?>
                                                             <option value="<?php echo $acad_data['oDATA'][4]['year'] ?>"><?php echo $acad_data['oDATA'][4]['year'] ?></option>
-                                                            <?php
-                                                        }
-                                                        foreach ($yearList as $k1 => $v1) {
-                                                            ?>
-                                                            <option value="<?php echo $v1; ?>"><?php echo $k1; ?></option>
-                                                            <?php
-                                                        }
+                                                        <?php
+                                                    }
+                                                    foreach ($yearList as $k1 => $v1) {
                                                         ?>
+                                                            <option value="<?php echo $v1; ?>"><?php echo $k1; ?></option>
+                                                        <?php
+                                                    }
+                                                    ?>
 
                                                     </select>
                                                 </td>
@@ -336,16 +337,16 @@ $extra_curr_activity = $db->getData($sql);
                                                 <td><input type="text" name="board6" class="form-control" value="<?php echo $acad_data['oDATA'][5]['board']; ?>"></td>
                                                 <td>
                                                     <select class="form-control" name="year6">
-                                                        <?php if ($acad_data['NO_OF_ITEMS'] > 0) { ?> 
+                                                        <?php if ($acad_data['NO_OF_ITEMS'] > 0) { ?>
                                                             <option value="<?php echo $acad_data['oDATA'][5]['year'] ?>"><?php echo $acad_data['oDATA'][5]['year'] ?></option>
-                                                            <?php
-                                                        }
-                                                        foreach ($yearList as $k1 => $v1) {
-                                                            ?>
-                                                            <option value="<?php echo $v1; ?>"><?php echo $k1; ?></option>
-                                                            <?php
-                                                        }
+                                                        <?php
+                                                    }
+                                                    foreach ($yearList as $k1 => $v1) {
                                                         ?>
+                                                            <option value="<?php echo $v1; ?>"><?php echo $k1; ?></option>
+                                                        <?php
+                                                    }
+                                                    ?>
 
                                                     </select>
                                                 </td>
@@ -356,7 +357,7 @@ $extra_curr_activity = $db->getData($sql);
                                     </table>
                                 </div>
                             </div>
-                        </div> 
+                        </div>
                         <div class="col-md-12 col-xs-12">
                             <p><br></p>
                             <div class="panel panel-info">
@@ -393,7 +394,7 @@ $extra_curr_activity = $db->getData($sql);
                                         <?php } ?>
                                     </table>
                                 </div>
-                            </div>                 
+                            </div>
                         </div>
                         <div class="col-md-12 col-xs-12">
                             <p><br></p>
@@ -418,16 +419,16 @@ $extra_curr_activity = $db->getData($sql);
                                                     <td width="25%">
                                                         <input type="text" name="sa_year[]" class="form-control" id="spec3" value="<?php echo $achive_data['oDATA'][$i]['year']; ?>">
                                                     </td>
-                                                    <?php
-                                                }
-                                                ?>
+                                                <?php
+                                            }
+                                            ?>
                                                 <td>
                                                     <input type="button" class="btn btn-primary" style="cursor: pointer;" value="Add row" onclick="addRow('table1', 'sa_slno', 'sa_name', 'sa_year', 'spec', '0')">
                                                 </td>
                                             </tr>
-                                            <?php
-                                        } else {
-                                            ?>
+                                        <?php
+                                    } else {
+                                        ?>
                                             <tr>
                                                 <td width="70%">
                                                     <input type="hidden" name="sa_slno[]" id="spec1" value="">
@@ -440,12 +441,12 @@ $extra_curr_activity = $db->getData($sql);
                                                     <input type="button" class="btn btn-primary" style="cursor: pointer;" value="Add row" onclick="addRow('table1', 'sa_slno', 'sa_name', 'sa_year', 'spec', '0')">
                                                 </td>
                                             </tr>
-                                            <?php
-                                        }
-                                        ?>
+                                        <?php
+                                    }
+                                    ?>
                                     </table>
                                 </div>
-                            </div>                 
+                            </div>
                         </div>
                         <div class="col-md-12 col-xs-12">
                             <p><br></p>
@@ -488,7 +489,7 @@ $extra_curr_activity = $db->getData($sql);
                                         <?php } ?>
                                     </table>
                                 </div>
-                            </div>                 
+                            </div>
                         </div>
                         <div class="col-md-12 col-xs-12">
                             <p><br></p>
@@ -533,7 +534,7 @@ $extra_curr_activity = $db->getData($sql);
                                         <?php } ?>
                                     </table>
                                 </div>
-                            </div>                 
+                            </div>
                         </div>
                         <div class="col-md-12 col-xs-12">
                             <p><br></p>
@@ -578,7 +579,7 @@ $extra_curr_activity = $db->getData($sql);
                                         <?php } ?>
                                     </table>
                                 </div>
-                            </div>                 
+                            </div>
                         </div>
                         <div class="col-md-12 col-xs-12">
                             <p><br></p>
@@ -623,7 +624,7 @@ $extra_curr_activity = $db->getData($sql);
                                         <?php } ?>
                                     </table>
                                 </div>
-                            </div>                 
+                            </div>
                         </div>
                         <div class="col-md-12 col-xs-12">
                             <p><br></p>
@@ -661,15 +662,15 @@ $extra_curr_activity = $db->getData($sql);
                                         <?php } ?>
                                     </table>
                                 </div>
-                            </div>                 
-                        </div> 
+                            </div>
+                        </div>
                         <div>
                             <span><input type="submit" name="save-data" value="Save" class="btn btn-primary" style="margin-left:40%; margin-top:1%;" /></span>
-                            <?php if(is_admin()){ ?>
+                            <?php if (is_admin()) { ?>
                                 <span><input type="submit" name="approved" value="Approve" class="btn btn-primary" style="margin-top:1%;" /></span>
                                 <span><input type="submit" name="rejected" value="Reject" class="btn btn-danger" style="margin-top:1%;" /></span>
                             <?php } else { ?>
-                                    <span><input type="submit" name="submit-data" value="Submit" class="btn btn-danger" style="margin-top:1%;" /></span>
+                                <span><input type="submit" name="submit-data" value="Submit" class="btn btn-danger" style="margin-top:1%;" /></span>
                             <?php } ?>
                         </div>
                     </form>
@@ -678,3 +679,8 @@ $extra_curr_activity = $db->getData($sql);
             </div>
         </div>
     </div>
+
+
+
+
+    <?php include('includes/templates/footer2.php') ?>

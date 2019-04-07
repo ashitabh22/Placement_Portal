@@ -36,7 +36,9 @@ if (isset($_POST['delete']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
 <!--header and top bar ends here-->
 
 <body>
+	
 	<div class="container">
+		
 		<div class="row">
 			<div class="col-md-10 col-md-offset-1" id="content">
 
@@ -50,6 +52,7 @@ if (isset($_POST['delete']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
 							display: none;
 						}
 					</style>
+					
 					<div class="wrapper">
 						<div id="sub-header"></div>
 						<section class="content-header">
@@ -90,10 +93,12 @@ if (isset($_POST['delete']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
 															<th>Edit</th>
 															<th>View Applied Students</th>
 
+
 														</tr>
 														<?php for ($i = 0; $i < $res['NO_OF_ITEMS']; $i++) { ?>
-																<tr>
-																	<td><?php
+															<tr>
+																
+																<td><?php
 																	$q2 = "select * from all_jobs where post_id=" . $res['oDATA'][$i]['post_id'];
 																	$post_desc = $db->getData($q2);
 																	// pr($post_desc); die();
@@ -107,30 +112,30 @@ if (isset($_POST['delete']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
 																	//pr($comp_info); die();
 
 																	echo $comp_info['oDATA'][0]['company_name'] ?>
-																	</td>
+																</td>
 
-																	<td><?php
-																	
+																<td><?php
+
 																	// $q4 = "select * from all_jobs where post_id=".$post_id;
 																	// $res = $db->getData($q4);
 																	echo $res['oDATA'][$i]['job_title'] ?>
-																	</td>
+																</td>
 
-																	<td>
-																		<?php
+																<td>
+																	<?php
 																	// $q4 = "select * from all_jobs where company_id=" . $company_id;
-																	 //$res = $db->getData($q4);
+																	//$res = $db->getData($q4);
 																	$program_code = $res['oDATA'][$i]['program_code'];
-																	$q5 = "select * from program where o_code=".$program_code;
+																	$q5 = "select * from program where o_code=" . $program_code;
 																	$comp_info3 = $db->getData($q5);
 																	//pr($comp_info); die();
 
 																	echo $comp_info3['oDATA'][0]['program_name'] ?>
 
-																	</td>
+																</td>
 
-																	<td>
-																		<?php
+																<td>
+																	<?php
 																	// $q5 = "select * from posted_jobs_B_P where company_id=" . $company_id;
 																	// $comp_info3 = $db->getData($q5);
 																	$branch_code = $res['oDATA'][$i]['branch_code'];
@@ -139,161 +144,161 @@ if (isset($_POST['delete']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
 																	//pr($comp_info); die();
 
 																	echo $comp_info4['oDATA'][0]['branch_name'] ?>
-																	</td>
+																</td>
 
 
-																	<td>
-																		<button type="button" data-toggle="modal" data-target=<?php echo "#myModal" . $i ?>>View</button>
+																<td>
+																	<button type="button" data-toggle="modal" data-target=<?php echo "#myModal" . $i ?>>View</button>
 
-																															<!-- Modal -->
-																															<div class="modal fade" id=<?php echo "myModal" . $i ?> role="dialog">
-																															<div class="modal-dialog">
+																	<!-- Modal -->
+																	<div class="modal fade" id=<?php echo "myModal" . $i ?> role="dialog">
+																		<div class="modal-dialog">
 
-																																<!-- Modal content-->
-																																<div class="modal-content">
-																																	<div class="modal-header">
-																																		<button type="button" class="close" data-dismiss="modal">&times;</button>
-																																		<h4 class="modal-title">Details</h4>
-																																	</div>
-																																	<div class="modal-body">
-																																		<table class="table table-hover" id="modelTable">
-																																			<tr>
-																																				<th> Sr.</th>
-																																				<th>Job Info.</th>
-																																				<th>Details</th>
-																																			</tr>
-																																			<tr>
-																																				<td>1.</td>
-																																				<td>Company ID</td>
-																																				<td><?php echo $res['oDATA'][$i]['company_id'] ?></td>
+																			<!-- Modal content-->
+																			<div class="modal-content">
+																				<div class="modal-header">
+																					<button type="button" class="close" data-dismiss="modal">&times;</button>
+																					<h4 class="modal-title">Details</h4>
+																				</div>
+																				<div class="modal-body">
+																					<table class="table table-hover" id="modelTable">
+																						<tr>
+																							<th> Sr.</th>
+																							<th>Job Info.</th>
+																							<th>Details</th>
+																						</tr>
+																						<tr>
+																							<td>1.</td>
+																							<td>Company ID</td>
+																							<td><?php echo $res['oDATA'][$i]['company_id'] ?></td>
 
-																															</tr>
-																															<tr>
-																																<td>2.</td>
-																																<td>Job Description</td>
-																																<td><?php echo $res['oDATA'][$i]['job_description'] ?></td>
-																															</tr>
-																															<tr>
-																																<td>3.</td>
-																																<td>CGPA Requirement</td>
-																																<td><?php echo $res['oDATA'][$i]['cgpa_requirement'] ?></td>
-																															</tr>
-																															<tr>
-																																<td>4.</td>
-																																<td>Application Period</td>
-																																<td>FROM <?php echo $res['oDATA'][$i]['application_period_from'] ?> TO <?php echo $res['oDATA'][$i]['application_period_to'] ?> </td>
-																															</tr>
-																															<tr>
-																																<td>5.</td>
-																																<td>Minimum Package Offered</td>
-																																<td><?php echo $res['oDATA'][$i]['min_package_offered'] ?></td>
-																															</tr>
-																															<tr>
-																																<td>7.</td>
-																																<td>PPT Date</td>
-																																<td><?php echo $res['oDATA'][$i]['ppt_date'] ?></td>
-																															</tr>
-																															<tr>
-																																<td>8.</td>
-																																<td>Test Date</td>
-																																<td><?php echo $res['oDATA'][$i]['test_date'] ?></td>
-																															</tr>
-																															<tr>
-																																<td>9.</td>
-																																<td>Interview Date</td>
-																																<td><?php echo $res['oDATA'][$i]['interview_date'] ?></td>
-																															</tr>
-																															<tr>
-																																<td>10.</td>
-																																<td>Shortlisting Date</td>
-																																<td><?php echo $res['oDATA'][$i]['shortlisting_date'] ?></td>
-																															</tr>
+																						</tr>
+																						<tr>
+																							<td>2.</td>
+																							<td>Job Description</td>
+																							<td><?php echo $res['oDATA'][$i]['job_description'] ?></td>
+																						</tr>
+																						<tr>
+																							<td>3.</td>
+																							<td>CGPA Requirement</td>
+																							<td><?php echo $res['oDATA'][$i]['cgpa_requirement'] ?></td>
+																						</tr>
+																						<tr>
+																							<td>4.</td>
+																							<td>Application Period</td>
+																							<td>FROM <?php echo $res['oDATA'][$i]['application_period_from'] ?> TO <?php echo $res['oDATA'][$i]['application_period_to'] ?> </td>
+																						</tr>
+																						<tr>
+																							<td>5.</td>
+																							<td>Minimum Package Offered</td>
+																							<td><?php echo $res['oDATA'][$i]['min_package_offered'] ?></td>
+																						</tr>
+																						<tr>
+																							<td>7.</td>
+																							<td>PPT Date</td>
+																							<td><?php echo $res['oDATA'][$i]['ppt_date'] ?></td>
+																						</tr>
+																						<tr>
+																							<td>8.</td>
+																							<td>Test Date</td>
+																							<td><?php echo $res['oDATA'][$i]['test_date'] ?></td>
+																						</tr>
+																						<tr>
+																							<td>9.</td>
+																							<td>Interview Date</td>
+																							<td><?php echo $res['oDATA'][$i]['interview_date'] ?></td>
+																						</tr>
+																						<tr>
+																							<td>10.</td>
+																							<td>Shortlisting Date</td>
+																							<td><?php echo $res['oDATA'][$i]['shortlisting_date'] ?></td>
+																						</tr>
 
-																														</table>
-																													</div>
-																													<div class="modal-footer">
-																							
-																														<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-																													</div>
-																												</div>
-																											</div>
-																										</div>
-																									</td>
+																					</table>
+																				</div>
+																				<div class="modal-footer">
 
-																									<td>
-																										<form method="post" action="">
-																											<button type="submit" value="<?php echo $res['oDATA'][$i]['post_id'] ?>" name="delete">Delete</button>
-																															</form>
-																														</td>
+																					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																</td>
 
-																														<td>
-																															<form method="post" action="editjobs.php">
+																<td>
+																	<form method="post" action="">
+																		<button type="submit" value="<?php echo $res['oDATA'][$i]['post_id'] ?>" name="delete">Delete</button>
+																	</form>
+																</td>
 
-																																<button type="submit" value="<?php echo $res['oDATA'][$i]['post_id'] ?>" name="edit">Edit</button>
-																															</form>
-																														</td>
-																														<td>
-																															<button type="button" data-toggle="modal" data-target=<?php echo "#myModal1" . $i ?>>View Applied Students</button>
+																<td>
+																	<form method="post" action="editjobs.php">
 
-																															<!-- Modal -->
-																															<div class="modal fade" id=<?php echo "myModal1" . $i ?> role="dialog">
-																															<div class="modal-dialog">
+																		<button type="submit" value="<?php echo $res['oDATA'][$i]['post_id'] ?>" name="edit">Edit</button>
+																	</form>
+																</td>
+																<td>
+																	<button type="button" data-toggle="modal" data-target=<?php echo "#myModal1" . $i ?>>View Applied Students</button>
 
-																																<!-- Modal content-->
-																																<div class="modal-content">
-																																	<div class="modal-header">
-																																		<button type="button" class="close" data-dismiss="modal">&times;</button>
-																																		<h4 class="modal-title">Details</h4>
-																																	</div>
-																																	<div class="modal-body">
-																																		<table class="table table-hover" id="modelTable">
-																																			<tr>
-																																				<th> ldapid</th>
-																																				<th>Name</th>
-																																				<th>Branch</th>
-																																				<th>Program</th>
+																	<!-- Modal -->
+																	<div class="modal fade" id=<?php echo "myModal1" . $i ?> role="dialog">
+																		<div class="modal-dialog">
 
-																																			</tr>
-																																			<?php
-																															$post_id = $res2['oDATA'][$i]['post_id'];
-																															$b_q = $res2['oDATA'][$i]['branch_code'];
-																															$p_q = $res2['oDATA'][$i]['program_code'];
-																															$q_ldap_id = "SELECT * FROM applicable_jobs WHERE post_id='" . $post_id . "' AND status >= 4";
-																															$res_applied_stud = $db->getData($q_ldap_id);
-																															for ($k = 0; $k < $res_applied_stud['NO_OF_ITEMS']; $k++) { ?>
-																																<tr>
-																																	<td><?php echo $res_applied_stud['oDATA'][$k]['ldapid'] ?></td>
-																																<td><?php
-																																$q_ldap_name = "select * from personal_details where ldapid = " . $res_applied_stud['oDATA'][$k]['ldapid'];
-																																$res_ldap_name = $db->getData($q_ldap_name);
-																																echo $res_ldap_name['oDATA'][0]['name'];
-																																?></td>
-																																<td><?php
-																																echo $db->getData("select * from branch where o_code = " . $b_q)['oDATA'][0]['branch_name'];
-																																?></td>
-																																<td><?php
-																																echo $db->getData("select * from program where o_code = " . $b_q)['oDATA'][0]['program_name'];
-																																?></td>
-																																</tr>
-																																									<?php
-																															} ?>
-																															</table>
+																			<!-- Modal content-->
+																			<div class="modal-content">
+																				<div class="modal-header">
+																					<button type="button" class="close" data-dismiss="modal">&times;</button>
+																					<h4 class="modal-title">Details</h4>
+																				</div>
+																				<div class="modal-body">
+																					<table class="table table-hover" id="modelTable">
+																						<tr>
+																							<th> ldapid</th>
+																							<th>Name</th>
+																							<th>Branch</th>
+																							<th>Program</th>
 
-																														</div>
-																														<div class="modal-footer">
+																						</tr>
+																						<?php
+																						$post_id = $res2['oDATA'][$i]['post_id'];
+																						$b_q = $res2['oDATA'][$i]['branch_code'];
+																						$p_q = $res2['oDATA'][$i]['program_code'];
+																						$q_ldap_id = "SELECT * FROM applicable_jobs WHERE post_id='" . $post_id . "' AND status >= 4";
+																						$res_applied_stud = $db->getData($q_ldap_id);
+																						for ($k = 0; $k < $res_applied_stud['NO_OF_ITEMS']; $k++) { ?>
+																							<tr>
+																								<td><?php echo $res_applied_stud['oDATA'][$k]['ldapid'] ?></td>
+																								<td><?php
+																									$q_ldap_name = "select * from personal_details where ldapid = " . $res_applied_stud['oDATA'][$k]['ldapid'];
+																									$res_ldap_name = $db->getData($q_ldap_name);
+																									echo $res_ldap_name['oDATA'][0]['name'];
+																									?></td>
+																								<td><?php
+																									echo $db->getData("select * from branch where o_code = " . $b_q)['oDATA'][0]['branch_name'];
+																									?></td>
+																								<td><?php
+																									echo $db->getData("select * from program where o_code = " . $b_q)['oDATA'][0]['program_name'];
+																									?></td>
+																							</tr>
+																						<?php
+																					} ?>
+																					</table>
 
-																															<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-																														</div>
-																													</div>
-																												</div>
-																											</div>
-																										</td>
+																				</div>
+																				<div class="modal-footer">
+
+																					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																</td>
 
 
-																									</tr>
+															</tr>
 
-																																	<?php
-																														} ?>
+														<?php
+													} ?>
 
 													</table>
 												</div>
@@ -330,33 +335,44 @@ if (isset($_POST['delete']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
 		tr = table.getElementsByTagName("tr");
 
 		for (i = 0; i < tr.length; i = i + 1) {
+									
+			
+			lengthofcell = tr[i].cells.length;
+			
+           
+
+
+			if (lengthofcell ==8) {
 			td1 = tr[i].getElementsByTagName("td")[0];
 			td2 = tr[i].getElementsByTagName("td")[1];
-			td5 = tr[i].getElementsByTagName("td")[2];
-			if ((i - 1) % 13 == 0) {
-				td3 = tr[i + 5].getElementsByTagName("td")[2];
-				td4 = tr[i + 4].getElementsByTagName("td")[2];
-			}
+			td3 = tr[i].getElementsByTagName("td")[2];
+			td4 = tr[i].getElementsByTagName("td")[3];
+			
+			console.log(td1);
 
-			console.log(td2);
+			
 
-			if (td1 || td2) {
+			if (td1 || td2||td3||td4) {
 				txtValue1 = td1.textContent || td1.innerText;
 				txtValue2 = td2.textContent || td2.innerText;
-				txtValue5 = td5.textContent || td5.innerText;
+				txtValue3 = td3.textContent || td3.innerText;
+				txtValue4 = td4.textContent || td4.innerText;
+		
 
-				if ((i - 1) % 13 == 0) {
-					txtValue3 = td3.textContent || td3.innerText;
-					txtValue4 = td4.textContent || td4.innerText;
-					if (txtValue1.toUpperCase().indexOf(filter) > -1 || txtValue2.toUpperCase().indexOf(filter) > -1 || txtValue3.toUpperCase().indexOf(filter) > -1 || txtValue4.toUpperCase().indexOf(filter) > -1 || txtValue5.toUpperCase().indexOf(filter) > -1) {
+				
+					
+					if (txtValue1.toUpperCase().indexOf(filter) > -1 || txtValue2.toUpperCase().indexOf(filter) > -1 || txtValue3.toUpperCase().indexOf(filter) > -1 || txtValue4.toUpperCase().indexOf(filter) > -1 ) {
 						tr[i].style.display = "";
 					} else {
 						tr[i].style.display = "none";
 					}
 				}
-			}
+			} 
 		}
 
 
 	}
 </script>
+
+
+<?php include('includes/templates/footer2.php') ?>

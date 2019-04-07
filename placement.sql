@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 05, 2019 at 07:33 PM
+-- Generation Time: Apr 07, 2019 at 07:24 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 5.6.40
 
@@ -58,7 +58,12 @@ INSERT INTO `academic_details` (`slno`, `ldapid`, `exam`, `board`, `year`, `disc
 (13, 11640680, 'B.teck', 'IIT Bhilai', 2017, 'cse', '7.5'),
 (14, 11740160, 'B.teck', 'IIT Bhilai', 1974, 'cse', '6'),
 (15, 11740970, '12', 'MGPS', 2017, 'PCM', '92%'),
-(16, 11740610, '10th', 'CBSE', 2015, 'CBSE', '96.40%');
+(16, 11740610, '10th', 'CBSE', 2015, 'CBSE', '96.40%'),
+(17, 11640750, 'Higher secondary', 'CBSE', 2016, 'Science', '9'),
+(18, 11640800, 'sdafasd', 'asdf', 1973, 'asdfas', '7'),
+(19, 11640960, '122', '222', 1971, 'Wer', '88'),
+(20, 11640920, 'asdf', 'asdf', 1974, 'asdf', '8'),
+(21, 11640490, 'asdf', 'asdf', 1972, 'asdfas', '3');
 
 -- --------------------------------------------------------
 
@@ -90,6 +95,43 @@ INSERT INTO `achievement_details` (`slno`, `ldapid`, `achievement`, `year`) VALU
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `all_jobs`
+--
+
+CREATE TABLE `all_jobs` (
+  `post_id` int(11) NOT NULL,
+  `company_id` int(30) NOT NULL,
+  `job_title` text NOT NULL,
+  `job_description` text NOT NULL,
+  `cgpa_requirement` float NOT NULL,
+  `branch_code` int(11) NOT NULL,
+  `program_code` int(11) NOT NULL,
+  `application_period_from` date NOT NULL,
+  `application_period_to` date NOT NULL,
+  `min_package_offered` bigint(20) NOT NULL,
+  `ppt_date` date NOT NULL,
+  `test_date` date NOT NULL,
+  `interview_date` date NOT NULL,
+  `shortlisting_date` date NOT NULL,
+  `academic_year` year(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `all_jobs`
+--
+
+INSERT INTO `all_jobs` (`post_id`, `company_id`, `job_title`, `job_description`, `cgpa_requirement`, `branch_code`, `program_code`, `application_period_from`, `application_period_to`, `min_package_offered`, `ppt_date`, `test_date`, `interview_date`, `shortlisting_date`, `academic_year`) VALUES
+(1, 2, 'Snnsns', 'Sbsbs', 8, 1, 1, '0000-00-00', '0000-00-00', 202819, '2019-04-06', '0000-00-00', '0000-00-00', '0000-00-00', 0000),
+(2, 2, 'Snnsns', 'Sbsbs', 0, 1, 2, '0000-00-00', '0000-00-00', 202819, '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', 0000),
+(3, 2, 'Snnsns', 'Sbsbs', 0, 1, 3, '0000-00-00', '0000-00-00', 202819, '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', 0000),
+(4, 2, 'Snnsns', 'Sbsbs', 0, 2, 1, '0000-00-00', '0000-00-00', 202819, '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', 0000),
+(6, 2, 'need a doctor of philosopy', 'Sbsbs', 8, 2, 3, '0000-00-00', '0000-00-00', 202819, '2019-04-06', '0000-00-00', '0000-00-00', '0000-00-00', 0000),
+(8, 3, 'sdljf s', 'asdknf ', 5, 1, 3, '2019-04-10', '2019-04-06', 25, '2019-04-06', '2019-04-18', '2019-04-18', '2019-04-18', 2019),
+(9, 3, 'changed', 'asdknf ', 5, 2, 3, '2019-04-10', '2019-04-06', 25, '0000-00-00', '2019-04-18', '2019-04-18', '2019-04-18', 2019);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `applicable_jobs`
 --
 
@@ -105,10 +147,13 @@ CREATE TABLE `applicable_jobs` (
 --
 
 INSERT INTO `applicable_jobs` (`ldapid`, `status`, `post_id`, `time_stamp`) VALUES
-(11640680, 10, 1, '2019-04-05 17:28:33'),
+(11640680, 5, 1, '2019-04-06 11:30:29'),
 (11740610, 6, 1, '2019-04-05 17:28:40'),
 (11740970, 8, 1, '2019-04-05 17:25:46'),
-(11740160, 11, 1, '2019-04-05 17:28:59');
+(11740160, 11, 1, '2019-04-05 17:28:59'),
+(11640750, 10, 1, '2019-04-06 06:46:20'),
+(11640960, 7, 6, '2019-04-06 06:46:08'),
+(11640490, 2, 2, '2019-04-06 07:06:05');
 
 -- --------------------------------------------------------
 
@@ -138,6 +183,26 @@ INSERT INTO `archived_companies` (`company_id`, `company_name`, `email`, `point_
 ('2', 'GHI', 'ghi@gmail.com', 'kljszdfkldf', 134235345, 'arjfoairef, hdfogidofg, oiiajroigjap.', 'akljhfolshdfolasdf.com', 'uaierfhoiahfbkbj akjsdfga jaklwlfkj.', 'ioidfjgksdg'),
 ('3', 'FGH', 'fgh@gmail.com', '643512', 456132, 'olikugyjSATD', 'www.fgh.com', 'oiugyghlk', 'ihugyftdhc'),
 ('4', 'IJK', 'iukyjthd', '94562312', 95622, 'posiukdysf', 'www.ijk.com', 'iukgaySj', 'oilugsadysv');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `branch`
+--
+
+CREATE TABLE `branch` (
+  `o_code` int(2) NOT NULL,
+  `branch_code` varchar(10) NOT NULL,
+  `branch_name` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `branch`
+--
+
+INSERT INTO `branch` (`o_code`, `branch_code`, `branch_name`) VALUES
+(1, 'EECS', 'Electrical Engineering and Computer Science'),
+(2, 'ME', 'Mechanical Engineering ');
 
 -- --------------------------------------------------------
 
@@ -239,7 +304,12 @@ CREATE TABLE `personal_details` (
 --
 
 INSERT INTO `personal_details` (`ldapid`, `name`, `roll_number`, `dob`, `degree`, `branch`, `semester`, `email`, `phone`, `present_addr`, `permanent_addr`, `dream_company`, `status`, `time_stamp`) VALUES
+(11640490, 'MLL', 11640490, '2001-01-10', 'M.Tech', 'Electrical Engineering and Computer Science', 6, 'sriharsha@iitbhilai.ac.in', '7004109457', '', '', '', 2, '2019-04-06 07:05:50'),
 (11640680, 'Pradeep Kumar', 11640680, '2019-03-19', 'B.Tech', 'Electrical Engineering and Computer Science', 7, 'pradeepk@iitbhilai.ac.in', '7004109457', '', '', '', 2, '2019-04-01 06:19:20'),
+(11640750, 'Rahul Dewangan', 11640750, '1997-12-25', 'B.Tech', 'Electrical Engineering and Computer Science', 6, 'rahuld@iitbhilai.ac.in', '7724882567', '', '', '', 2, '2019-04-06 05:58:14'),
+(11640800, 'Rishabh Kumar', 11640800, '2019-03-19', 'M.Tech', 'Mechanical Engineering', 5, 'rishabhk@iitbhilai.ac.in', '7004109457', '', '', '', 2, '2019-04-06 06:15:16'),
+(11640920, 'Sharad Roy', 11640920, '2001-01-10', 'M.Tech', 'Mechanical Engineering', 6, 'sharadr@iitbhilai.ac.in', '7004109457', '', '', '', 2, '2019-04-06 06:59:21'),
+(11640960, 'Shubham Agrawal', 11640960, '0000-00-00', 'Ph.D.', 'Mechanical Engineering', 6, 'shubhagrawal2693@gmail.com', '8871162693', 'IIT Bhilai, Sejbahar', '', 'IIT Bhilai', 2, '2019-04-06 06:22:48'),
 (11740160, 'lalalalalala', 11740160, '2019-03-19', 'B.Tech', 'Electrical Engineering and Computer Science', 1, 'pradeepk@iitbhilai.ac.in', '1321313451', '', '', '', 2, '2019-04-05 15:47:08'),
 (11740610, 'Pallavi Lohkare', 11740610, '2000-02-01', 'B.Tech', 'Electrical Engineering and Computer Science', 4, 'pallavil@iitbhilai.ac.in', '9168127970', '', '', '', 2, '2019-04-05 15:47:36'),
 (11740970, 'Shivani Tripathi', 11740970, '2001-01-10', 'B.Tech', 'Electrical Engineering and Computer Science', 4, 'shivanit@iitbhilai.ac.in', '8949667919', '', '', '', 2, '2019-04-05 15:47:22'),
@@ -312,7 +382,29 @@ INSERT INTO `ppt_list` (`ldapid`, `company_id`, `attendance`) VALUES
 (91600070, 2, 0),
 (41800060, 2, 0),
 (41800070, 2, 0),
-(61900020, 2, 0);
+(61900020, 2, 0),
+(11640960, 3, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `program`
+--
+
+CREATE TABLE `program` (
+  `o_code` int(2) NOT NULL,
+  `program_name` text NOT NULL,
+  `program_code` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `program`
+--
+
+INSERT INTO `program` (`o_code`, `program_name`, `program_code`) VALUES
+(1, 'Bachelor of Technology', 'B.Tech'),
+(2, 'Master of Technology', 'M.Tech'),
+(3, 'Doctor of Philosophy', 'Ph.D.');
 
 -- --------------------------------------------------------
 
@@ -396,7 +488,12 @@ CREATE TABLE `resume_usr` (
 
 INSERT INTO `resume_usr` (`ldapid`, `login_timestamp`) VALUES
 (0, '2019-04-02 15:25:25'),
+(11640490, '2019-04-06 07:02:18'),
 (11640680, '2019-03-19 09:35:40'),
+(11640750, '2019-04-06 05:53:30'),
+(11640800, '2019-04-06 06:09:24'),
+(11640920, '2019-04-06 06:53:48'),
+(11640960, '2019-04-06 06:18:20'),
 (11740160, '2019-04-01 17:34:57'),
 (11740200, '2019-04-05 15:18:33'),
 (11740270, '2019-04-05 15:03:20'),
@@ -410,6 +507,7 @@ INSERT INTO `resume_usr` (`ldapid`, `login_timestamp`) VALUES
 (41800070, '2019-03-08 05:34:12'),
 (61900020, '2019-03-12 11:03:19'),
 (71800160, '2019-03-12 12:31:21'),
+(81800030, '2019-04-06 11:47:15'),
 (91600070, '2019-03-12 10:46:40');
 
 -- --------------------------------------------------------
@@ -517,16 +615,31 @@ ALTER TABLE `achievement_details`
   ADD KEY `ldapid` (`ldapid`);
 
 --
+-- Indexes for table `all_jobs`
+--
+ALTER TABLE `all_jobs`
+  ADD PRIMARY KEY (`post_id`),
+  ADD KEY `company_id` (`company_id`);
+
+--
 -- Indexes for table `applicable_jobs`
 --
 ALTER TABLE `applicable_jobs`
-  ADD KEY `ldapid` (`ldapid`);
+  ADD KEY `ldapid` (`ldapid`),
+  ADD KEY `post_id` (`post_id`);
 
 --
 -- Indexes for table `archived_companies`
 --
 ALTER TABLE `archived_companies`
   ADD PRIMARY KEY (`company_id`);
+
+--
+-- Indexes for table `branch`
+--
+ALTER TABLE `branch`
+  ADD PRIMARY KEY (`o_code`),
+  ADD UNIQUE KEY `o_code` (`o_code`);
 
 --
 -- Indexes for table `extra_curricular_activities_details`
@@ -567,6 +680,13 @@ ALTER TABLE `placement_status`
 ALTER TABLE `positions_of_responsibility_details`
   ADD PRIMARY KEY (`slno`),
   ADD KEY `ldapid` (`ldapid`);
+
+--
+-- Indexes for table `program`
+--
+ALTER TABLE `program`
+  ADD PRIMARY KEY (`o_code`),
+  ADD UNIQUE KEY `o_code` (`o_code`);
 
 --
 -- Indexes for table `project_details`
@@ -610,13 +730,25 @@ ALTER TABLE `work_experiences`
 -- AUTO_INCREMENT for table `academic_details`
 --
 ALTER TABLE `academic_details`
-  MODIFY `slno` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `slno` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `achievement_details`
 --
 ALTER TABLE `achievement_details`
   MODIFY `slno` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `all_jobs`
+--
+ALTER TABLE `all_jobs`
+  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `branch`
+--
+ALTER TABLE `branch`
+  MODIFY `o_code` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `extra_curricular_activities_details`
@@ -635,6 +767,12 @@ ALTER TABLE `internship_details`
 --
 ALTER TABLE `positions_of_responsibility_details`
   MODIFY `slno` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `program`
+--
+ALTER TABLE `program`
+  MODIFY `o_code` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `project_details`
@@ -670,6 +808,12 @@ ALTER TABLE `academic_details`
 ALTER TABLE `achievement_details`
   ADD CONSTRAINT `achievement_details_ibfk_1` FOREIGN KEY (`ldapid`) REFERENCES `resume_usr` (`ldapid`),
   ADD CONSTRAINT `achievement_details_ibfk_2` FOREIGN KEY (`ldapid`) REFERENCES `resume_usr` (`ldapid`);
+
+--
+-- Constraints for table `applicable_jobs`
+--
+ALTER TABLE `applicable_jobs`
+  ADD CONSTRAINT `applicable_jobs_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `all_jobs` (`post_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `extra_curricular_activities_details`

@@ -15,14 +15,14 @@ if (is_admin()) {
     }
 } else {
     if (!is_loggedin()) {
-        redirect('login.php');
+        redirect('new_login.php');
     }
     $uid = $_SESSION[SES]['user'];
 }
 $sql = "SELECT * FROM " . STUD_DETAILS . " WHERE ldapid = '$uid'";
 $personal_details = $db->getData($sql);
 if ($personal_details['oDATA'][0]['status'] == 0) {
-    redirect($BASE_URL . "login.php");
+    redirect($BASE_URL . "new_login.php");
 }
 $sql = "SELECT * FROM " . ACAD_DETAILS . " WHERE ldapid = '$uid'";
 $academic_details = $db->getData($sql);
@@ -249,3 +249,6 @@ if (is_admin()) {
             </div>
         </div>
     </div> 
+    
+
+    <?php include('includes/templates/footer2.php') ?>

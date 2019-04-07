@@ -26,7 +26,7 @@ if (is_admin()) {
 
     <div class="col-md-4"></div>
     <div class="col-md-4">
-        <div class="container-fluid">
+        <div class="container-fluid" style="padding:10%">
             <br>
 
             <div class="signin-form">
@@ -66,3 +66,4 @@ if (is_admin()) {
         </div>
     </div>
 
+<?php include('includes/templates/footer2.php') ?>

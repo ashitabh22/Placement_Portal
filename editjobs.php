@@ -34,11 +34,11 @@ $comp_info = $db->getData($q3);
 $q4 = "select * from all_jobs where company_id='$company_id'";
 $comp_info2 = $db->getData($q4);
 
-$program_code=$post_desc['oDATA'][0]['program_code'];
+$program_code = $post_desc['oDATA'][0]['program_code'];
 $q5 = "select * from program where o_code='$program_code'";
 $comp_info3 = $db->getData($q5);
 
-$branch_code=$post_desc['oDATA'][0]['branch_code'];
+$branch_code = $post_desc['oDATA'][0]['branch_code'];
 $q6 = "select * from branch where o_code='$branch_code'";
 $comp_info4 = $db->getData($q6);
 
@@ -46,12 +46,12 @@ $comp_info4 = $db->getData($q6);
 
 
 if (isset($_POST['submit']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
-    
-//     global $company_id;
-//     echo $company_id;
-//    die();
-// // echo $GLOBALS['post_id'];
-   $post_id = $_POST['post_id'];
+
+    //     global $company_id;
+    //     echo $company_id;
+    //    die();
+    // // echo $GLOBALS['post_id'];
+    $post_id = $_POST['post_id'];
 
     $id = $_POST['submit'];
 
@@ -68,32 +68,32 @@ if (isset($_POST['submit']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     $interview = $_POST['interview_date'];
     $shortlist = $_POST['shortlist_date'];
     $year = $_POST['academic_year'];
-  
+
     $q2 = "select * from all_jobs where post_id='$post_id'";
-$post_desc = $db->getData($q2);
+    $post_desc = $db->getData($q2);
 
-$program_code=$post_desc['oDATA'][0]['program_code'];
-$q5 = "select * from program where o_code='$program_code'";
-$comp_info3 = $db->getData($q5);
+    $program_code = $post_desc['oDATA'][0]['program_code'];
+    $q5 = "select * from program where o_code='$program_code'";
+    $comp_info3 = $db->getData($q5);
 
-$branch_code=$post_desc['oDATA'][0]['branch_code'];
-$q6 = "select * from branch where o_code='$branch_code'";
-$comp_info4 = $db->getData($q6);
+    $branch_code = $post_desc['oDATA'][0]['branch_code'];
+    $q6 = "select * from branch where o_code='$branch_code'";
+    $comp_info4 = $db->getData($q6);
 
     $q7 = "select * from program where program_code='$program'";
     $comp_info5 = $db->getData($q7);
-   
+
     $program_code = $comp_info5['oDATA'][0]['o_code'];
 
     $q8 = "select * from branch where branch_code='$branch'";
     $comp_info6 = $db->getData($q8);
     $branch_code = $comp_info6['oDATA'][0]['o_code'];
-    
+
     $q9 = "select * from all_jobs where company_id='$id' AND program_code= '$program_code' AND branch_code = '$branch_code'";
     $posted = $db->getData($q9);
-   
-   
-        $query = "UPDATE all_jobs SET 
+
+
+    $query = "UPDATE all_jobs SET 
                         job_title='$title' 
                         , job_description='$des'
                         , cgpa_requirement='$cgpa'
@@ -106,18 +106,14 @@ $comp_info4 = $db->getData($q6);
                         , shortlisting_date='$shortlist'
                         , academic_year='$year'
                         
-                        , company_id='$id'  WHERE post_id=".$post_id;
+                        , company_id='$id'  WHERE post_id=" . $post_id;
 
-        if (mysql_query($query)) {
-            redirect('PostedJobs.php');
-        } else {
-            echo "error:";
-            die(mysql_error());
-        
-        }
-
-
-    
+    if (mysql_query($query)) {
+        redirect('PostedJobs.php');
+    } else {
+        echo "error:";
+        die(mysql_error());
+    }
 }
 
 include('includes/templates/top_bar_admin.php');
@@ -132,7 +128,7 @@ include('includes/templates/top_bar_admin.php');
 <body>
     <div class="container">
         <div class="row">
-        <div class="col-md-8 col-md-offset-2" id="content">
+            <div class="col-md-8 col-md-offset-2" id="content">
 
                 <body id="content">
                     <div class="panel panel-default">
@@ -169,26 +165,26 @@ include('includes/templates/top_bar_admin.php');
                                                 <label>
                                                     <b style="color:red;">*</b>Job Title
                                                 </label>
-                                                <input type="text" class="form-control" placeholder="Enter Job Title" name="Job_Title" required value="<?php echo $comp_info2['oDATA'][0]['job_title']?>"/>
+                                                <input type="text" class="form-control" placeholder="Enter Job Title" name="Job_Title" required value="<?php echo $comp_info2['oDATA'][0]['job_title'] ?>" />
                                             </div>
                                             <div class="form-group">
                                                 <label>
                                                     <b style="color:red;">*</b>Job Description
                                                 </label>
-                                                <input type="text" class="form-control" placeholder="Enter Job Description" name="Job_Description" value="<?php echo $comp_info2['oDATA'][0]['job_description']?>" required />
+                                                <input type="text" class="form-control" placeholder="Enter Job Description" name="Job_Description" value="<?php echo $comp_info2['oDATA'][0]['job_description'] ?>" required />
                                             </div>
                                             <div class="form-group">
                                                 <label>
                                                     CGPA Requirement
                                                 </label>
-                                                <input type="number" min="0" step="any" class="form-control" placeholder="Enter CGPA Requirement" name="CGPA_Requirement" value="<?php echo $comp_info2['oDATA'][0]['cgpa_requirement']?>" />
+                                                <input type="number" min="0" step="any" class="form-control" placeholder="Enter CGPA Requirement" name="CGPA_Requirement" value="<?php echo $comp_info2['oDATA'][0]['cgpa_requirement'] ?>" />
                                             </div>
                                             <div class="form-group">
                                                 <label>
                                                     <b style="color:red;">*</b>Program
                                                 </label>
                                                 <select name="Program" class="selectpicker" disabled>
-                                                <option selected value="<?php echo $comp_info3['oDATA'][0]['o_code']  ?>"> <?php echo $comp_info3['oDATA'][0]['program_name']  ?> </option>
+                                                    <option selected value="<?php echo $comp_info3['oDATA'][0]['o_code']  ?>"> <?php echo $comp_info3['oDATA'][0]['program_name']  ?> </option>
 
                                                 </select>
                                             </div>
@@ -197,8 +193,8 @@ include('includes/templates/top_bar_admin.php');
                                                     <b style="color:red;">*</b>Branch
                                                 </label>
                                                 <select name="Branch" class="selectpicker" data-live-search="true" disabled>
-                                                <option selected value="<?php echo $comp_info4['oDATA'][0]['o_code']  ?>"> <?php echo $comp_info4['oDATA'][0]['branch_name'] ?> </option>
-                                               
+                                                    <option selected value="<?php echo $comp_info4['oDATA'][0]['o_code']  ?>"> <?php echo $comp_info4['oDATA'][0]['branch_name'] ?> </option>
+
                                                 </select>
                                             </div>
                                             <div class="form-group">
@@ -208,51 +204,51 @@ include('includes/templates/top_bar_admin.php');
                                                 <label>
                                                     FROM
                                                 </label>
-                                                <input type="date" name="Application_Period_from" id="interviewdate" value="<?php echo $comp_info2['oDATA'][0]['application_period_from']?>"/>
+                                                <input type="date" name="Application_Period_from" id="interviewdate" value="<?php echo $comp_info2['oDATA'][0]['application_period_from'] ?>" />
                                                 <label>
-                                                   TO
+                                                    TO
                                                 </label>
-                                                <input type="date" name="Application_Period_to" id="interviewdate" value="<?php echo $comp_info2['oDATA'][0]['application_period_to']?>"/>
+                                                <input type="date" name="Application_Period_to" id="interviewdate" value="<?php echo $comp_info2['oDATA'][0]['application_period_to'] ?>" />
                                             </div>
                                             <div class="form-group">
                                                 <label>
                                                     <b style="color:red;">*</b>Minimum Package Offered
                                                 </label>
-                                                <input type="text" class="form-control" placeholder="Enter Minimum Package Offered" name="Minimum_Package_Offered" value="<?php echo $comp_info2['oDATA'][0]['min_package_offered']?>" required />
+                                                <input type="text" class="form-control" placeholder="Enter Minimum Package Offered" name="Minimum_Package_Offered" value="<?php echo $comp_info2['oDATA'][0]['min_package_offered'] ?>" required />
                                             </div>
                                             <div class="form-group">
                                                 <label>
                                                     PPT Date
                                                 </label>
-                                                <input type="date" name="ppt_date" id="pptdate" value="<?php echo $comp_info2['oDATA'][0]['ppt_date']?>">
+                                                <input type="date" name="ppt_date" id="pptdate" value="<?php echo $comp_info2['oDATA'][0]['ppt_date'] ?>">
                                             </div>
                                             <div class="form-group">
                                                 <label>
                                                     Shortlisting Date
                                                 </label>
-                                                <input type="date" name="shortlist_date" id="shortlistdate" value="<?php echo $comp_info2['oDATA'][0]['shortlisting_date']?>">
+                                                <input type="date" name="shortlist_date" id="shortlistdate" value="<?php echo $comp_info2['oDATA'][0]['shortlisting_date'] ?>">
                                             </div>
                                             <div class="form-group">
                                                 <label>
                                                     Test Date
                                                 </label>
-                                                <input type="date" name="test_date" id="testdate" value="<?php echo $comp_info2['oDATA'][0]['test_date']?>">
+                                                <input type="date" name="test_date" id="testdate" value="<?php echo $comp_info2['oDATA'][0]['test_date'] ?>">
                                             </div>
                                             <div class="form-group">
                                                 <label>
                                                     Interview Date
-                                                    <input type="date" name="interview_date" id="interviewdate" value="<?php echo $comp_info2['oDATA'][0]['interview_date']?>">
+                                                    <input type="date" name="interview_date" id="interviewdate" value="<?php echo $comp_info2['oDATA'][0]['interview_date'] ?>">
                                             </div>
                                             <div class="form-group">
                                                 <label>
                                                     Academic-Year
                                                 </label>
-                                                <input type="number" min="0" step="any" class="form-control" placeholder="Enter Academic Year" name="academic_year" id="academic_year" value="<?php echo $comp_info2['oDATA'][0]['academic_year']?>">
+                                                <input type="number" min="0" step="any" class="form-control" placeholder="Enter Academic Year" name="academic_year" id="academic_year" value="<?php echo $comp_info2['oDATA'][0]['academic_year'] ?>">
                                             </div>
 
                                             <hr />
                                             <div class="form-group">
-                                                <input type="hidden" name ="post_id" value=<?php echo $post_id; ?>>
+                                                <input type="hidden" name="post_id" value=<?php echo $post_id; ?>>
                                                 <button type="submit" class="btn btn-primary" id="btn-login" name="submit" value="<?php echo $comp_info['oDATA'][0]['company_id']  ?>">
                                                     <span class="glyphicon glyphicon-log-in"></span> &nbsp; Update
                                                 </button>
@@ -273,4 +269,9 @@ include('includes/templates/top_bar_admin.php');
 
         </div>
     </div>
-</body> 
+</body>
+
+
+
+
+<?php include('includes/templates/footer2.php') ?>

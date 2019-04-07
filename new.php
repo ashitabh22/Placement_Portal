@@ -94,25 +94,25 @@ if (isset($_POST['submit_changes']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                                                             <tr>
                                                                 <form method="post" action="">
                                                                     <td><input type="hidden" name="ldapid" value=<?php echo $res['oDATA'][$i]['ldapid'] ?>><?php echo $res['oDATA'][$i]['ldapid'] ?></td>
-                                                                                                                                                        <?php
-                                                                                                                                                        $ldap_id = $res['oDATA'][$i]['ldapid'];
-                                                                                                                                                        $post_id = $res['oDATA'][$i]['post_id'];
-                                                                                                                                                        $query = "SELECT * from all_jobs, registered_companies,personal_details where  all_jobs.post_id='$post_id' and  all_jobs.company_id = " . REGISTERED_COMPANIES . ".company_id and personal_details.ldapid='$ldap_id' ";
+                                                                    <?php
+                                                                    $ldap_id = $res['oDATA'][$i]['ldapid'];
+                                                                    $post_id = $res['oDATA'][$i]['post_id'];
+                                                                    $query = "SELECT * from all_jobs, registered_companies,personal_details where  all_jobs.post_id='$post_id' and  all_jobs.company_id = " . REGISTERED_COMPANIES . ".company_id and personal_details.ldapid='$ldap_id' ";
 
-                                                                                                                                                        $finalres = $db->getData($query);
-                                                                                                                                                        pr($finalres); 
+                                                                    $finalres = $db->getData($query);
+                                                                    pr($finalres);
 
-                                                                                                                                                        ?>
-                                                                                                                                                        <td>
-                                                                                                                                                            <input type="hidden" name="post_id" value=<?php echo $res['oDATA'][$i]['post_id'] ?>><?php echo $finalres['oDATA'][0]['name'] ?></td>
-                                                                                                                                                            <td><input type="hidden" name="ldapid" value=<?php echo $res['oDATA'][$i]['ldapid'] ?>><?php echo $res['oDATA'][$i]['ldapid'] ?></td>
-                                                                                                                                                            <td><input type="hidden" name="ldapid" value=<?php echo $res['oDATA'][$i]['ldapid'] ?>><?php echo $res['oDATA'][$i]['ldapid'] ?></td>
-                                                                                                                                                            <td><input type="hidden" name="ldapid" value=<?php echo $res['oDATA'][$i]['ldapid'] ?>><?php echo $res['oDATA'][$i]['ldapid'] ?></td>
-                                                                                                                                                            <td><input type="hidden" name="ldapid" value=<?php echo $res['oDATA'][$i]['ldapid'] ?>><?php echo $res['oDATA'][$i]['ldapid'] ?></td>
-                                                                                                                                                            </form>
-                                                                                                                                                        </tr>
-                                                                                                                                                                                                                                                    <?php
-                                                                                                                                                        } ?>
+                                                                    ?>
+                                                                    <td>
+                                                                        <input type="hidden" name="post_id" value=<?php echo $res['oDATA'][$i]['post_id'] ?>><?php echo $finalres['oDATA'][0]['name'] ?></td>
+                                                                    <td><input type="hidden" name="ldapid" value=<?php echo $res['oDATA'][$i]['ldapid'] ?>><?php echo $res['oDATA'][$i]['ldapid'] ?></td>
+                                                                    <td><input type="hidden" name="ldapid" value=<?php echo $res['oDATA'][$i]['ldapid'] ?>><?php echo $res['oDATA'][$i]['ldapid'] ?></td>
+                                                                    <td><input type="hidden" name="ldapid" value=<?php echo $res['oDATA'][$i]['ldapid'] ?>><?php echo $res['oDATA'][$i]['ldapid'] ?></td>
+                                                                    <td><input type="hidden" name="ldapid" value=<?php echo $res['oDATA'][$i]['ldapid'] ?>><?php echo $res['oDATA'][$i]['ldapid'] ?></td>
+                                                                </form>
+                                                            </tr>
+                                                        <?php
+                                                    } ?>
 
                                                     </table>
                                                 </div>
@@ -138,3 +138,6 @@ if (isset($_POST['submit_changes']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
         </div>
     </div>
 </body>
+
+
+<?php include('includes/templates/footer2.php') ?>

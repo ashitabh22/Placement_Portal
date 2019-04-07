@@ -19,13 +19,13 @@ $result2 = $db->getData($sql3);
 //$sql4 = "SELECT * FROM posted_jobs_B_P";
 //$result3 = $db->getData($sql4);
 $q10 = "select * from all_jobs where company_id='$id'";
-$all_jobs= $db->getData($q10);
+$all_jobs = $db->getData($q10);
 
 if (isset($_POST['submit']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
 
-    
-    
-    
+
+
+
     $id = $_POST['Company_Id'];
     $title = $_POST['Job_Title'];
     $des = $_POST['Job_Description'];
@@ -41,18 +41,18 @@ if (isset($_POST['submit']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     $shortlist = $_POST['shortlist_date'];
     $year = $_POST['academic_year'];
 
-    foreach ($_POST['Branch'] as $value ) {
-            
-         
-        // $branch_code = $db->getData("select * from branch where b_name='$value'")['oDATA'][0]['b_code'];
-        foreach ($_POST['Program'] as $value2 ) {
-         
-         $q9 = "select * from all_jobs where company_id='$id' AND program_code= '$value2' AND branch_code = '$value'";
-         $posted = $db->getData($q9);
+    foreach ($_POST['Branch'] as $value) {
 
-         if(intval($posted['NO_OF_ITEMS'])!=0){
-            
-             $query1 = "UPDATE all_jobs SET 
+
+        // $branch_code = $db->getData("select * from branch where b_name='$value'")['oDATA'][0]['b_code'];
+        foreach ($_POST['Program'] as $value2) {
+
+            $q9 = "select * from all_jobs where company_id='$id' AND program_code= '$value2' AND branch_code = '$value'";
+            $posted = $db->getData($q9);
+
+            if (intval($posted['NO_OF_ITEMS']) != 0) {
+
+                $query1 = "UPDATE all_jobs SET 
              job_title='$title' 
              , job_description='$des'
              , cgpa_requirement='$cgpa'
@@ -68,27 +68,19 @@ if (isset($_POST['submit']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
              , program_code='$value2'
              , company_id='$id'
              WHERE company_id='$id' AND branch_code='$value'
-             AND program_code='$value2' "; 
+             AND program_code='$value2' ";
 
-             mysql_query($query1);
-            } 
-         
-         else{
-             
-         $query = "INSERT INTO all_jobs ( company_id , branch_code, program_code, job_title , job_description,cgpa_requirement ,application_period_from,application_period_to, min_package_offered , ppt_date, test_date, interview_date, shortlisting_date ,academic_year) VALUES ( '$id' ,'$value','$value2', '$title' ,'$des' , '$cgpa' , '$app_period_from','$app_period_to', '$package' , '$pptdate', '$test', '$interview', '$shortlist', '$year')";
-         mysql_query($query); 
+                mysql_query($query1);
+            } else {
 
-         }   
-      
-     }
-         
- }
-
-     redirect('PostedJobs.php');
-       
-
-
+                $query = "INSERT INTO all_jobs ( company_id , branch_code, program_code, job_title , job_description,cgpa_requirement ,application_period_from,application_period_to, min_package_offered , ppt_date, test_date, interview_date, shortlisting_date ,academic_year) VALUES ( '$id' ,'$value','$value2', '$title' ,'$des' , '$cgpa' , '$app_period_from','$app_period_to', '$package' , '$pptdate', '$test', '$interview', '$shortlist', '$year')";
+                mysql_query($query);
+            }
+        }
     }
+
+    redirect('PostedJobs.php');
+}
 
 include('includes/templates/top_bar_admin.php');
 ?>
@@ -105,7 +97,7 @@ include('includes/templates/top_bar_admin.php');
 <body>
     <div class="container">
         <div class="row">
-        <div class="col-md-8 col-md-offset-2" id="content">
+            <div class="col-md-8 col-md-offset-2" id="content">
 
                 <body id="content">
                     <div class="panel panel-default">
@@ -130,40 +122,37 @@ include('includes/templates/top_bar_admin.php');
                                                 </label>
                                                 <form method="POST" action="">
                                                     <select name="Company_Id" id="dropdown" class="selectpicker" data-live-search="true" onchange="alpha(this.value)" required>
-                                                        <option value=0 >Select a Company Name</option>
+                                                        <option value=0>Select a Company Name</option>
                                                         <?php
 
                                                         for ($i = 0; $i < $result['NO_OF_ITEMS']; $i++) {
 
                                                             echo "<option value=" . $result['oDATA'][$i]['company_id'] . "  > " . $result['oDATA'][$i]['company_name'] . " </option>";
-                                                        } 
+                                                        }
                                                         ?>
                                                     </select>
 
-                                                <div id="total" style =" font-size :14px; padding-right:120px;"></div>
+                                                    <div id="total" style=" font-size :14px; padding-right:120px;"></div>
 
-                                                <script type="text/javascript">
-                                                    function alpha(value) {
-                                                        if (value == 0) { 
-                                                            document.getElementById("total").innerHTML = "";
-                                                            return;
-                                                        } 
-                                                        else {
-                                                            var xmlhttp = new XMLHttpRequest();
-                                                            xmlhttp.onreadystatechange = function() {
-                                                                if (this.readyState == 4 && this.status == 200) {
-                                                                    document.getElementById("total").innerHTML = "No. of Jobs: " + this.responseText;
-                                                                }
-                                                            };
-                                                            xmlhttp.open("GET", "temp.php?q=" + value, true);
-                                                            xmlhttp.send();
+                                                    <script type="text/javascript">
+                                                        function alpha(value) {
+                                                            if (value == 0) {
+                                                                document.getElementById("total").innerHTML = "";
+                                                                return;
+                                                            } else {
+                                                                var xmlhttp = new XMLHttpRequest();
+                                                                xmlhttp.onreadystatechange = function() {
+                                                                    if (this.readyState == 4 && this.status == 200) {
+                                                                        document.getElementById("total").innerHTML = "No. of Jobs: " + this.responseText;
+                                                                    }
+                                                                };
+                                                                xmlhttp.open("GET", "temp.php?q=" + value, true);
+                                                                xmlhttp.send();
+                                                            }
                                                         }
-                                                    }
+                                                    </script>
 
 
-                                                </script>
-
-                                                
 
                                             </div>
 
@@ -211,59 +200,59 @@ include('includes/templates/top_bar_admin.php');
                                                     } ?>
                                                 </select>
                                                 <div class="form-group"></div>
-                                                
-                                                <div class="form-group">
-                                                <label>
-                                                Application Period: From: 
-                                                </label>
-                                                <input type="date"  name="Application_Period_from" id="interviewdate" value="<?php echo $comp_info2['oDATA'][0]['application_period_from']?>"/>
-                                                <label>
-                                                   To:
-                                                </label>
-                                                <input type="date"  name="Application_Period_to" id="interviewdate" value="<?php echo $comp_info2['oDATA'][0]['application_period_to']?>"/>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>
-                                                    <b style="color:red;">*</b>Minimum Package Offered
-                                                </label>
-                                                <input type="text" class="form-control" placeholder="Enter Minimum Package Offered" name="Minimum_Package_Offered" required />
-                                            </div>
-                                            <div class="form-group">
-                                                <label>
-                                                    PPT Date
-                                                </label>
-                                                <input type="date" name="ppt_date" id="pptdate">
-                                            </div>
-                                            <div class="form-group">
-                                                <label>
-                                                    Shortlisting Date
-                                                </label>
-                                                <input type="date" name="shortlist_date" id="shortlistdate">
-                                            </div>
-                                            <div class="form-group">
-                                                <label>
-                                                    Test Date
-                                                </label>
-                                                <input type="date" name="test_date" id="testdate">
-                                            </div>
-                                            <div class="form-group">
-                                                <label>
-                                                    Interview Date
-                                                    <input type="date" name="interview_date" id="interviewdate">
-                                            </div>
-                                            <div class="form-group">
-                                                <label>
-                                                    Academic-Year
-                                                </label>
-                                                <input type="number" min="0" step="any" class="form-control" placeholder="Enter Academic Year" name="academic_year" id="academic_year">
-                                            </div>
 
-                                            <hr />
-                                            <div class="form-group">
-                                                <button type="submit" class="btn btn-primary" name="submit">
-                                                    <span class="glyphicon glyphicon-log-in"></span> &nbsp; Post
-                                                </button>
-                                            </div>
+                                                <div class="form-group">
+                                                    <label>
+                                                        Application Period: From:
+                                                    </label>
+                                                    <input type="date" name="Application_Period_from" id="interviewdate" value="<?php echo $comp_info2['oDATA'][0]['application_period_from'] ?>" />
+                                                    <label>
+                                                        To:
+                                                    </label>
+                                                    <input type="date" name="Application_Period_to" id="interviewdate" value="<?php echo $comp_info2['oDATA'][0]['application_period_to'] ?>" />
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>
+                                                        <b style="color:red;">*</b>Minimum Package Offered
+                                                    </label>
+                                                    <input type="text" class="form-control" placeholder="Enter Minimum Package Offered" name="Minimum_Package_Offered" required />
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>
+                                                        PPT Date
+                                                    </label>
+                                                    <input type="date" name="ppt_date" id="pptdate">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>
+                                                        Shortlisting Date
+                                                    </label>
+                                                    <input type="date" name="shortlist_date" id="shortlistdate">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>
+                                                        Test Date
+                                                    </label>
+                                                    <input type="date" name="test_date" id="testdate">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>
+                                                        Interview Date
+                                                        <input type="date" name="interview_date" id="interviewdate">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>
+                                                        Academic-Year
+                                                    </label>
+                                                    <input type="number" min="0" step="any" class="form-control" placeholder="Enter Academic Year" name="academic_year" id="academic_year">
+                                                </div>
+
+                                                <hr />
+                                                <div class="form-group">
+                                                    <button type="submit" class="btn btn-primary" name="submit">
+                                                        <span class="glyphicon glyphicon-log-in"></span> &nbsp; Post
+                                                    </button>
+                                                </div>
                                         </form>
                                     </div>
                                 </div>
@@ -280,4 +269,7 @@ include('includes/templates/top_bar_admin.php');
 
         </div>
     </div>
-</body> 
+</body>
+
+
+<?php include('includes/templates/footer2.php') ?>

@@ -30,4 +30,4 @@ if ($res['oDATA'][0]['status'] == 0) {
             </div>
         </div>
     </div>
-    <?php include('includes/templates/footer.php'); ?>
+    <?php include('includes/templates/footer2.php'); ?>

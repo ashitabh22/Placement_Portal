@@ -77,6 +77,9 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li>
+                            <a href="admin.php">Registered Students</a>
+                        </li>
+                        <li>
                             <a href="viewRegisteredCompany.php">Registered Company</a>
                         </li>
                         <li>

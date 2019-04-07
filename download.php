@@ -233,3 +233,7 @@ if(file_exists(FILE_PATH.$uid.'.pdf')){
 }
     
 ?>
+
+
+
+    <?php include('includes/templates/footer2.php') ?>
