@@ -682,5 +682,3 @@ $extra_curr_activity = $db->getData($sql);
 
 
 
-
-    <?php include('includes/templates/footer2.php') ?>

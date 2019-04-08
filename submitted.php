@@ -250,5 +250,3 @@ if (is_admin()) {
         </div>
     </div> 
     
-
-    <?php include('includes/templates/footer2.php') ?>

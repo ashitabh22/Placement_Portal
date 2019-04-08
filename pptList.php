@@ -301,5 +301,3 @@ if (isset($_POST['new_update']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
 
-
-                    <?php include('includes/templates/footer2.php') ?>

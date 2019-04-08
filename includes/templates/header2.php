@@ -3,6 +3,7 @@
 
 <head>
     <title><?php echo $title; ?></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="Description" content="IIT Bhilai Main Page" />
     <meta name="KeyWords" content="IIT Bhilai, Youngest IIT, Premier Engineering Institute of India, IIT Bhilai" />
@@ -49,4 +50,4 @@
 
 
 
-</head> 
+</head>

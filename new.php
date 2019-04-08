@@ -139,5 +139,3 @@ if (isset($_POST['submit_changes']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
 </body>
 
-
-<?php include('includes/templates/footer2.php') ?>

@@ -159,5 +159,3 @@
 </html>
 
 
-
-<?php include('includes/templates/footer2.php') ?>

@@ -374,5 +374,3 @@ if (isset($_POST['delete']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
 	}
 </script>
 
-
-<?php include('includes/templates/footer2.php') ?>

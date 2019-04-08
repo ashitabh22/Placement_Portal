@@ -196,5 +196,3 @@ if (!is_loggedin()) {
 
 
 
-
-<?php include('includes/templates/footer2.php') ?>

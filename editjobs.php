@@ -273,5 +273,3 @@ include('includes/templates/top_bar_admin.php');
 
 
 
-
-<?php include('includes/templates/footer2.php') ?>
